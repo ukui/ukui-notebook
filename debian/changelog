@@ -1,0 +1,11 @@
+ukui-notebook (3.1.0-1-0031.1) v101; urgency=medium
+
+  * 加入安装依赖，避免电脑中有老版本侧边栏（未拆分小插件）时，安装便签本失败的情况.
+
+ -- zhaoyubiao <zhaoyubiao@kylinos.cn>  Wed, 11 Aug 2021 14:39:46 +0800
+
+ukui-notebook (3.1.0-1-0031) v101; urgency=medium
+
+  * 独立便签代码.
+
+ -- zhaoyubiao <zhaoyubiao@kylinos.cn>  Wed, 21 Jul 2021 14:17:59 +0800
