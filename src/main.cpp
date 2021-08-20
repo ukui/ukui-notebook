@@ -16,12 +16,12 @@
 *
 */
 
-#include <QApplication>
-
 #include "widget.h"
 #include "singleApplication.h"
 #include "utils/xatom-helper.h"
 #include "utils/utils.h"
+
+#include <QApplication>
 #include <X11/Xlib.h>
 //#include <KWindowEffects>
 
@@ -130,11 +130,6 @@ int main(int argc, char *argv[])
     */
     parser.process(a);
     Widget w;
-    //if (QApplication::arguments().length() > 1) {
-    //    if (QApplication::arguments().at(1) == "--display" || QApplication::arguments().at(1) == "-m") {
-    //        w.createNewNote();
-    //    }
-    //}
 
     if(!a.isRunning()){
         a.w = &w;
@@ -150,7 +145,23 @@ int main(int argc, char *argv[])
 
         QObject::connect(&a, SIGNAL(messageReceived(/*const QString&*/)), &w, SLOT(sltMessageReceived(/*const QString&*/)));
 
+        if (QApplication::arguments().length() > 1) {
+            if (QApplication::arguments().at(1) == "--show") {
+                QString arg = QApplication::arguments().at(2);
+                qDebug() << "main" << arg.toInt();
+                w.openMemoWithId(arg.toInt());
+            }
+        }
+
         return a.exec();
+    } else {
+        if (QApplication::arguments().length() > 1) {
+            if (QApplication::arguments().at(1) == "--show") {
+                QString arg = QApplication::arguments().at(2);
+                qDebug() << "main" << arg.toInt();
+                w.openMemoWithId(arg.toInt());
+            }
+        }
     }
     return 0;
 }

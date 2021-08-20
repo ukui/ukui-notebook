@@ -109,6 +109,7 @@ public:
     int getListFlag() const;                                        //获取列表切换标志位
     void setListFlag(const int &listflag);                          //设置列表切换标志位
     void createNewNote();                                           //新建便签
+    void openMemoWithId(int noteId);
 
 public slots:
     void sltMessageReceived(/*const QString &msg*/);                //接收socket信息
