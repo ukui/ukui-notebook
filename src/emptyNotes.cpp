@@ -35,6 +35,13 @@ emptyNotes::emptyNotes(QWidget *parent) :
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     setAttribute(Qt::WA_TranslucentBackground);
 
+    ui->pushButton->setAutoRepeat(true);
+    ui->pushButton->setAutoRepeatDelay(1);
+    ui->pushButton->setAutoRepeatInterval(1);
+    ui->pushButton_2->setAutoRepeat(true);
+    ui->pushButton_2->setAutoRepeatDelay(1);
+    ui->pushButton_2->setAutoRepeatInterval(1);
+
     // 添加窗管协议
     MotifWmHints hints;
     hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
