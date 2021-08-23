@@ -37,7 +37,7 @@ public:
     explicit UNoteDbusServer();
 
 public slots:
-    QVariantMap keywordMatch(QString key);
+    QVariantMap keywordMatch(QStringList keyList);
 
 private:
     QMap<QString, QVariant> loadSqlDB();

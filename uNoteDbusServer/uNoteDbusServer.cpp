@@ -5,25 +5,43 @@ UNoteDbusServer::UNoteDbusServer()
 
 }
 
-QVariantMap UNoteDbusServer::keywordMatch(QString key)
+QVariantMap UNoteDbusServer::keywordMatch(QStringList keyList)
 {
     QVariantMap keyMap;
-    keyMap = loadSqlDB();
-    if(keyMap.empty()) {
-       return  keyMap;
-    } else {
-        QMap<QString, QVariant>::iterator iter = keyMap.begin();
-        while (iter != keyMap.end())
-        {
-            qDebug() << "Iterator### " << iter.key() << ":" << iter.value(); // 迭代器
-            if(iter.value().toString().contains(key)) {
-                keywordsMatched.insert(iter.key(), iter.value());
-            }
-            iter++;
+
+    qDebug() << keyList.count();
+    QString sql;
+
+    if(keyList.count() >= 1) {
+        sql = QStringLiteral("SELECT id, md_content, full_title FROM active_notes WHERE md_content LIKE '%%1%'").arg(keyList.at(0));
+        for(int i = 1; i < keyList.count(); i++) {
+            QString tmpSql = QStringLiteral(" AND md_content LIKE '%%1%'").arg(keyList.at(i));
+            sql.append(tmpSql);
         }
     }
-    qDebug() << "keywordMatch" << keywordsMatched;
-    return keywordsMatched;
+
+    qDebug() << sql <<QSqlDatabase::drivers();
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(QDir::homePath() + "/.config/kylin-note/kyNotes.db");
+    if(!db.open()){
+        //如果数据库打开失败
+        qWarning() << "error!" << db.lastError().text();
+    }
+
+    QSqlQuery query;
+    if(query.exec(sql)) {
+        while(query.next()){
+            qDebug() << "Dat:::" << query.value(0).toString() << query.value(1).toString() << query.value(2).toString();
+            QVariantList content;
+            content << query.value(1).toString().mid(query.value(1).toString().indexOf(keyList.at(0)), 20) << query.value(2).toString();
+            qDebug() << "Dat###" << query.value(1).toString().mid(query.value(1).toString().indexOf(keyList.at(0)), 20);
+            QVariant var = QVariant::fromValue<QVariantList>(content);
+            keyMap.insert(query.value(0).toString(), var);
+        }
+    }
+    qDebug() << keyMap;
+    return keyMap;
 }
 
 QMap<QString, QVariant> UNoteDbusServer::loadSqlDB()

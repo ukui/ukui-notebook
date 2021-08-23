@@ -4,7 +4,7 @@
     <method name="keywordMatch">
       <arg type="a{sv}" direction="out"/>
       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
-      <arg name="key" type="s" direction="in"/>
+      <arg name="keyList" type="as" direction="in"/>
     </method>
   </interface>
 </node>
