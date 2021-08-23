@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-include(./src/env.pri)
+include(./env.pri)
 include($$PROJECT_COMPONENTSOURCE/closebutton.pri)
 
 QT  +=  core gui printsupport sql concurrent network KWindowSystem dbus x11extras
@@ -117,7 +117,6 @@ FORMS += \
 RESOURCES += \
     image.qrc
 
-DISTFILES +=
 unix {
     target.path = /usr/bin/
     INSTALLS += target
@@ -127,7 +126,7 @@ unix {
     INSTALLS += translation
 }
 
-desktopfile.files = ukui-notebook.desktop
+desktopfile.files = ../data/ukui-notebook.desktop
 desktopfile.path = /usr/share/applications/
 
 INSTALLS += desktopfile

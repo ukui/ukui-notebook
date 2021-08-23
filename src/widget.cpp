@@ -77,7 +77,7 @@ Widget::Widget(QWidget *parent) :
     listenToGsettings();
     kyNoteInit();
     kyNoteConn();
-    QTimer::singleShot(200, this, SLOT(initData()));
+    initData();
 }
 
 /*!
@@ -539,6 +539,71 @@ void Widget::migrateNote(QString notePath)
     QFile oldNoteDBFile(notePath);
     oldNoteDBFile.rename(QFileInfo(notePath).dir().path() + QDir::separator()
                          + QStringLiteral("oldNotes.ini"));
+}
+
+/*!
+ * \brief Widget::openMemoWithId
+ *
+ */
+void Widget::openMemoWithId(int noteId)
+{
+    qDebug() << "openMemoWithId" << noteId;
+
+    QTimer::singleShot(300, this, [=]() {
+        m_notebook = new Edit_page(this, noteId);
+        m_editors.push_back(m_notebook);
+        m_notebook->id = m_editors.size() - 1;
+
+        for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
+            QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
+
+            if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {
+                m_currentSelectedNoteProxy = m_proxyModel->mapToSource(m_tmpIndex);
+
+                showNoteInEditor(m_currentSelectedNoteProxy);
+                m_noteView->selectionModel()->select(m_currentSelectedNoteProxy,
+                                                     QItemSelectionModel::ClearAndSelect);
+                m_noteView->setCurrentIndex(m_currentSelectedNoteProxy);
+                m_noteView->scrollTo(m_currentSelectedNoteProxy);
+                break;
+            }
+        }
+
+        connect(m_notebook->m_noteHeadMenu, &noteHeadMenu::requestNewNote, this, [=](){
+            newSlot();
+        });
+        connect(m_notebook->m_noteHeadMenu, &noteHeadMenu::requestShowNote, this, [=] {
+            // 添加窗管协议
+            MotifWmHints hints;
+            hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
+            hints.functions = MWM_FUNC_ALL;
+            hints.decorations = MWM_DECOR_BORDER;
+            XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+            this->raise();
+            this->activateWindow();
+            this->show();
+        });
+        connect(m_editors[m_editors.size() - 1], &Edit_page::requestDel, this, [=](int noteId){
+            for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
+                QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
+                if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {
+                    QModelIndex sourceIndex = m_proxyModel->mapToSource(m_tmpIndex);
+                    deleteNote(m_tmpIndex, true);
+                    break;
+                }
+            }
+        });
+        connect(m_editors[m_editors.size() - 1], SIGNAL(texthasChanged(int,int)), this,
+                SLOT(onTextEditTextChanged(int,int)));
+        connect(m_editors[m_editors.size() - 1], SIGNAL(colorhasChanged(QColor,int)), this,
+                SLOT(onColorChanged(QColor,int)));
+
+        // 设置鼠标焦点
+        m_notebook->ui->textEdit->setFocus();
+        // 移动光标至行末
+        m_notebook->ui->textEdit->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+        m_notebook->show();
+    });
 }
 
 /*!

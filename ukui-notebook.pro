@@ -1,5 +1,5 @@
 #! [0]
 DEFINES += PLATFORM_TYPE
 TEMPLATE    =   subdirs
-SUBDIRS     =   ./src/src.pro
-
+SUBDIRS     =   ./src/src.pro \
+                ./uNoteDbusServer/uNoteDbusServer.pro
