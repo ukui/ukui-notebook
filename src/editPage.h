@@ -126,6 +126,8 @@ private slots:
     void showFullScreenSlot();
     void textRightMenu(QPoint);
     void textForNewEditpageSlot();
+    void insertpicture();
+    void dropImage(const QImage& image, const QString& format);
 
 signals:
     void texthasChanged(int noteId, int id);
