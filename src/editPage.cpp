@@ -451,6 +451,8 @@ void Edit_page::list(bool checked, QTextListFormat::Style style)
         QTextBlockFormat bfmt;
         bfmt.setIndent(obfmt.indent());
         cursor.setBlockFormat(bfmt);
+        QTextDocument *document = ui->textEdit->document();
+        document->setIndentWidth(0);
     } else {
         qDebug() << "checked";
         QTextListFormat listFmt;

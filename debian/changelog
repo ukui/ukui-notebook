@@ -1,3 +1,11 @@
+ukui-notebook (3.1.0-1-0032) v101; urgency=medium
+
+  * BUG编号：72560 【便签】无序列表、有序列表; 69601 【便签贴】删除编号后，换行多出空格
+  * 需求编号：无 
+  * 其他：无
+
+ -- zhaoyubiao <zhaoyubiao@kylinos.cn>  Tue, 24 Aug 2021 17:40:09 +0800
+
 ukui-notebook (3.1.0-1-0031.1) v101; urgency=medium
 
   * 加入安装依赖，避免电脑中有老版本侧边栏（未拆分小插件）时，安装便签本失败的情况.
