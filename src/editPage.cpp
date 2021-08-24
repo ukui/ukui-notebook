@@ -23,6 +23,8 @@
 //#include <QClipboard>
 #include <QDebug>
 #include <QtX11Extras/QX11Info>
+#include <QFileDialog>
+#include <QImageReader>
 
 #include "widget.h"
 #include "ui_widget.h"
@@ -134,12 +136,21 @@ void Edit_page::initSetup()
 
 void Edit_page::btnSetup()
 {
-    ui->boldBtn->setIcon(QPixmap(":/image/1x/bold.png"));
-    ui->italicBtn->setIcon(QPixmap(":/image/1x/Italic.png"));
-    ui->underlineBtn->setIcon(QPixmap(":/image/1x/under_line-new.png"));
-    ui->strikeOutBtn->setIcon(QPixmap(":/image/1x/del_line.png"));
-    ui->unorderedBtn->setIcon(QPixmap(":/image/1x/Symbol.png"));
-    ui->orderedBtn->setIcon(QPixmap(":/image/1x/number.png"));
+    ui->unorderedBtn->setIcon(QIcon::fromTheme("view-list.symbolic"));
+    ui->strikeOutBtn->setIcon(QIcon::fromTheme("format-text-strikethrough-symbolic"));
+    ui->orderedBtn->setIcon(QIcon::fromTheme("ukui-view-list-numbe.symbolic"));
+    ui->insertBtn->setIcon(QIcon::fromTheme("view-list-images.symbolic"));
+    ui->underlineBtn->setIcon(QIcon::fromTheme("format-text-underline-symbolic"));
+    ui->boldBtn->setIcon(QIcon::fromTheme("format-text-bold-symbolic"));
+    ui->italicBtn->setIcon(QIcon::fromTheme("format-text-italic-symbolic"));
+
+    ui->unorderedBtn->setIconSize(QSize(20, 24));
+    ui->strikeOutBtn->setIconSize(QSize(20, 17));
+    ui->orderedBtn->setIconSize(QSize(20, 14));
+    ui->insertBtn->setIconSize(QSize(20, 24));
+    ui->underlineBtn->setIconSize(QSize(20, 16));
+    ui->boldBtn->setIconSize(QSize(20, 17));
+    ui->italicBtn->setIconSize(QSize(20, 17));
 
     ui->boldBtn->setToolTip(tr("Bold"));
     ui->italicBtn->setToolTip(tr("Italic"));
@@ -150,10 +161,8 @@ void Edit_page::btnSetup()
 
     ui->fontSizeBtn->setToolTip(tr("Font Size"));
     ui->styleBtn->setToolTip(tr("Font Color"));
+    ui->insertBtn->setToolTip(tr("InsertPicture"));
 
-    // ui->underlineBtn->setIcon(QIcon::fromTheme("format-text-underline-symbolic"));
-    // ui->boldBtn->setIcon(QIcon::fromTheme("format-text-bold-symbolic"));
-    // ui->italicBtn->setIcon(QIcon::fromTheme("format-text-italic-symbolic"));
 
     // 取消按钮默认灰色背景
     QPalette palette = ui->boldBtn->palette();
@@ -168,6 +177,7 @@ void Edit_page::btnSetup()
     ui->strikeOutBtn->setPalette(palette);
     ui->unorderedBtn->setPalette(palette);
     ui->orderedBtn->setPalette(palette);
+    ui->insertBtn->setPalette(palette);
 
     QPalette palette2 = ui->fontColorBtn->palette();
     palette2.setColor(QPalette::Highlight, Qt::transparent); /* 取消按钮高亮 */
@@ -180,6 +190,7 @@ void Edit_page::btnSetup()
     ui->unorderedBtn->setCheckable(true);
     ui->orderedBtn->setCheckable(true);
     ui->fontSizeBtn->setCheckable(false);
+    ui->insertBtn->setCheckable(false);
 
 //变更btn的属性，hover态，蓝色变为灰色
 #if 1
@@ -200,6 +211,9 @@ void Edit_page::btnSetup()
 
     ui->orderedBtn->setProperty("isWindowButton", 0x1);
     ui->orderedBtn->setProperty("useIconHighlightEffect", 0x2);
+
+    ui->insertBtn->setProperty("isWindowButton", 0x1);
+    ui->insertBtn->setProperty("useIconHighlightEffect", 0x2);
 #else
     ui->boldBtn->setProperty("useIconHighlightEffect", true);
     ui->boldBtn->setProperty("iconHighlightEffectMode", 1);
@@ -213,6 +227,8 @@ void Edit_page::btnSetup()
     ui->unorderedBtn->setProperty("iconHighlightEffectMode", 1);
     ui->orderedBtn->setProperty("useIconHighlightEffect", true);
     ui->orderedBtn->setProperty("iconHighlightEffectMode", 1);
+    ui->insertBtn->setProperty("useIconHighlightEffect", true);
+    ui->insertBtn->setProperty("iconHighlightEffectMode", 1);
 #endif
 }
 
@@ -268,6 +284,7 @@ void Edit_page::slotsSetup()
     connect(ui->strikeOutBtn, &QPushButton::clicked, this, &Edit_page::setStrikeOutSlot);
     connect(ui->unorderedBtn, &QPushButton::clicked, this, &Edit_page::setUnorderedListSlot);
     connect(ui->orderedBtn, &QPushButton::clicked, this, &Edit_page::setOrderedListSlot);
+    connect(ui->insertBtn, &QPushButton::clicked, this, &Edit_page::insertpicture);
     connect(ui->textEdit, &QTextEdit::cursorPositionChanged, this,
             &Edit_page::cursorPositionChangedSlot);
     connect(ui->textEdit, &QTextEdit::currentCharFormatChanged, this,
@@ -956,5 +973,46 @@ void Edit_page::setStayOnTopSlot(bool b)
 
     //m_ignoreShowHideEvents = false;
 }
+
+void Edit_page::dropImage(const QImage& image, const QString& format) {
+    QByteArray bytes;
+    QBuffer buffer(&bytes);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, format.toLocal8Bit().data());
+    buffer.close();
+    QByteArray base64 = bytes.toBase64();
+    QByteArray base64l;
+    for (int i=0; i<base64.size(); i++) {
+        base64l.append(base64[i]);
+        if (i%80 == 0) {
+            base64l.append("\n");
+            }
+        }
+
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextImageFormat imageFormat;
+    imageFormat.setWidth  ( image.width() );
+    imageFormat.setHeight ( image.height() );
+    imageFormat.setName   ( QString("data:image/%1;base64,%2")
+                                .arg(QString("%1.%2").arg(rand()).arg(format))
+                                .arg(base64l.data())
+                                );
+    cursor.insertImage    ( imageFormat );
+}
+
+
+void Edit_page::insertpicture()
+{
+        QSettings s;
+        QString attdir = s.value("general/filedialog-path").toString();
+        QString file = QFileDialog::getOpenFileName(this,
+                                        tr("Select an image"),
+                                        attdir,
+                                        tr("JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; All (*)"));
+        QImage image = QImageReader(file).read();
+        dropImage(image, QFileInfo(file).suffix().toUpper().toLocal8Bit().data());
+}
+
 
 
