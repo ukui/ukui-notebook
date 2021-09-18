@@ -991,6 +991,8 @@ void Edit_page::dropImage(const QImage& image, const QString& format) {
             }
         }
 
+    if(image.isNull())
+    {return ;}
 
     QTextCursor cursor = ui->textEdit->textCursor();
     QTextImageFormat imageFormat;
