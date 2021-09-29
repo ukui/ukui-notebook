@@ -102,7 +102,6 @@ public:
 
     Ui::Widget *ui;                                                 //主ui
     std::vector<Edit_page*> m_editors;                              //c++数组容器
-    QTranslator *translator;                                        //国际化
 
     int m_isThemeChanged;                                           //主题
     void error_throw();                                             //异常处理抛出
