@@ -22,6 +22,20 @@
 #include <QListView>
 #include <QScrollArea>
 
+#include <QMenu>
+#include <QAction>
+
+class NoteMenu : public QMenu
+{
+    Q_OBJECT
+public:
+    explicit NoteMenu(QWidget* parent = nullptr);
+    QModelIndex getIndex(){return m_index;}
+    void setIndex(QModelIndex index){m_index = index;}
+private:
+    QModelIndex m_index;
+};
+
 class NoteView : public QListView
 {
     Q_OBJECT
@@ -50,6 +64,18 @@ private:
     bool m_isMousePressed;
     int m_rowHeight;
 
+    NoteMenu *m_popMenu = nullptr; //右键弹出菜单
+    QMap<QString,QAction*> m_menuActs; //右键动作列表
+
+    void initPopMenu();
+    bool addAct(QString);
+    void onClearAll();
+    void onCreateNew();
+    void onTopping(QModelIndex);
+    void onDeleteSingle(QModelIndex);
+    void onSendMail(QModelIndex);
+    void onOpenNote(QModelIndex);
+
 public slots:
     void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd,
                             const QModelIndex &destinationParent, int destinationRow);
@@ -59,7 +85,8 @@ public slots:
 
 private slots:
     void init();
-
+    void onCustemMenuRequested(QPoint); //ListView 右键菜单
+    void onMenuTriggered(QAction*);
 signals:
     void viewportPressed();
 

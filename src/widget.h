@@ -162,9 +162,8 @@ private:
     int m_trashCounter;                                             //废纸篓总数
     bool m_isContentModified;                                       //便签内容是否修改
     bool m_isColorModified;                                         //便签颜色是否修改
-    bool m_isOperationRunning;
+    bool m_isOperationRunning = false;
     bool m_isTextCpNew;
-    QMenu *m_popMenu = nullptr;
 
     void kyNoteInit();                                              //加载界面组件
     void kyNoteConn();                                              //绑定槽函数
@@ -194,8 +193,6 @@ private:
     void checkMigration();                                          //迁移sync
     void migrateNote(QString notePath);                             //便签数据迁移
 
-
-
 private slots:
     void initData();                                                //初始化加载第一个便签
     void loadNotes(QList<NoteData *> noteList, int noteCounter);    //加载便签列表
@@ -215,7 +212,7 @@ private slots:
     void clearNoteSlot();                                           //清空便签槽函数
     //void SetNoteSlot();                                             //便签设置界面槽函数
     void onF1ButtonClicked();                                       //快捷键F1槽函数
-    void onCustemMenuRequested(QPoint); //ListView 右键菜单
+
 signals:
     void requestNotesList();                                        //加载列表请求信号
     void requestOpenDBManager(QString path, bool doCreate);         //打开数据库信号

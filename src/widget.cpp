@@ -82,58 +82,16 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     m_noteView = static_cast<NoteView *>(ui->listView);
     m_noteView->setContextMenuPolicy(Qt::CustomContextMenu);
-    //Add Right Menu
-    m_popMenu = new QMenu(m_noteView);
-    QAction *act1 = new QAction(); // 置顶
-    QAction *act2 = new QAction(); // 发送到邮箱
-    QAction *act3 = new QAction(); // 删除当前文档
-    QAction *act4 = new QAction(); // 打开当前便签
-    QAction *act5 = new QAction(); // 清空列表
-    act1->setText(tr("Topping this note"));
-    act1->setObjectName("Topping this note");
-    act2->setText(tr("Send a mail"));
-    act2->setObjectName("Send a mail");
-    act3->setText(tr("Delete this note"));
-    act3->setObjectName("Delete this note");
-    act4->setText(tr("Open this note"));
-    act4->setObjectName("Open this note");
-    act5->setText(tr("Clear all notes"));
-    act5->setObjectName("Clear all notes");
-    m_popMenu->addAction(act1);
-    m_popMenu->addAction(act2);
-    m_popMenu->addSeparator();
-    m_popMenu->addAction(act3);
-    m_popMenu->addAction(act4);
-    m_popMenu->addAction(act5);
-    connect(m_noteView,&QListView::customContextMenuRequested,this,&Widget::onCustemMenuRequested);
     setupDatabases();
     listenToGsettings();
     kyNoteInit();
     kyNoteConn();
     initData();
+    //initPopMenu();
 }
-void Widget::onCustemMenuRequested(QPoint pt)
-{
-    qDebug() << pt;
-    auto index = m_noteView->indexAt(pt);
-    if(index.isValid()) {
-        auto actions = m_popMenu->actions();
-        for(auto act :actions){
-            //判断是否置顶
-            if(act->objectName().compare("Topping this note") == 0) {
-                //auto m = static_cast<>(m_noteView->indexWidget(index));
-                int noteId = index.data(NoteModel::NoteID).toInt();
-                for(auto it = m_editors.begin();it!=m_editors.end();it++){
-                    if ((*it)->m_noteId == noteId) {
-                        qDebug() << "found";
-                        break;
-                    }
-                }
-            }
-        }
-        m_popMenu->exec(QCursor::pos());
-    }
-}
+
+
+
 /*!
  * \brief Widget::~Widget
  * Deconstructor of the class
@@ -1283,11 +1241,16 @@ void Widget::clearSearch()
  */
 // void Widget::mousePressEvent(QMouseEvent *event)
 // {
-// if (event->button() == Qt::LeftButton) {
-// this->dragPosition = event->globalPos() - frameGeometry().topLeft();
-// this->mousePressed = true;
-// }
-// QWidget::mousePressEvent(event);
+//     if (event->button() == Qt::RightButton) {
+//        QPoint p = event->pos();
+//        QModelIndex idx = m_noteView->indexAt(p);
+//        if(idx.isValid() == false) {
+//            qDebug() << "Right Click empty ......";
+//            m_noteView->setCurrentIndex(QModelIndex());
+
+//        }
+//     }
+//     QWidget::mousePressEvent(event);
 // }
 
 /*!
