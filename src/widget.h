@@ -212,7 +212,8 @@ private slots:
     void clearNoteSlot();                                           //清空便签槽函数
     //void SetNoteSlot();                                             //便签设置界面槽函数
     void onF1ButtonClicked();                                       //快捷键F1槽函数
-
+    void onOpenNote(QModelIndex);                                   //打开便签槽函数
+    void onDeleteNote(QModelIndex);                                 //删除选中便签
 signals:
     void requestNotesList();                                        //加载列表请求信号
     void requestOpenDBManager(QString path, bool doCreate);         //打开数据库信号

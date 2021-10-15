@@ -89,7 +89,10 @@ private slots:
     void onMenuTriggered(QAction*);
 signals:
     void viewportPressed();
-
+    void requestOpenNote(QModelIndex); //打开特定便签页
+    void requestDeleteNote(QModelIndex); //删除特定便签页
+    void requestCreateNote(); // 新建便签页
+    void requestClearAllNotes();//清空便签本
 };
 
 #endif // NOTEVIEW_H

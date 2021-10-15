@@ -398,6 +398,11 @@ void Widget::kyNoteConn()
             Qt::BlockingQueuedConnection);
 
     connect(m_dbManager, &DBManager::notesReceived, this, &Widget::loadNotes);
+    //NoteView的右键菜单
+    connect(m_noteView,&NoteView::requestOpenNote,this, &Widget::onOpenNote);
+    connect(m_noteView,&NoteView::requestDeleteNote,this,&Widget::onDeleteNote);
+    connect(m_noteView,&NoteView::requestCreateNote,this,&Widget::createNewNote);
+    connect(m_noteView,&NoteView::requestClearAllNotes,this,&Widget::clearNoteSlot);
     // 快捷键
     new QShortcut(QKeySequence(Qt::Key_F1), this, SLOT(onF1ButtonClicked()));
 }
@@ -1434,9 +1439,9 @@ void Widget::exitSlot()
 void Widget::trashSlot()
 {
     if(!m_emptyNotes->mIsDontShow)
-    m_emptyNotes->exec();
-        else
-    emit m_emptyNotes->requestEmptyNotes();
+        m_emptyNotes->exec();
+    else
+        emit m_emptyNotes->requestEmptyNotes();
 }
 
 /*!
@@ -1804,4 +1809,13 @@ void Widget::transFisrtLine()
         if (note != Q_NULLPTR && note->content() == NULL)
             note->setFullTitle(tr("Welcome to use Notes."));
     }
+}
+
+void Widget::onOpenNote(QModelIndex idx)
+{
+    listDoubleClickSlot(idx);
+}
+void Widget::onDeleteNote(QModelIndex idx)
+{
+    deleteNote(idx,true);
 }

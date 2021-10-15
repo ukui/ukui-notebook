@@ -226,7 +226,7 @@ void NoteView::setAnimationEnabled(bool isEnabled)
 {
     m_animationEnabled = isEnabled;
 }
-
+//ListView右键弹窗，包括UKUI3.1的
 void NoteView::initPopMenu()
 {
     m_popMenu = new NoteMenu(this);
@@ -255,7 +255,6 @@ void NoteView::initPopMenu()
     m_menuActs.insert(act4->objectName(),act4);
     m_menuActs.insert(act5->objectName(),act5);
     m_menuActs.insert(act6->objectName(),act6);
-    //Connect to slots...
 }
 bool NoteView::addAct(QString key)
 {
@@ -272,12 +271,12 @@ void NoteView::onCustemMenuRequested(QPoint pt)
     if(index.isValid()) {
         m_popMenu->clear();
         m_popMenu->setIndex(index);
-        addAct("Topping this note");
-        addAct("Send a mail");
-        m_popMenu->addSeparator();
+//        addAct("Topping this note");
+//        addAct("Send a mail");
+//        m_popMenu->addSeparator();
         addAct("Open this note");
         addAct("Delete this note");
-        addAct("Clear all notes");
+//addAct("Clear all notes");
         m_popMenu->exec(QCursor::pos());
     }else {
         m_popMenu->clear();
@@ -296,19 +295,22 @@ void NoteView::onMenuTriggered(QAction *action)
         return ;
     QModelIndex idx = m_popMenu->getIndex();
     qDebug() << idx;
-    if(action->objectName().compare("Topping this note")==0){
+/*    if(action->objectName().compare("Topping this note")==0){
         onTopping(idx);
     } else if(action->objectName().compare("Send a mail") == 0) {
         onSendMail(idx);
-    } else if(action->objectName().compare("Open this note") == 0) {
+    } else */
+    if(action->objectName().compare("Open this note") == 0) {
         onOpenNote(idx);
     } else if(action->objectName().compare("Delete this note") == 0) {
         onDeleteSingle(idx);
-    } else if(action->objectName().compare("Clear all notes") == 0) {
+    }
+    else if(action->objectName().compare("Clear all notes") == 0) {
         onClearAll();
     } else if(action->objectName().compare("Create a new note") == 0) {
         onCreateNew();
-    } else {
+    }
+    else {
         qDebug () << "Wrong action "<< action->objectName();
     }
 
@@ -317,21 +319,25 @@ void NoteView::onMenuTriggered(QAction *action)
 void NoteView::onClearAll()
 {
     qDebug () << __FUNCTION__;
+    emit requestClearAllNotes();
 }
 
 void NoteView::onCreateNew()
 {
     qDebug () << __FUNCTION__;
+    emit requestCreateNote();
 }
 
 void NoteView::onTopping(QModelIndex idx)
 {
     qDebug () << __FUNCTION__ << " " << idx;
+
 }
 
 void NoteView::onDeleteSingle(QModelIndex idx)
 {
     qDebug () << __FUNCTION__ << " " << idx;
+    emit requestDeleteNote(idx);
 }
 
 void NoteView::onSendMail(QModelIndex idx)
@@ -341,5 +347,5 @@ void NoteView::onSendMail(QModelIndex idx)
 
 void NoteView::onOpenNote(QModelIndex idx)
 {
-    qDebug () << __FUNCTION__ << " " << idx;
+    emit requestOpenNote(idx);
 }
