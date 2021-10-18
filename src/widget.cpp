@@ -1046,7 +1046,7 @@ void Widget::loadNotes(QList<NoteData *> noteList, int noteCounter)
 
     selectFirstNote();
     transFisrtLine();
-#if 0
+#if 1
     //UKUI 3.0
     createNewNoteIfEmpty();
 #else
@@ -1817,5 +1817,15 @@ void Widget::onOpenNote(QModelIndex idx)
 }
 void Widget::onDeleteNote(QModelIndex idx)
 {
+    int noteId = idx.data(NoteModel::NoteID).toInt();
+    for (auto it = m_editors.begin(); it != m_editors.end(); it++) {
+        if ((*it)->m_noteId == noteId) {
+            m_notebook = *it;
+            m_notebook->close();
+            delete m_notebook;
+            m_editors.erase(it);
+            break;
+        }
+    }
     deleteNote(idx,true);
 }
