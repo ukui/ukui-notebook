@@ -64,6 +64,8 @@
 #include "adaptscreeninfo.h"
 #include "about.h"
 #include "emptyNotes.h"
+#include "listViewModeDelegate.h"
+#include "iconViewModeDelegate.h"
 
 #define     FIRST_LINE_MAX 80
 #define     tristateButton(className,imageUrl)     (""#className"{image:url("#imageUrl".svg);}   \
@@ -75,7 +77,8 @@
  */
 #define THEME_QT_SCHEMA "org.ukui.style"
 #define MODE_QT_KEY "style-name"
-#define FONT_SIZE "system-font-size"
+#define FONT_SIZE "systemFontSize"
+#define FONT_STYLE "systemFont"
 
 /**
  * ukui-control-center
@@ -87,6 +90,7 @@
  */
 #define USER_GUIDE_SCHEMA "com.kylinUserGuide.hotel_1000"
 
+extern QFont g_currentFont;
 
 namespace Ui {
 class Widget;
@@ -137,6 +141,7 @@ private:
     QPushButton* m_trashButton;                                     //删除按钮
     QPushButton* m_viewChangeButton;                                //列表/平铺切换按钮
     NoteView* m_noteView;                                           //listview
+    listViewModeDelegate* m_plistDelegate;
     QTableView* m_noteTable;                                        //tableview
     NoteModel* m_noteModel;                                         //便签模板
     NoteModel* m_deletedNotesModel;                                 //删除模板

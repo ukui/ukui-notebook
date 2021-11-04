@@ -36,6 +36,7 @@ public:
     void animateRemovedRow(const QModelIndex &parent, int start, int end);
     void setAnimationEnabled(bool isEnabled);
     void setCurrentRowActive(bool isActive);
+    void updateList();
 
 protected:
     void paintEvent(QPaintEvent *e) Q_DECL_OVERRIDE;

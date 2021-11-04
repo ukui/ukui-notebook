@@ -27,7 +27,7 @@ class iconViewModeDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    iconViewModeDelegate(QObject *parent = Q_NULLPTR);
+    iconViewModeDelegate(QFont currentFont,QObject *parent = Q_NULLPTR);
 
     enum States{
         Normal,
@@ -55,9 +55,9 @@ public:
     QColor intToQcolor(int &intColor) const;
 
 private:
-    QFont m_titleFont;
-    QFont m_titleSelectedFont;
-    QFont m_dateFont;
+    mutable QFont m_titleFont;
+    mutable QFont m_titleSelectedFont;
+    mutable QFont m_dateFont;
     QColor m_titleColor;
     QColor m_dateColor;
     QColor m_ActiveColor;

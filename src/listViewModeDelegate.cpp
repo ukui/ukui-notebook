@@ -35,12 +35,12 @@
  */
 #define FORMAT_SCHEMA   "org.ukui.control-center.panel.plugins"
 #define TIME_FORMAT_KEY "hoursystem"
-
-listViewModeDelegate::listViewModeDelegate(QObject *parent)
+extern QFont g_currentFont;
+listViewModeDelegate::listViewModeDelegate(QFont currentFont, QObject *parent)
     : QStyledItemDelegate(parent),
-      m_titleFont(QStringLiteral("Noto Sans CJK SC"), 10.5),              //标题字体
-      m_titleSelectedFont(QStringLiteral("Noto Sans CJK SC"), 11),        //标题选中字体
-      m_dateFont(QStringLiteral("Noto Sans CJK SC"), 9),                  //日期字体
+      m_titleFont(currentFont.family(), currentFont.pointSizeF()/15 * 10.5),              //标题字体
+      m_titleSelectedFont(currentFont.family(), currentFont.pointSizeF()/15 * 11),        //标题选中字体
+      m_dateFont(currentFont.family(), currentFont.pointSizeF()/15 * 9),                  //日期字体
       m_titleColor(255, 255, 255),                          //标题颜色
       m_dateColor(255, 255, 255),                           //日期颜色
       m_ActiveColor(218, 233, 239),
@@ -128,6 +128,8 @@ void listViewModeDelegate::setAnimationDuration(const int duration)
 {
     m_timeLine->setDuration(duration);
 }
+
+
 
 void listViewModeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -295,16 +297,23 @@ void listViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     const int topOffsetY = 18;   // 标题上方的空格
     const int spaceY = 5;        // 标题和日期之间的空格
 
+    QString fontName = g_currentFont.family();
+    double fontSize = (double)g_currentFont.pointSize()/15;
+    m_titleFont.setFamily(fontName);
+    m_titleFont.setPointSizeF(fontSize * 10.5);
+    m_titleSelectedFont.setFamily(g_currentFont.family());
+    m_titleSelectedFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 11);
+    m_dateFont.setFamily(g_currentFont.family());
+    m_dateFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 9);
+
     QStyleOptionViewItem opt = option;
     QString title{index.data(NoteModel::NoteFullTitle).toString()};
 
-    //QFont titleFont = (option.state & QStyle::State_Selected) == QStyle::State_Selected ? m_titleSelectedFont : m_titleFont;
-    QFont titleFont;
+    QFont titleFont = (option.state & QStyle::State_Selected) == QStyle::State_Selected ? m_titleSelectedFont : m_titleFont;
     QFontMetrics fmTitle(titleFont);
     QRect fmRectTitle = fmTitle.boundingRect(title);
 
-    QFont dateFont;
-    dateFont.setPointSize(9);
+    QFont dateFont = m_dateFont;
     QString date = parseDateTime(index.data(NoteModel::NoteLastModificationDateTime).toDateTime());
     QFontMetrics fmDate(dateFont);
     QRect fmRectDate = fmDate.boundingRect(title);
