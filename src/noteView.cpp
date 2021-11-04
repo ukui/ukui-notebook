@@ -28,6 +28,11 @@
 #include "noteView.h"
 #include "listViewModeDelegate.h"
 
+NoteMenu::NoteMenu(QWidget* parent):QMenu(parent)
+{
+    m_index = QModelIndex();
+}
+
 NoteView::NoteView(QWidget *parent)
     : QListView( parent )
     , m_isScrollBarHidden(true)
@@ -40,12 +45,16 @@ NoteView::NoteView(QWidget *parent)
     setWindowOpacity(0.7);
     setAttribute(Qt::WA_TranslucentBackground);//设置窗口透明显示(毛玻璃效果)
     viewport()->setAttribute(Qt::WA_TranslucentBackground);
+    initPopMenu();
+    connect(this,&QListView::customContextMenuRequested,this,&NoteView::onCustemMenuRequested);
     //一次性定时器,槽函数只处理一次
     QTimer::singleShot(0, this, SLOT(init()));
 }
 
 NoteView::~NoteView()
 {
+    qDeleteAll(m_menuActs.begin(),m_menuActs.end());
+    m_menuActs.clear();
 }
 
 void NoteView::animateAddedRow(const QModelIndex& parent, int start, int end)
@@ -216,4 +225,127 @@ void NoteView::setCurrentRowActive(bool isActive)
 void NoteView::setAnimationEnabled(bool isEnabled)
 {
     m_animationEnabled = isEnabled;
+}
+//ListView右键弹窗，包括UKUI3.1的
+void NoteView::initPopMenu()
+{
+    m_popMenu = new NoteMenu(this);
+    connect(m_popMenu,&QMenu::triggered,this,&NoteView::onMenuTriggered);
+    QAction *act1 = new QAction(); // 置顶
+    QAction *act2 = new QAction(); // 发送到邮箱
+    QAction *act3 = new QAction(); // 删除当前文档
+    QAction *act4 = new QAction(); // 打开当前便签
+    QAction *act5 = new QAction(); // 清空列表
+    QAction *act6 = new QAction(); // 新建便签
+    act1->setText(tr("Topping this note"));
+    act1->setObjectName("Topping this note");
+    act2->setText(tr("Send a mail"));
+    act2->setObjectName("Send a mail");
+    act3->setText(tr("Delete this note"));
+    act3->setObjectName("Delete this note");
+    act4->setText(tr("Open this note"));
+    act4->setObjectName("Open this note");
+    act5->setText(tr("Clear all notes"));
+    act5->setObjectName("Clear all notes");
+    act6->setText(tr("Create a new note"));
+    act6->setObjectName("Create a new note");
+    m_menuActs.insert(act1->objectName(),act1);
+    m_menuActs.insert(act2->objectName(),act2);
+    m_menuActs.insert(act3->objectName(),act3);
+    m_menuActs.insert(act4->objectName(),act4);
+    m_menuActs.insert(act5->objectName(),act5);
+    m_menuActs.insert(act6->objectName(),act6);
+}
+bool NoteView::addAct(QString key)
+{
+    if(m_menuActs.contains(key) == true){
+        m_popMenu->addAction(m_menuActs.find(key).value());
+        return true;
+    }
+    return false;
+}
+void NoteView::onCustemMenuRequested(QPoint pt)
+{
+    auto index = this->indexAt(pt);
+    qDebug() << pt << index;
+    if(index.isValid()) {
+        m_popMenu->clear();
+        m_popMenu->setIndex(index);
+//        addAct("Topping this note");
+//        addAct("Send a mail");
+//        m_popMenu->addSeparator();
+        addAct("Open this note");
+        addAct("Delete this note");
+//addAct("Clear all notes");
+        m_popMenu->exec(QCursor::pos());
+    }else {
+        m_popMenu->clear();
+        m_popMenu->setIndex(QModelIndex());
+        addAct("Clear all notes");
+        addAct("Create a new note");
+        m_popMenu->exec(QCursor::pos());
+    }
+}
+
+void NoteView::onMenuTriggered(QAction *action)
+{
+    if(action == nullptr)
+        return ;
+    if(action->objectName().isNull() == true)
+        return ;
+    QModelIndex idx = m_popMenu->getIndex();
+    qDebug() << idx;
+/*    if(action->objectName().compare("Topping this note")==0){
+        onTopping(idx);
+    } else if(action->objectName().compare("Send a mail") == 0) {
+        onSendMail(idx);
+    } else */
+    if(action->objectName().compare("Open this note") == 0) {
+        onOpenNote(idx);
+    } else if(action->objectName().compare("Delete this note") == 0) {
+        onDeleteSingle(idx);
+    }
+    else if(action->objectName().compare("Clear all notes") == 0) {
+        onClearAll();
+    } else if(action->objectName().compare("Create a new note") == 0) {
+        onCreateNew();
+    }
+    else {
+        qDebug () << "Wrong action "<< action->objectName();
+    }
+
+}
+
+void NoteView::onClearAll()
+{
+    qDebug () << __FUNCTION__;
+    emit requestClearAllNotes();
+}
+
+void NoteView::onCreateNew()
+{
+    qDebug () << __FUNCTION__;
+    emit requestCreateNote();
+}
+
+void NoteView::onTopping(QModelIndex idx)
+{
+    qDebug () << __FUNCTION__ << " " << idx;
+
+}
+
+void NoteView::onDeleteSingle(QModelIndex idx)
+{
+    qDebug () << __FUNCTION__ << " " << idx;
+    emit requestDeleteNote(idx);
+}
+
+void NoteView::onSendMail(QModelIndex idx)
+{
+    qDebug () << __FUNCTION__ << " " << idx;
+}
+
+void NoteView::onOpenNote(QModelIndex idx)
+{
+    emit requestOpenNote(idx);
 }
