@@ -79,16 +79,12 @@ Widget::Widget(QWidget *parent) :
     }
     ui->setupUi(this);
     m_noteView = static_cast<NoteView *>(ui->listView);
-    m_noteView->setContextMenuPolicy(Qt::CustomContextMenu);
     setupDatabases();
     listenToGsettings();
     kyNoteInit();
     kyNoteConn();
     initData();
-    //initPopMenu();
 }
-
-
 
 /*!
  * \brief Widget::~Widget
@@ -145,7 +141,6 @@ void Widget::initData()
         watcher->setFuture(migration);
     } else {
         emit requestNotesList();
-        //show();
     }
     iniNoteModeRead();
 }
@@ -396,11 +391,6 @@ void Widget::kyNoteConn()
             Qt::BlockingQueuedConnection);
 
     connect(m_dbManager, &DBManager::notesReceived, this, &Widget::loadNotes);
-    //NoteView的右键菜单
-    connect(m_noteView,&NoteView::requestOpenNote,this, &Widget::onOpenNote);
-    connect(m_noteView,&NoteView::requestDeleteNote,this,&Widget::onDeleteNote);
-    connect(m_noteView,&NoteView::requestCreateNote,this,&Widget::createNewNote);
-    connect(m_noteView,&NoteView::requestClearAllNotes,this,&Widget::clearNoteSlot);
     // 快捷键
     new QShortcut(QKeySequence(Qt::Key_F1), this, SLOT(onF1ButtonClicked()));
 }
@@ -1076,15 +1066,9 @@ void Widget::loadNotes(QList<NoteData *> noteList, int noteCounter)
 
     m_noteCounter = noteCounter;
 
+    createNewNoteIfEmpty();
     selectFirstNote();
     transFisrtLine();
-#if 1
-    //UKUI 3.0
-    createNewNoteIfEmpty();
-#else
-    //UKUI 3.1
-    show();
-#endif
 }
 
 /*!
@@ -1278,16 +1262,11 @@ void Widget::clearSearch()
  */
 // void Widget::mousePressEvent(QMouseEvent *event)
 // {
-//     if (event->button() == Qt::RightButton) {
-//        QPoint p = event->pos();
-//        QModelIndex idx = m_noteView->indexAt(p);
-//        if(idx.isValid() == false) {
-//            qDebug() << "Right Click empty ......";
-//            m_noteView->setCurrentIndex(QModelIndex());
-
-//        }
-//     }
-//     QWidget::mousePressEvent(event);
+// if (event->button() == Qt::LeftButton) {
+// this->dragPosition = event->globalPos() - frameGeometry().topLeft();
+// this->mousePressed = true;
+// }
+// QWidget::mousePressEvent(event);
 // }
 
 /*!
@@ -1472,9 +1451,9 @@ void Widget::exitSlot()
 void Widget::trashSlot()
 {
     if(!m_emptyNotes->mIsDontShow)
-        m_emptyNotes->exec();
-    else
-        emit m_emptyNotes->requestEmptyNotes();
+    m_emptyNotes->exec();
+        else
+    emit m_emptyNotes->requestEmptyNotes();
 }
 
 /*!
@@ -1842,23 +1821,4 @@ void Widget::transFisrtLine()
         if (note != Q_NULLPTR && note->content() == NULL)
             note->setFullTitle(tr("Welcome to use Notes."));
     }
-}
-
-void Widget::onOpenNote(QModelIndex idx)
-{
-    listDoubleClickSlot(idx);
-}
-void Widget::onDeleteNote(QModelIndex idx)
-{
-    int noteId = idx.data(NoteModel::NoteID).toInt();
-    for (auto it = m_editors.begin(); it != m_editors.end(); it++) {
-        if ((*it)->m_noteId == noteId) {
-            m_notebook = *it;
-            m_notebook->close();
-            delete m_notebook;
-            m_editors.erase(it);
-            break;
-        }
-    }
-    deleteNote(idx,true);
 }
