@@ -27,7 +27,7 @@ class iconViewModeDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    iconViewModeDelegate(QFont currentFont,QObject *parent = Q_NULLPTR);
+    iconViewModeDelegate(QObject *parent = Q_NULLPTR);
 
     enum States{
         Normal,

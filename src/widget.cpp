@@ -155,7 +155,7 @@ void Widget::setupListModeModel()
     m_proxyModel->setFilterKeyColumn(0);                // 此属性保存用于读取源模型内容的键的列,listview只有一列所以是0
     m_proxyModel->setFilterRole(NoteModel::NoteMdContent);// 此属性保留项目角色，该角色用于在过滤项目时查询源模型的数据
     m_proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);//
-    m_plistDelegate = new listViewModeDelegate(g_currentFont, m_noteView);
+    m_plistDelegate = new listViewModeDelegate(m_noteView);
     m_noteView->setItemDelegate(m_plistDelegate);    // 安装定制delegate提供编辑功能
     m_noteView->setModel(m_proxyModel); // 设置view的model是proxyModel，proxyModel作为view和QAbstractListModel的桥梁
 }
@@ -171,7 +171,7 @@ void Widget::setupIconModeModel()
     m_proxyModel->setFilterRole(NoteModel::NoteMdContent);// 此属性保留项目角色，该角色用于在过滤项目时查询源模型的数据
     m_proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);//
 
-    m_noteView->setItemDelegate(new iconViewModeDelegate(g_currentFont, m_noteView));    // 安装定制delegate提供编辑功能
+    m_noteView->setItemDelegate(new iconViewModeDelegate(m_noteView));    // 安装定制delegate提供编辑功能
     m_noteView->setModel(m_proxyModel); // 设置view的model是proxyModel，proxyModel作为view和QAbstractListModel的桥
 }
 

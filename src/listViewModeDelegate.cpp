@@ -36,11 +36,11 @@
 #define FORMAT_SCHEMA   "org.ukui.control-center.panel.plugins"
 #define TIME_FORMAT_KEY "hoursystem"
 extern QFont g_currentFont;
-listViewModeDelegate::listViewModeDelegate(QFont currentFont, QObject *parent)
+listViewModeDelegate::listViewModeDelegate(QObject *parent)
     : QStyledItemDelegate(parent),
-      m_titleFont(currentFont.family(), currentFont.pointSizeF()/15 * 10.5),              //标题字体
-      m_titleSelectedFont(currentFont.family(), currentFont.pointSizeF()/15 * 11),        //标题选中字体
-      m_dateFont(currentFont.family(), currentFont.pointSizeF()/15 * 9),                  //日期字体
+      m_titleFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 10.5),              //标题字体
+      m_titleSelectedFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 11),        //标题选中字体
+      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 9),                  //日期字体
       m_titleColor(255, 255, 255),                          //标题颜色
       m_dateColor(255, 255, 255),                           //日期颜色
       m_ActiveColor(218, 233, 239),

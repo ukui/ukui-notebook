@@ -27,7 +27,7 @@ class listViewModeDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    listViewModeDelegate(QFont currentFont, QObject *parent = Q_NULLPTR);
+    listViewModeDelegate(QObject *parent = Q_NULLPTR);
 
     enum States{
         Normal,
