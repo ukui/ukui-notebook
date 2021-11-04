@@ -233,39 +233,6 @@
     </message>
 </context>
 <context>
-    <name>NoteView</name>
-    <message>
-        <location filename="../../src/noteView.cpp" line="240"/>
-        <source>Topping this note</source>
-        <translation>置顶便签</translation>
-    </message>
-    <message>
-        <location filename="../../src/noteView.cpp" line="242"/>
-        <source>Send a mail</source>
-        <translation>发送至邮箱</translation>
-    </message>
-    <message>
-        <location filename="../../src/noteView.cpp" line="244"/>
-        <source>Delete this note</source>
-        <translation>删除该便签</translation>
-    </message>
-    <message>
-        <location filename="../../src/noteView.cpp" line="246"/>
-        <source>Open this note</source>
-        <translation>打开该便签</translation>
-    </message>
-    <message>
-        <location filename="../../src/noteView.cpp" line="248"/>
-        <source>Clear all notes</source>
-        <translation>清空便签列表</translation>
-    </message>
-    <message>
-        <location filename="../../src/noteView.cpp" line="250"/>
-        <source>Create a new note</source>
-        <translation>新建便签</translation>
-    </message>
-</context>
-<context>
     <name>PaletteWidget</name>
     <message>
         <location filename="../../src/paletteWidget.ui" line="26"/>
@@ -339,7 +306,7 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="643"/>
+        <location filename="../../src/widget.cpp" line="633"/>
         <source>About</source>
         <translatorcomment>关于</translatorcomment>
         <translation>关于</translation>
@@ -350,13 +317,13 @@
         <translation type="vanished">欢迎使用麒麟便签本。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1196"/>
+        <location filename="../../src/widget.cpp" line="1180"/>
         <source>Search</source>
         <translatorcomment>搜索</translatorcomment>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="718"/>
+        <location filename="../../src/widget.cpp" line="708"/>
         <source>Create New Note</source>
         <translatorcomment>新建便签</translatorcomment>
         <translation>新建便签</translation>
@@ -367,40 +334,40 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="296"/>
-        <location filename="../../src/widget.cpp" line="300"/>
+        <location filename="../../src/widget.cpp" line="291"/>
+        <location filename="../../src/widget.cpp" line="295"/>
         <source>Notes</source>
         <translatorcomment>便签贴</translatorcomment>
         <translation>便签贴</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="642"/>
+        <location filename="../../src/widget.cpp" line="632"/>
         <source>Help</source>
         <translatorcomment>帮助</translatorcomment>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="644"/>
+        <location filename="../../src/widget.cpp" line="634"/>
         <source>Empty Note</source>
         <translatorcomment>清空便签本</translatorcomment>
         <translation>清空便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="721"/>
+        <location filename="../../src/widget.cpp" line="711"/>
         <source>Close</source>
         <translatorcomment>关闭</translatorcomment>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="722"/>
+        <location filename="../../src/widget.cpp" line="712"/>
         <source>Minimize</source>
         <translatorcomment>最小化</translatorcomment>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1117"/>
-        <location filename="../../src/widget.cpp" line="1164"/>
-        <location filename="../../src/widget.cpp" line="1810"/>
+        <location filename="../../src/widget.cpp" line="1101"/>
+        <location filename="../../src/widget.cpp" line="1148"/>
+        <location filename="../../src/widget.cpp" line="1789"/>
         <source>Welcome to use Notes.</source>
         <translatorcomment>欢迎使用便签贴，双击可编辑便签内容。</translatorcomment>
         <translation>欢迎使用便签贴，双击可编辑便签内容。</translation>
@@ -426,13 +393,13 @@
         <translation type="vanished">便签名称</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="719"/>
+        <location filename="../../src/widget.cpp" line="709"/>
         <source>Delete Selected Note</source>
         <translatorcomment>删除</translatorcomment>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="720"/>
+        <location filename="../../src/widget.cpp" line="710"/>
         <source>Switch View</source>
         <translatorcomment>切换视图</translatorcomment>
         <translation>切换视图</translation>
@@ -448,7 +415,7 @@
         <translation type="vanished">换肤</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="646"/>
+        <location filename="../../src/widget.cpp" line="636"/>
         <source>Exit</source>
         <translatorcomment>退出</translatorcomment>
         <translation>退出</translation>
@@ -459,7 +426,7 @@
         <translation type="vanished">最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="723"/>
+        <location filename="../../src/widget.cpp" line="713"/>
         <source>Menu</source>
         <translatorcomment>菜单</translatorcomment>
         <translation>菜单</translation>
