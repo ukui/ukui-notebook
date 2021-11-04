@@ -18,8 +18,6 @@
 
 #include "widget.h"
 #include "ui_widget.h"
-#include "listViewModeDelegate.h"
-#include "iconViewModeDelegate.h"
 #include "editPage.h"
 #include "customStyle.h"
 #include "CloseButton/closebutton.h"
@@ -32,7 +30,7 @@
 #define TIME_FORMAT_KEY "hoursystem"
 #define STYLE_ICON                "icon-theme-name"
 #define STYLE_ICON_NAME           "iconThemeName"
-
+QFont g_currentFont;
 extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
 static QPixmap drawSymbolicColoredPixmap (const QPixmap&, QAction *);
 
@@ -64,13 +62,21 @@ Widget::Widget(QWidget *parent) :
     mousePressed(false),
     m_isTextCpNew(false)
 {
-    translator = new QTranslator(this);
-    if (translator->load(QLocale(), QLatin1String("ukui-notebook"), QLatin1String("_"),
-                         QLatin1String("/usr/share/ukui-notebook")))
-        QApplication::installTranslator(translator);
-    else
-        qDebug() << "cannot load translator ukui-notebook_" << QLocale::system().name() << ".qm!";
+    QString qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translations
+    QString locale = QLocale::system().name();
+    QTranslator *trans_global = new QTranslator;
+    QTranslator *trans_menu = new QTranslator;
+    if (locale == "zh_CN") {
+        if(!trans_global->load(QLocale(), "ukui-notebook", "_", QLatin1String("/usr/share/ukui-notebook")))
+            qDebug() << "Load translations file" <<QLocale() << "failed!";
+        else
+            QApplication::installTranslator(trans_global);
 
+        if(!trans_menu->load(QLocale(), "qt", "_", qtTranslationsPath))
+            qDebug() << "Load translations file" <<QLocale() << "failed!";
+        else
+            QApplication::installTranslator(trans_menu);
+    }
     ui->setupUi(this);
     m_noteView = static_cast<NoteView *>(ui->listView);
     setupDatabases();
@@ -149,8 +155,8 @@ void Widget::setupListModeModel()
     m_proxyModel->setFilterKeyColumn(0);                // 此属性保存用于读取源模型内容的键的列,listview只有一列所以是0
     m_proxyModel->setFilterRole(NoteModel::NoteMdContent);// 此属性保留项目角色，该角色用于在过滤项目时查询源模型的数据
     m_proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);//
-
-    m_noteView->setItemDelegate(new listViewModeDelegate(m_noteView));    // 安装定制delegate提供编辑功能
+    m_plistDelegate = new listViewModeDelegate(m_noteView);
+    m_noteView->setItemDelegate(m_plistDelegate);    // 安装定制delegate提供编辑功能
     m_noteView->setModel(m_proxyModel); // 设置view的model是proxyModel，proxyModel作为view和QAbstractListModel的桥梁
 }
 
@@ -424,6 +430,39 @@ void Widget::listenToGsettings()
             ui->iconLabel->setPixmap(QIcon::fromTheme("kylin-notebook").pixmap(24,24));
             }
         });
+        connect(styleSettings,&QGSettings::changed,this, [=] (const QString &key) {
+            if(key == FONT_STYLE || key == FONT_SIZE)
+            {
+                //获取字号的值
+                QString fontStyle = styleSettings->get(FONT_STYLE).toString();
+                int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+
+                QFontDatabase db;
+                //发送改变信号
+                if (db.families().contains(fontStyle))
+                {
+                    g_currentFont.setFamily(fontStyle);
+                    g_currentFont.setPointSize(fontSizeKey);
+                }
+                else
+                {
+                    qDebug() << "获取字体失败！";
+                }
+            }
+            else
+            {}
+        });
+
+        QString fontStyle = styleSettings->get(FONT_STYLE).toString();
+        int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+
+        QFontDatabase db;
+        //发送改变信号
+        if (db.families().contains(fontStyle))
+        {
+            g_currentFont.setFamily(fontStyle);
+            g_currentFont.setPointSize(fontSizeKey);
+        }
     }
 
     // 监听控制面板字体变化
@@ -871,8 +910,9 @@ void Widget::showNoteInEditor(const QModelIndex &noteIndex)
     int noteColor = noteIndex.data(NoteModel::NoteColor).toInt();
     // QString mdContent = noteIndex.data(NoteModel::NoteMdContent).toString();
 
-    const listViewModeDelegate delegate;
-    QColor m_color = delegate.intToQcolor(noteColor);
+//    const listViewModeDelegate delegate(m_currentFont);
+//    QColor m_color = delegate.intToQcolor(noteColor);
+    QColor m_color = m_plistDelegate->intToQcolor(noteColor);
     // set text and date
     m_notebook->ui->textEdit->setText(content);
     m_notebook->m_noteHead->color_widget = QColor(m_color);
@@ -1382,8 +1422,9 @@ void Widget::onColorChanged(const QColor &color, int noteId)
     }
 
     if (m_tmpColorIndex.isValid()) {
-        const listViewModeDelegate delegate;
-        int m_color = delegate.qcolorToInt(color);
+//        const listViewModeDelegate delegate(m_currentFont);
+//        int m_color = delegate.qcolorToInt(color);
+        int m_color = m_plistDelegate->qcolorToInt(color);
         QMap<int, QVariant> dataValue;
         dataValue[NoteModel::NoteColor] = QVariant::fromValue(m_color);
 
