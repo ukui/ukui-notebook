@@ -111,6 +111,13 @@ void Edit_page::initSetup()
     btnSetup();
     initColor();
     // 获取字体按钮状态
+    m_fontLabel = new QLabel(this);
+    m_fontBtnLayout = new QVBoxLayout(this);
+    m_fontBtnLayout->addWidget(m_fontLabel);
+    ui->fontSizeBtn->setLayout(m_fontBtnLayout);
+    QFont dateFont;
+    dateFont.setPointSize(11);
+    m_fontLabel->setFont(dateFont);
     fontChanged(ui->textEdit->font());
 
     m_noteHead = new noteHead(this);
@@ -396,15 +403,15 @@ void Edit_page::fontChanged(const QFont &f)
 {
     qDebug() << "font Changed" << f.pointSize() << f.bold();
     set_size_page->ui->listWidget->setCurrentRow(f.pointSize() - 10);
-//    ui->fontSizeBtn->setText(QString::number(f.pointSize()));
+    m_fontLabel->setText(QString::number(f.pointSize()));
 
     if(f.pointSize() < 10 )
     {
-        ui->fontSizeBtn->setText(QString::number(10));
+        m_fontLabel->setText(QString::number(10));
     }
     else
     {
-        ui->fontSizeBtn->setText(QString::number(f.pointSize()));
+        m_fontLabel->setText(QString::number(f.pointSize()));
     }
     ui->boldBtn->setChecked(f.bold());
     ui->italicBtn->setChecked(f.italic());
@@ -735,7 +742,7 @@ void Edit_page::setFontSizeSlot()
 {
     qDebug() << "setFontSizeSlot";
     int num = set_size_page->ui->listWidget->currentRow();
-    ui->fontSizeBtn->setText(QString::number(num+10));
+    m_fontLabel->setText(QString::number(num+10));
     set_size_page->close();
 
     QTextCharFormat fmt;
