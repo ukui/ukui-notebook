@@ -1,3 +1,48 @@
+ukui-notebook (3.1.0-1-0036) v101; urgency=medium
+
+  * Bug:无
+  * 任务：#59229 desktop文件增加藏文名称和简介
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- Xin Li <lixin@kylinos.cn>  Thu, 04 Nov 2021 19:18:05 +0800
+
+ukui-notebook (3.1.0-1-0035) v101; urgency=medium
+
+  * Fix Bug #71062:【麒麟便签本】字号未完全适配
+  * 需求：无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- Xin Li <lixin@kylinos.cn>  Thu, 04 Nov 2021 15:23:31 +0800
+
+ukui-notebook (3.1.0-1-0034) v101; urgency=medium
+
+  * Bug编号：bug #82847 【便签本】插入图片提示语没有汉化
+  *          bug #81092 【便签本】右键便签本滚动条，弹出的菜单框未汉化
+  * 需求：无
+  * 其他：无
+
+ -- Xin Li <lixin@kylinos.cn>  Mon, 27 Sep 2021 14:07:37 +0800
+ 
+ukui-notebook (3.1.0-1-0033) v101; urgency=medium
+
+  * 
+  [ BUG编号 ] 
+  * bug77463便签插入图片，原内容消失. 
+  
+  [ 任务编号 ] 
+  * 无 
+  
+  [ 需求编号 ] 
+  * 无 
+  
+  [ 其他改动说明 ] 
+  * 无 
+  
+
+ -- zhaoyubiao <zhaoyubiao@kylinos.cn>  Wed, 22 Sep 2021 09:13:53 +0800
+
 ukui-notebook (3.1.0-1-0032) v101; urgency=medium
 
   * BUG编号：72560 【便签】无序列表、有序列表; 69601 【便签贴】删除编号后，换行多出空格
