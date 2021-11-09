@@ -60,6 +60,8 @@ public:
     QModelIndex m_index;
     SetFontSize *set_size_page = nullptr ;
     SetFontColor *set_color_fort_page = nullptr ;
+    QLabel *m_fontLabel = nullptr;
+    QVBoxLayout *m_fontBtnLayout = nullptr;
 
     int id;
     int m_noteId;
