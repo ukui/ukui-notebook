@@ -1351,7 +1351,13 @@ void Widget::onTextEditTextChanged(int noteId, int i)
 
             // QModelIndex firstIndex = m_proxyModel->index(0,0);
             // Get the new data
-            QString firstline = getFirstLine(m_editors[i]->ui->textEdit->toPlainText());
+            QString firstline;
+            if(m_editors[i]->m_isInsImg) {
+                firstline = getFirstLine("[图片]");
+            }
+            else {
+                firstline = getFirstLine(m_editors[i]->ui->textEdit->toPlainText());
+            }
             QDateTime dateTime = QDateTime::currentDateTime();
             // QString noteDate = dateTime.toString(Qt::ISODate);
 

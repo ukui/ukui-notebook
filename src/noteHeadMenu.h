@@ -57,6 +57,7 @@ private:
 signals:
     void requestNewNote();
     void requestShowNote();
+    void requestUpdateMenuIcon();
 //    void requestFullscreen();
 };
 

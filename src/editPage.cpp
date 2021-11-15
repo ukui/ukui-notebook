@@ -26,6 +26,10 @@
 #include <QFileDialog>
 #include <QImageReader>
 
+#include <KWindowSystem>
+// Necessary for closeApplication()
+#include <NETWM>
+
 #include "widget.h"
 #include "ui_widget.h"
 #include "editPage.h"
@@ -47,7 +51,7 @@ Edit_page::Edit_page(Widget *page, int noteId, QWidget *parent) :
     set_size_page(new SetFontSize(pNotebook)),
     set_color_fort_page(new SetFontColor(pNotebook)),
     m_isFullscreen(false),
-    m_isTopHit(false)
+    m_isInsImg(false)
 {
     ui->setupUi(this);
     initSetup();
@@ -392,16 +396,27 @@ void Edit_page::slotsSetup()
         set_color_fort_page->show();
     });
 
-     connect(m_noteHeadMenu, &noteHeadMenu::requestTopMost, this, [=](){
-         if(m_isTopHit) {
-             m_isTopHit = false;
-             setStayOnTopSlot(m_isTopHit);
-             m_noteHeadMenu->m_topAction->setIcon(QPixmap(""));
+    connect(m_noteHeadMenu, &noteHeadMenu::requestUpdateMenuIcon, this, [=](){
+        KWindowInfo info(this->winId(), NET::WMState);
+        bool b = info.state() & NET::KeepAbove;
+
+        if(b){
+            m_noteHeadMenu->m_topAction->setIcon(QPixmap(":/image/1x/select.png"));
+        }
+        else{
+            m_noteHeadMenu->m_topAction->setIcon(QPixmap(""));
+        }
+    });
+
+    connect(m_noteHeadMenu, &noteHeadMenu::requestTopMost, this, [=](){
+         KWindowInfo info(this->winId(), NET::WMState);
+         bool b = info.state() & NET::KeepAbove;
+
+         if(b) {
+             setWindowStatusClear();
          }
          else {
-             m_isTopHit = true;
-             setStayOnTopSlot(m_isTopHit);
-             m_noteHeadMenu->m_topAction->setIcon(QPixmap(":/image/1x/select.png"));
+             setWindowKeepAbove();
          }
      });
 }
@@ -966,6 +981,17 @@ void Edit_page::showFullScreenSlot()
     }
 }
 
+void Edit_page::setWindowKeepAbove()
+{
+    KWindowSystem::setState(this->winId(), NET::KeepAbove);
+}
+
+void Edit_page::setWindowStatusClear()
+{
+    KWindowSystem::clearState(this->winId(), NET::KeepAbove);
+}
+
+#if 0
 void Edit_page::setStayOnTopSlot(bool b)
 {
     //m_ignoreShowHideEvents = true;
@@ -997,9 +1023,9 @@ void Edit_page::setStayOnTopSlot(bool b)
     if (visible) {
         show();
     }
-
     //m_ignoreShowHideEvents = false;
 }
+#endif
 
 void Edit_page::dropImage(const QImage& image, const QString& format) {
     QByteArray bytes;
@@ -1020,6 +1046,13 @@ void Edit_page::dropImage(const QImage& image, const QString& format) {
     {return ;}
 
     QTextCursor cursor = ui->textEdit->textCursor();
+
+    if(cursor.atStart())
+    {
+        qDebug() <<"ZDEBUG " << "cursor.atStart() " <<endl;
+        m_isInsImg = true;
+    }
+
     QTextImageFormat imageFormat;
     imageFormat.setWidth  ( image.width() );
     imageFormat.setHeight ( image.height() );
