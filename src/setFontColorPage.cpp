@@ -34,7 +34,7 @@ SetFontColor::~SetFontColor()
     //释放内存
     for (int i=0; i < 10;i++)
     {
-        delete list_aItem[i];
+        delete m_listAItem[i];
     }
 }
 
@@ -59,15 +59,15 @@ void SetFontColor::paintEvent(QPaintEvent *event)
 
 void SetFontColor::setColor()
 {
-    color[0]="background:rgba(76,119,231,1);";
-    color[1]="background:rgba(250,108,99,1);";
-    color[2]="background:rgba(15,161,90,1);";
-    color[3]="background:rgba(255,151,47,1);";
-    color[4]="background:rgba(186,123,216,1);";
-    color[5]="background:rgba(248,209,93,1);";
-    color[6]="background:rgba(42,162,217,1);";
-    color[7]="background:rgba(110,207,67,1);";
-    color[8]="background:rgba(144,101,255,1);";
+    m_color[0]="background:rgba(76,119,231,1);";
+    m_color[1]="background:rgba(250,108,99,1);";
+    m_color[2]="background:rgba(15,161,90,1);";
+    m_color[3]="background:rgba(255,151,47,1);";
+    m_color[4]="background:rgba(186,123,216,1);";
+    m_color[5]="background:rgba(248,209,93,1);";
+    m_color[6]="background:rgba(42,162,217,1);";
+    m_color[7]="background:rgba(110,207,67,1);";
+    m_color[8]="background:rgba(144,101,255,1);";
 //    color[9]="background:rgba(236,238,242,1);";
 
     //监听主题改变
@@ -77,20 +77,20 @@ void SetFontColor::setColor()
         QString style = styleSettings->get(MODE_QT_KEY).toString();
         if(style == "ukui-default" || style == "ukui-white"
                 || style == "ukui-light" || style == "ukui"){
-            color[9]="background:rgba(0,0,0,1);";
+            m_color[9]="background:rgba(0,0,0,1);";
         }else if(style == "ukui-dark" || style == "ukui-black"){
-            color[9]="background:rgba(255,255,255,1);";
+            m_color[9]="background:rgba(255,255,255,1);";
         }
         connect(styleSettings, &QGSettings::changed, this, [=](const QString &key){
             if (key == "styleName"){
                 QString currentTheme = styleSettings->get(MODE_QT_KEY).toString();
                 if(currentTheme == "ukui-default" || currentTheme == "ukui-white"
                         || currentTheme == "ukui-light" || currentTheme == "ukui"){
-                    color[9]="background:rgba(0,0,0,1);";
-                    list_page[9]->ui->label->setStyleSheet(color[9]+"border-radius:3px;");
+                    m_color[9]="background:rgba(0,0,0,1);";
+                    m_listPage[9]->ui->label->setStyleSheet(m_color[9]+"border-radius:3px;");
                 }else if(currentTheme == "ukui-dark" || currentTheme == "ukui-black"){
-                    color[9]="background:rgba(255,255,255,1);";
-                    list_page[9]->ui->label->setStyleSheet(color[9]+"border-radius:3px;");
+                    m_color[9]="background:rgba(255,255,255,1);";
+                    m_listPage[9]->ui->label->setStyleSheet(m_color[9]+"border-radius:3px;");
                 }
             }
         });
@@ -107,17 +107,13 @@ void SetFontColor::initSetup()
     ui->listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->listWidget->setSelectionMode(QAbstractItemView::NoSelection);
 
-    for(int i=22; i<32 ; i++){
-        int n = i-22;
-        list_aItem[n] = new QListWidgetItem;
-        list_aItem[n]->setSizeHint(QSize(30,27));
-
-        ui->listWidget->addItem(list_aItem[n]);
-
-        list_page[n] = new paletteButton(this);
-        list_page[n]->resize(QSize(30,23));
-
-        ui->listWidget->setItemWidget(list_aItem[n],list_page[n]);
-        list_page[n]->ui->label->setStyleSheet(color[n]+"border-radius:3px;");
+    for(int n=0; n<10 ; n++){
+        m_listAItem[n] = new QListWidgetItem;
+        m_listAItem[n]->setSizeHint(QSize(30,27));
+        ui->listWidget->addItem(m_listAItem[n]);
+        m_listPage[n] = new paletteButton(this);
+        m_listPage[n]->resize(QSize(30,23));
+        ui->listWidget->setItemWidget(m_listAItem[n],m_listPage[n]);
+        m_listPage[n]->ui->label->setStyleSheet(m_color[n]+"border-radius:3px;");
     }   
 }

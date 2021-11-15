@@ -27,7 +27,7 @@ static QPixmap drawSymbolicColoredPixmap (const QPixmap&, QPushButton *);
 noteHeadMenu::noteHeadMenu(QWidget *parent) :
     QWidget(parent)
   , ui(new Ui::noteHeadMenu)
-  , color_widget(15,161,90)
+  , colorWidget(15,161,90)
 {
     ui->setupUi(this);
     setMinimumSize(250,34);
@@ -47,7 +47,7 @@ void noteHeadMenu::paintEvent(QPaintEvent *event)
     p.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
     QPainterPath rectPath;
     rectPath.addRect(this->rect());
-    p.fillPath(rectPath,QBrush(color_widget));
+    p.fillPath(rectPath,QBrush(colorWidget));
     QWidget::paintEvent(event);
 }
 

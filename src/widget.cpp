@@ -590,9 +590,9 @@ void Widget::openMemoWithId(int noteId)
     qDebug() << "openMemoWithId" << noteId;
 
     QTimer::singleShot(300, this, [=]() {
-        m_notebook = new Edit_page(this, noteId);
+        m_notebook = new EditPage(this, noteId);
         m_editors.push_back(m_notebook);
-        m_notebook->id = m_editors.size() - 1;
+        m_notebook->m_id = m_editors.size() - 1;
 
         for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
             QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
@@ -623,7 +623,7 @@ void Widget::openMemoWithId(int noteId)
             this->activateWindow();
             this->show();
         });
-        connect(m_editors[m_editors.size() - 1], &Edit_page::requestDel, this, [=](int noteId){
+        connect(m_editors[m_editors.size() - 1], &EditPage::requestDel, this, [=](int noteId){
             for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
                 QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
                 if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {
@@ -916,8 +916,8 @@ void Widget::showNoteInEditor(const QModelIndex &noteIndex)
     QColor m_color = m_plistDelegate->intToQcolor(noteColor);
     // set text and date
     m_notebook->ui->textEdit->setText(content);
-    m_notebook->m_noteHead->color_widget = QColor(m_color);
-    m_notebook->m_noteHeadMenu->color_widget = QColor(m_color);
+    m_notebook->m_noteHead->colorWidget = QColor(m_color);
+    m_notebook->m_noteHeadMenu->colorWidget = QColor(m_color);
     m_notebook->update();
 
     QString noteDate = dateTime.toString(Qt::ISODate);
@@ -986,9 +986,9 @@ void Widget::createNewNote()
         m_isOperationRunning = false;
     }
     int noteId = m_currentSelectedNoteProxy.data(NoteModel::NoteID).toInt();
-    m_notebook = new Edit_page(this, noteId);
+    m_notebook = new EditPage(this, noteId);
     m_editors.push_back(m_notebook);
-    m_notebook->id = m_editors.size() - 1;
+    m_notebook->m_id = m_editors.size() - 1;
 
     if (sender() != Q_NULLPTR) {
         // 获取当前选中item下标
@@ -997,7 +997,7 @@ void Widget::createNewNote()
         selectNote(m_currentSelectedNoteProxy);
         m_noteView->setCurrentRowActive(false);
     }
-    connect(m_editors[m_editors.size() - 1], &Edit_page::isEmptyNote, this, [=](int noteId){
+    connect(m_editors[m_editors.size() - 1], &EditPage::isEmptyNote, this, [=](int noteId){
         // m_editors.erase(m_editors[m_editors.size() - 1]);
         qDebug() << "receive signal isEmptyNote" << noteId;
         for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
@@ -1009,7 +1009,7 @@ void Widget::createNewNote()
             }
         }
     });
-    connect(m_editors[m_editors.size() - 1], &Edit_page::requestDel, this, [=](int noteId){
+    connect(m_editors[m_editors.size() - 1], &EditPage::requestDel, this, [=](int noteId){
         for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
             QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
             if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {
@@ -1543,9 +1543,9 @@ void Widget::listDoubleClickSlot(const QModelIndex &index)
         }
     }
     if (isExistInMeditors == 0) {
-        m_notebook = new Edit_page(this, noteId);
+        m_notebook = new EditPage(this, noteId);
         m_editors.push_back(m_notebook);
-        m_notebook->id = m_editors.size() - 1;
+        m_notebook->m_id = m_editors.size() - 1;
 
         if (sender() != Q_NULLPTR) {
             // 获取当前选中item下标
@@ -1568,7 +1568,7 @@ void Widget::listDoubleClickSlot(const QModelIndex &index)
             this->activateWindow();
             this->show();
         });
-        connect(m_editors[m_editors.size() - 1], &Edit_page::requestDel, this, [=](int noteId){
+        connect(m_editors[m_editors.size() - 1], &EditPage::requestDel, this, [=](int noteId){
             for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
                 QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
                 if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {

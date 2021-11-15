@@ -68,9 +68,6 @@
 #include "iconViewModeDelegate.h"
 
 #define     FIRST_LINE_MAX 80
-#define     tristateButton(className,imageUrl)     (""#className"{image:url("#imageUrl".svg);}   \
-            "#className":hover{image:url("#imageUrl"-hover.svg);}  \
-            "#className":pressed{image:url("#imageUrl"-click.svg);}")
 
 /**
  * ukui style
@@ -105,7 +102,7 @@ public:
     ~Widget();
 
     Ui::Widget *ui;                                                 //主ui
-    std::vector<Edit_page*> m_editors;                              //c++数组容器
+    std::vector<EditPage*> m_editors;                              //c++数组容器
 
     int m_isThemeChanged;                                           //主题
     void error_throw();                                             //异常处理抛出
@@ -127,7 +124,7 @@ protected:
     //void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    Edit_page *m_notebook;                                          //新建便签指针
+    EditPage *m_notebook;                                          //新建便签指针
     int m_listflag;                                                 //平铺/展开列表切换
     int sortflag;                                                   //升降序切换
     noteExitWindow* m_noteExitWindow;                               //退出弹窗

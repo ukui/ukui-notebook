@@ -39,9 +39,9 @@ public:
     Ui::noteHeadMenu *ui;
 
 public:
-    QColor color_widget;
-    QAction *m_menuActionDel;
-    QAction *m_topAction;
+    QColor colorWidget;
+    QAction *m_menuActionDel = nullptr;
+    QAction *m_topAction = nullptr;
 
 signals:
     void requestTopMost();

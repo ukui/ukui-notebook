@@ -23,7 +23,7 @@
 
 noteHead::noteHead(QWidget *parent) :
     QWidget(parent)
-  , color_widget(15,161,90)
+  , colorWidget(15,161,90)
   , ui(new Ui::noteHead)
 {
     ui->setupUi(this);
@@ -42,6 +42,6 @@ void noteHead::paintEvent(QPaintEvent *event)
     p.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
     QPainterPath rectPath;
     rectPath.addRect(this->rect());
-    p.fillPath(rectPath,QBrush(color_widget));
+    p.fillPath(rectPath,QBrush(colorWidget));
     QWidget::paintEvent(event);
 }

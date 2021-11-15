@@ -35,7 +35,7 @@ public:
     ~noteHead();
 
 public:
-    QColor color_widget;
+    QColor colorWidget;
 
 protected:
     void paintEvent(QPaintEvent *event);

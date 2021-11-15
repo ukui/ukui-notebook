@@ -65,7 +65,7 @@ public:
 
     QDateTime deletionDateTime() const;
     void setDeletionDateTime(const QDateTime& deletionDateTime);
-    Edit_page *m_note;
+    EditPage *m_note;
 
 private:
     int m_id;
