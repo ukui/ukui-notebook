@@ -93,6 +93,7 @@ Widget::Widget(QWidget *parent) :
 Widget::~Widget()
 {
     for (auto it = m_editors.begin(); it != m_editors.end(); it++) {
+        (*it)->close();
         delete *it;
     }
     m_editors.clear();
@@ -1442,6 +1443,7 @@ void Widget::onColorChanged(const QColor &color, int noteId)
 void Widget::exitSlot()
 {
     this->close();
+    this->~Widget();
 }
 
 /*!
@@ -1585,6 +1587,7 @@ void Widget::listDoubleClickSlot(const QModelIndex &index)
     m_notebook->ui->textEdit->setFocus();
     // 移动光标至行末
     m_notebook->ui->textEdit->moveCursor(QTextCursor::End, QTextCursor::MoveAnchor);
+    m_notebook->setHints();
     m_notebook->show();
 }
 

@@ -53,6 +53,7 @@ Edit_page::Edit_page(Widget *page, int noteId, QWidget *parent) :
     initSetup();
     listenToGsettings();
     slotsSetup();
+    installEventFilter(this);
 }
 
 Edit_page::~Edit_page()
@@ -85,6 +86,23 @@ void Edit_page::leaveEvent(QEvent *event)
         m_noteHead->show();
         m_noteHeadMenu->hide();
     }
+}
+
+bool Edit_page::eventFilter(QObject *obj,QEvent *event)
+{
+
+  if(obj == this)
+  {
+      if(event->type() == QEvent::Close)
+      {
+          if (ui->textEdit->document()->isEmpty()) {
+              qDebug() << "ZDEBUG " << __LINE__ ;
+
+              emit isEmptyNote(m_noteId);
+          }
+      }
+  }
+  return false;
 }
 
 void Edit_page::initSetup()
@@ -458,8 +476,8 @@ void Edit_page::list(bool checked, QTextListFormat::Style style)
         QTextBlockFormat bfmt;
         bfmt.setIndent(obfmt.indent());
         cursor.setBlockFormat(bfmt);
-        QTextDocument *document = ui->textEdit->document();
-        document->setIndentWidth(0);
+//        QTextDocument *document = ui->textEdit->document();
+//        document->setIndentWidth(0);
     } else {
         qDebug() << "checked";
         QTextListFormat listFmt;
@@ -467,8 +485,8 @@ void Edit_page::list(bool checked, QTextListFormat::Style style)
             listFmt = cursor.currentList()->format();
         }
         listFmt.setStyle(style);
-        QTextDocument *document = ui->textEdit->document();
-        document->setIndentWidth(15);
+//        QTextDocument *document = ui->textEdit->document();
+//        document->setIndentWidth(15);
         cursor.createList(listFmt);
     }
     cursor.endEditBlock();
@@ -781,10 +799,10 @@ void Edit_page::setFontColorSlot()
 
     QTextCharFormat fmt;
     if (num != 9) {
+        defaultFontColorChanged = true;
         fmt.setForeground(color_num[num]);
         ui->textEdit->mergeCurrentCharFormat(fmt);
     } else {
-        defaultFontColorChanged = true;
         fmt.setForeground(palette().color(QPalette::Text));
         // fmt.clearForeground();
         ui->textEdit->mergeCurrentCharFormat(fmt);
@@ -1025,5 +1043,13 @@ void Edit_page::insertpicture()
         dropImage(image, QFileInfo(file).suffix().toUpper().toLocal8Bit().data());
 }
 
-
+void Edit_page::setHints()
+{
+    // 添加窗管协议
+    MotifWmHints hints;
+    hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
+    hints.functions = MWM_FUNC_ALL;
+    hints.decorations = MWM_DECOR_BORDER;
+    XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+}
 

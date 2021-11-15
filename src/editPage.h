@@ -73,10 +73,11 @@ public:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
     void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
-    //bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
     Qt::WindowFlags m_flags;
     void setStayOnTopSlot(bool b);
+    void setHints();
 
 private:
     void initSetup();                                                // 初始配置
