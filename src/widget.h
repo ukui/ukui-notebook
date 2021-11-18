@@ -195,7 +195,7 @@ private:
     void selectNote(const QModelIndex& noteIndex);                  //双击前选中目标列表
     void checkMigration();                                          //迁移sync
     void migrateNote(QString notePath);                             //便签数据迁移
-
+    void closeAllEditors();
 
 
 private slots:

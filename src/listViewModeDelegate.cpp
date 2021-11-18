@@ -38,9 +38,9 @@
 extern QFont g_currentFont;
 listViewModeDelegate::listViewModeDelegate(QObject *parent)
     : QStyledItemDelegate(parent),
-      m_titleFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 10.5),              //标题字体
-      m_titleSelectedFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 11),        //标题选中字体
-      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 9),                  //日期字体
+      m_titleFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 14),              //标题字体
+      m_titleSelectedFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 14),        //标题选中字体
+      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 14),                  //日期字体
       m_titleColor(255, 255, 255),                          //标题颜色
       m_dateColor(255, 255, 255),                           //日期颜色
       m_ActiveColor(218, 233, 239),
@@ -300,11 +300,11 @@ void listViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     QString fontName = g_currentFont.family();
     double fontSize = (double)g_currentFont.pointSize()/15;
     m_titleFont.setFamily(fontName);
-    m_titleFont.setPointSizeF(fontSize * 10.5);
+    m_titleFont.setPointSizeF(fontSize * 14);
     m_titleSelectedFont.setFamily(g_currentFont.family());
-    m_titleSelectedFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 11);
+    m_titleSelectedFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 16);
     m_dateFont.setFamily(g_currentFont.family());
-    m_dateFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 9);
+    m_dateFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 14);
 
     QStyleOptionViewItem opt = option;
     QString title{index.data(NoteModel::NoteFullTitle).toString()};

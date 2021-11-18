@@ -97,11 +97,21 @@ Widget::~Widget()
         delete *it;
     }
     m_editors.clear();
-    delete ui;
-    delete m_dbManager;
-    m_dbThread->quit();
-    m_dbThread->wait();
-    delete m_dbThread;
+    if(ui!=nullptr){
+        delete ui;
+        ui = nullptr;
+    }
+    if(m_dbManager!=nullptr) {
+        delete m_dbManager;
+        m_dbManager = nullptr;
+    }
+    if(m_dbThread!=nullptr)
+    {
+        m_dbThread->quit();
+        m_dbThread->wait();
+        delete m_dbThread;
+        m_dbThread = nullptr;
+    }
 }
 
 /*!
@@ -727,16 +737,7 @@ void Widget::btnInit()
     palette.setBrush(QPalette::ButtonText, brush);
     // palette.setColor(QPalette::Highlight, Qt::transparent); /* 取消按钮高亮 */
     // ui->pushButton_Mini->setPalette(palette);
-
-    // 设置新建按钮背景文本颜色
-    QPalette palette2 = m_newKynote->palette();
-    QColor ColorPlaceholderText2(61, 107, 229, 255);
-    QBrush brush2;
-    brush2.setColor(ColorPlaceholderText2);
-    palette2.setColor(QPalette::Button, QColor(61, 107, 229, 255));
-    palette2.setBrush(QPalette::ButtonText, QBrush(Qt::white));
-    m_newKynote->setPalette(palette2);
-
+    m_newKynote->setProperty("isImportant",true);
     m_newKynote->setToolTip(tr("Create New Note"));
     m_trashButton->setToolTip(tr("Delete Selected Note"));
     m_viewChangeButton->setToolTip(tr("Switch View"));
@@ -1442,8 +1443,8 @@ void Widget::onColorChanged(const QColor &color, int noteId)
  */
 void Widget::exitSlot()
 {
+    closeAllEditors();
     this->close();
-    this->~Widget();
 }
 
 /*!
@@ -1473,6 +1474,16 @@ void Widget::textForNewEditpageSigReceived()
     m_isTextCpNew = true;
     newSlot();
 }
+
+void Widget::closeAllEditors()
+{
+    for (auto it = m_editors.begin(); it != m_editors.end(); it++) {
+        (*it)->close();
+        delete *it;
+    }
+    m_editors.clear();
+}
+
 /*!
  * \brief Widget::newSlot
  *
