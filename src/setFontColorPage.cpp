@@ -26,6 +26,7 @@ SetFontColor::SetFontColor(QWidget *parent) :
     ui->setupUi(this);
 
     initSetup();
+    qDebug() << size();
 }
 
 SetFontColor::~SetFontColor()
@@ -38,24 +39,24 @@ SetFontColor::~SetFontColor()
     }
 }
 
-void SetFontColor::paintEvent(QPaintEvent *event)
-{
-    Q_UNUSED(event);
-//    系统默认 255 、 248  深色模式 30 34
-    QStyleOption opt;
-    opt.init(this);
-    QPainter p(this);
+//void SetFontColor::paintEvent(QPaintEvent *event)
+//{
+//    Q_UNUSED(event);
+////    系统默认 255 、 248  深色模式 30 34
+//    QStyleOption opt;
+//    opt.init(this);
+//    QPainter p(this);
 
-    p.setBrush(opt.palette.color(QPalette::Base));
-    //qDebug() << "paintEvent" << p.brush().color().value();
-    //p.setOpacity(0.3);
-    p.setOpacity(0.9);
-    p.setPen(Qt::NoPen);
+//    p.setBrush(opt.palette.color(QPalette::Base));
+//    //qDebug() << "paintEvent" << p.brush().color().value();
+//    //p.setOpacity(0.3);
+//    p.setOpacity(0.9);
+//    p.setPen(Qt::NoPen);
 
-    p.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
-    p.drawRoundedRect(opt.rect,6,6);
-    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-}
+//    p.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
+//    p.drawRoundedRect(opt.rect,6,6);
+//    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+//}
 
 void SetFontColor::setColor()
 {
@@ -68,8 +69,7 @@ void SetFontColor::setColor()
     m_color[6]="background:rgba(42,162,217,1);";
     m_color[7]="background:rgba(110,207,67,1);";
     m_color[8]="background:rgba(144,101,255,1);";
-//    color[9]="background:rgba(236,238,242,1);";
-
+    m_color[9] = "background:rgba(127,127,127,1);";
     //监听主题改变
     const QByteArray id(THEME_QT_SCHEMA);
     if(QGSettings::isSchemaInstalled(id)){
@@ -77,9 +77,9 @@ void SetFontColor::setColor()
         QString style = styleSettings->get(MODE_QT_KEY).toString();
         if(style == "ukui-default" || style == "ukui-white"
                 || style == "ukui-light" || style == "ukui"){
-            m_color[9]="background:rgba(0,0,0,1);";
+//            m_color[9]="background:rgba(0,0,0,1);";
         }else if(style == "ukui-dark" || style == "ukui-black"){
-            m_color[9]="background:rgba(255,255,255,1);";
+//            m_color[9]="background:rgba(255,255,255,1);";
         }
         connect(styleSettings, &QGSettings::changed, this, [=](const QString &key){
             if (key == "styleName"){
@@ -99,21 +99,25 @@ void SetFontColor::setColor()
 
 void SetFontColor::initSetup()
 {
+    qDebug () << __FILE__<<__FUNCTION__;
+    setColor();
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setAttribute(Qt::WA_TranslucentBackground);
-    setColor();
 
+    ui->listWidget->clear();
     ui->listWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->listWidget->setSelectionMode(QAbstractItemView::NoSelection);
 
-    for(int n=0; n<10 ; n++){
+    for(int n=0; n<10; n++){
         m_listAItem[n] = new QListWidgetItem;
         m_listAItem[n]->setSizeHint(QSize(30,27));
-        ui->listWidget->addItem(m_listAItem[n]);
+
         m_listPage[n] = new paletteButton(this);
         m_listPage[n]->resize(QSize(30,23));
-        ui->listWidget->setItemWidget(m_listAItem[n],m_listPage[n]);
         m_listPage[n]->ui->label->setStyleSheet(m_color[n]+"border-radius:3px;");
-    }   
+
+        ui->listWidget->addItem(m_listAItem[n]);
+        ui->listWidget->setItemWidget(m_listAItem[n],m_listPage[n]);
+    }
 }

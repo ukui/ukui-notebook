@@ -53,12 +53,10 @@ public:
 private:
     QListWidgetItem *m_listAItem[10];
     paletteButton *m_listPage[10];
-
-    QString m_color[11];
-    QString m_color1;
+    QString m_color[10];
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
+    //void paintEvent(QPaintEvent *event) override;
 
 private:
     void initSetup();
