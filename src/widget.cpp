@@ -363,11 +363,13 @@ void Widget::kyNoteConn()
     connect(m_noteView, &NoteView::viewportPressed, this, [this](){
         if (m_noteModel->rowCount() > 0) {
             QModelIndex index = m_noteView->currentIndex();
-            m_currentSelectedNoteProxy = index;
-            m_noteView->selectionModel()->select(m_currentSelectedNoteProxy,
-                                                 QItemSelectionModel::ClearAndSelect);
-            m_noteView->setCurrentIndex(m_currentSelectedNoteProxy);
-            m_noteView->scrollTo(m_currentSelectedNoteProxy);
+            if(index!=m_currentSelectedNoteProxy) {
+                m_currentSelectedNoteProxy = index;
+                m_noteView->selectionModel()->select(m_currentSelectedNoteProxy,
+                                                     QItemSelectionModel::ClearAndSelect);
+                m_noteView->setCurrentIndex(m_currentSelectedNoteProxy);
+                m_noteView->scrollTo(m_currentSelectedNoteProxy);
+            }
         }
     });
 

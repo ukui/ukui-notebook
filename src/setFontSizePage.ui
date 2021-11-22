@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">selection-background-color: rgb(85, 255, 127);
+    <string notr="true">
 </string>
    </property>
   </widget>

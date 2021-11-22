@@ -1054,7 +1054,7 @@ void EditPage::onFontColorClicked()
     QPointF position = this->pos();
     QSize size = this->size();
     qDebug () << "Current size:" << size;
-    m_setColorFontPage->move(position.x()+size.width() - 300, position.y() + size.height() - 70);
+    m_setColorFontPage->move(position.x()+size.width() - 295 , position.y() + size.height() - 70);
     //m_setColorFontPage->resize(300,30);
     //m_setColorFontPage->ui->listWidget->resize(300,30);
     m_setColorFontPage->show();

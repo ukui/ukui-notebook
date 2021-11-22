@@ -109,10 +109,10 @@ void SetFontColor::initSetup()
 
     for(int n=0; n<10; n++){
         m_listAItem[n] = new QListWidgetItem;
-        m_listAItem[n]->setSizeHint(QSize(30,27));
+        m_listAItem[n]->setSizeHint(QSize(28,27));
 
         m_listPage[n] = new paletteButton(this);
-        m_listPage[n]->resize(QSize(30,23));
+        m_listPage[n]->resize(QSize(28,23));
         m_listPage[n]->ui->label->setStyleSheet(m_color[n]+"border-radius:3px;");
 
         ui->listWidget->addItem(m_listAItem[n]);
