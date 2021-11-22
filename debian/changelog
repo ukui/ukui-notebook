@@ -1,3 +1,13 @@
+ukui-notebook (3.1.0-1-0041) v101; urgency=medium
+
+  * Bug:
+        #92422 【便签本】界面走查
+  * 任务：无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- Xin Li <lixin@kylinos.cn>  Tue, 23 Nov 2021 09:28:48 +0800
+
 ukui-notebook (3.1.0-1-0040) v101; urgency=medium
 
   * Bug :
