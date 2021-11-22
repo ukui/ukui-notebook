@@ -56,7 +56,7 @@ private:
     QString m_color[10];
 
 protected:
-    //void paintEvent(QPaintEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     void initSetup();

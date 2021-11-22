@@ -68,7 +68,7 @@ public:
 
     bool m_isFullscreen = false;
     //bool m_ignoreShowHideEvents;
-    bool m_isTopHit = false;
+    bool m_isInsImg = false;
 
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
@@ -78,6 +78,8 @@ public:
     Qt::WindowFlags m_flags;
     void setStayOnTopSlot(bool b);
     void setHints();
+    void setWindowKeepAbove();
+    void setWindowStatusClear();
 
 private:
     void initSetup();                                                // 初始配置
@@ -135,7 +137,7 @@ private slots:
     void dropImage(const QImage& image, const QString& format);
 
 signals:
-    void texthasChanged(int noteId, int m_id);
+    void texthasChanged(int noteId, int id);
     void colorhasChanged(const QColor &color,int);
     void isEmptyNote(int noteId);
     void requestDel(int noteId);

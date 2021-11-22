@@ -26,7 +26,6 @@ SetFontColor::SetFontColor(QWidget *parent) :
     ui->setupUi(this);
 
     initSetup();
-    qDebug() << size();
 }
 
 SetFontColor::~SetFontColor()
@@ -39,24 +38,24 @@ SetFontColor::~SetFontColor()
     }
 }
 
-//void SetFontColor::paintEvent(QPaintEvent *event)
-//{
-//    Q_UNUSED(event);
-////    系统默认 255 、 248  深色模式 30 34
-//    QStyleOption opt;
-//    opt.init(this);
-//    QPainter p(this);
+void SetFontColor::paintEvent(QPaintEvent *event)
+{
+    Q_UNUSED(event);
+//    系统默认 255 、 248  深色模式 30 34
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
 
-//    p.setBrush(opt.palette.color(QPalette::Base));
-//    //qDebug() << "paintEvent" << p.brush().color().value();
-//    //p.setOpacity(0.3);
-//    p.setOpacity(0.9);
-//    p.setPen(Qt::NoPen);
+    p.setBrush(opt.palette.color(QPalette::Base));
+    //qDebug() << "paintEvent" << p.brush().color().value();
+    //p.setOpacity(0.3);
+    p.setOpacity(0.9);
+    p.setPen(Qt::NoPen);
 
-//    p.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
-//    p.drawRoundedRect(opt.rect,6,6);
-//    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-//}
+    p.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
+    p.drawRoundedRect(opt.rect,6,6);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}
 
 void SetFontColor::setColor()
 {
@@ -77,9 +76,9 @@ void SetFontColor::setColor()
         QString style = styleSettings->get(MODE_QT_KEY).toString();
         if(style == "ukui-default" || style == "ukui-white"
                 || style == "ukui-light" || style == "ukui"){
-//            m_color[9]="background:rgba(0,0,0,1);";
+            m_color[9]="background:rgba(0,0,0,1);";
         }else if(style == "ukui-dark" || style == "ukui-black"){
-//            m_color[9]="background:rgba(255,255,255,1);";
+            m_color[9]="background:rgba(255,255,255,1);";
         }
         connect(styleSettings, &QGSettings::changed, this, [=](const QString &key){
             if (key == "styleName"){
@@ -99,7 +98,6 @@ void SetFontColor::setColor()
 
 void SetFontColor::initSetup()
 {
-    qDebug () << __FILE__<<__FUNCTION__;
     setColor();
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setAttribute(Qt::WA_TranslucentBackground);
