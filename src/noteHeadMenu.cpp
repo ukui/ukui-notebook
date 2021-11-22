@@ -118,6 +118,10 @@ void noteHeadMenu::btnInit()
     m_menu->addAction(m_menuAction);
     ui->pushButtonMenu->setMenu(m_menu);
 
+    connect(m_menu, &QMenu::aboutToShow, this, [=](){
+        requestUpdateMenuIcon();
+    });
+
     connect(m_menuAction, &QAction::triggered, this, [=](){
         requestShowNote();
     });
