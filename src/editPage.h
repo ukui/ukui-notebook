@@ -113,7 +113,7 @@ private slots:
     void setOrderedListSlot(bool checked);                           // 有序列表
     void list(bool checked, QTextListFormat::Style style);
     void setFontSizeSlot();                                          // 设置字体大小
-    void setFontColorSlot();                                         // 设置字体颜色
+    void setFontColorSlot(QListWidgetItem *item);                                         // 设置字体颜色
     // 调色按钮
     void onFontColorClicked();
     void blueBtnSlot();

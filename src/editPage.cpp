@@ -163,7 +163,7 @@ void EditPage::btnSetup()
 {
     ui->unorderedBtn->setIcon(QIcon::fromTheme("view-list.symbolic"));
     ui->strikeOutBtn->setIcon(QIcon::fromTheme("format-text-strikethrough-symbolic"));
-    ui->orderedBtn->setIcon(QIcon::fromTheme("ukui-view-list-numbe.symbolic"));
+    ui->orderedBtn->setIcon(QIcon::fromTheme("ukui-view-list-numbe-symbolic"));
     ui->insertBtn->setIcon(QIcon::fromTheme("view-list-images.symbolic"));
     ui->underlineBtn->setIcon(QIcon::fromTheme("format-text-underline-symbolic"));
     ui->boldBtn->setIcon(QIcon::fromTheme("format-text-bold-symbolic"));
@@ -745,17 +745,18 @@ void EditPage::initColor()
 
 }
 
-void EditPage::setFontColorSlot()
+void EditPage::setFontColorSlot(QListWidgetItem *item)
 {
-    qDebug() << "setFontColorSlot";
+    qDebug() << "Sender" << sender();
+    qDebug() << "Item" << item;
     int num = m_setColorFontPage->ui->listWidget->currentRow();
-
     QTextCharFormat fmt;
     if (num != 9) {
         m_defaultFontColorChanged = true;
         fmt.setForeground(m_colorNum[num]);
         ui->textEdit->mergeCurrentCharFormat(fmt);
     } else {
+        m_defaultFontColorChanged = false;
         fmt.setForeground(palette().color(QPalette::Text));
         // fmt.clearForeground();
         ui->textEdit->mergeCurrentCharFormat(fmt);
@@ -1021,8 +1022,8 @@ void EditPage::onFontColorClicked()
     QPointF position = this->pos();
     QSize size = this->size();
     qDebug () << "Current size:" << size;
-    m_setColorFontPage->move(position.x()+size.width() - 300, position.y() + size.height() - 70);
-    m_setColorFontPage->resize(300,30);
-    m_setColorFontPage->ui->listWidget->resize(300,30);
+    m_setColorFontPage->move(position.x()+size.width() - 295 , position.y() + size.height() - 70);
+    //m_setColorFontPage->resize(300,30);
+    //m_setColorFontPage->ui->listWidget->resize(300,30);
     m_setColorFontPage->show();
 }
