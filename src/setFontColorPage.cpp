@@ -26,6 +26,7 @@ SetFontColor::SetFontColor(QWidget *parent) :
     ui->setupUi(this);
 
     initSetup();
+    qDebug() << size();
 }
 
 SetFontColor::~SetFontColor()
@@ -98,6 +99,7 @@ void SetFontColor::setColor()
 
 void SetFontColor::initSetup()
 {
+    qDebug () << __FILE__<<__FUNCTION__;
     setColor();
     setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
     setAttribute(Qt::WA_TranslucentBackground);
