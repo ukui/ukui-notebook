@@ -99,11 +99,10 @@ bool EditPage::eventFilter(QObject *obj,QEvent *event)
   {
       if(event->type() == QEvent::Close)
       {
-          if (ui->textEdit->document()->isEmpty()) {
-              qDebug() << "ZDEBUG " << __LINE__ ;
-
-              emit isEmptyNote(m_noteId);
-          }
+//          if (ui->textEdit->document()->isEmpty()) {
+//              qDebug() << "ZDEBUG " << __LINE__ ;
+//              emit isEmptyNote(m_noteId);
+//          }
       }
   }
   return false;
@@ -211,7 +210,7 @@ void EditPage::btnSetup()
     QPalette palette2 = ui->fontColorBtn->palette();
     palette2.setColor(QPalette::Highlight, Qt::transparent); /* 取消按钮高亮 */
     ui->fontColorBtn->setPalette(palette2);
-
+    ui->fontColorBtn->setAttribute(Qt::WA_TransparentForMouseEvents);
     ui->boldBtn->setCheckable(true);
     ui->italicBtn->setCheckable(true);
     ui->underlineBtn->setCheckable(true);
@@ -357,7 +356,7 @@ void EditPage::slotsSetup()
 
         m_setSizePage->show();
     });
-    connect(ui->fontColorBtn, &QPushButton::clicked, this, &EditPage::onFontColorClicked);
+    connect(ui->styleBtn, &QPushButton::clicked, this, &EditPage::onFontColorClicked);
     connect(m_noteHeadMenu, &noteHeadMenu::requestUpdateMenuIcon, this, [=](){
         KWindowInfo info(this->winId(), NET::WMState);
         bool b = info.state() & NET::KeepAbove;
@@ -457,6 +456,9 @@ void EditPage::list(bool checked, QTextListFormat::Style style)
 //        document->setIndentWidth(0);
     } else {
         qDebug() << "checked";
+        QTextCharFormat charFormat = cursor.charFormat();
+        qDebug() << charFormat.fontPointSize() << cursor.selectedText() ;
+        qDebug() << cursor.anchor() << cursor.position();
         QTextListFormat listFmt;
         if (cursor.currentList()) {
             listFmt = cursor.currentList()->format();
@@ -464,6 +466,7 @@ void EditPage::list(bool checked, QTextListFormat::Style style)
         listFmt.setStyle(style);
 //        QTextDocument *document = ui->textEdit->document();
 //        document->setIndentWidth(15);
+
         cursor.createList(listFmt);
     }
     cursor.endEditBlock();

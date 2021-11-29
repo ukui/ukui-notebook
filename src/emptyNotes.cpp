@@ -28,7 +28,7 @@
 emptyNotes::emptyNotes(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::emptyNotes),
-    mIsDontShow(false)
+    m_isDontShow(false)
 {
     ui->setupUi(this);
     setWindowTitle(tr("emptyNotes"));
@@ -96,11 +96,11 @@ void emptyNotes::on_pushButton_2_clicked()
 
     if(ui->checkBox->isChecked())
     {
-        mIsDontShow = true;
+        m_isDontShow = true;
     }
     else
     {
-        mIsDontShow = false;
+        m_isDontShow = false;
     }
 
     emit requestEmptyNotes();

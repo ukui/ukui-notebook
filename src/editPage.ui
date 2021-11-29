@@ -307,13 +307,13 @@
         <x>105</x>
         <y>5</y>
         <width>1</width>
-        <height>16</height>
+        <height>25</height>
        </rect>
       </property>
       <property name="maximumSize">
        <size>
         <width>1</width>
-        <height>20</height>
+        <height>25</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -416,13 +416,13 @@
         <x>259</x>
         <y>5</y>
         <width>1</width>
-        <height>20</height>
+        <height>25</height>
        </rect>
       </property>
       <property name="maximumSize">
        <size>
         <width>1</width>
-        <height>20</height>
+        <height>25</height>
        </size>
       </property>
       <property name="styleSheet">

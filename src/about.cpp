@@ -17,6 +17,8 @@
 #define STYLE_ICON                "icon-theme-name"
 #define STYLE_ICON_NAME           "iconThemeName"
 
+static  QString SOFTWARE_VERSION = "3.1.0";
+
 extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
 
 About::About(QWidget *parent) :
@@ -48,8 +50,10 @@ About::About(QWidget *parent) :
         this->close();
     });
 
-    ui->versionLabel->setText(tr("Version: 2020.1.0"));
-// ui->teamLabel->setText(tr("Service & Support: ") +
+//    ui->versionLabel->setText(tr("Version: 2020.1.0"));
+    QString version = QString(tr("Version: %1")).arg(SOFTWARE_VERSION);
+    ui->versionLabel->setText(version);
+    // ui->teamLabel->setText(tr("Service & Support: ") +
 // "<a href=\"mailto://support@kylinos.cn\""
 // "style=\"color: palette(buttonText)\">"
 // "support@kylinos.cn</a>");

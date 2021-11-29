@@ -1461,10 +1461,11 @@ void Widget::exitSlot()
  */
 void Widget::trashSlot()
 {
-    if(!m_emptyNotes->mIsDontShow)
-    m_emptyNotes->exec();
-        else
-    emit m_emptyNotes->requestEmptyNotes();
+    if(!m_emptyNotes->m_isDontShow) {
+        m_emptyNotes->exec();
+    } else{
+        emit m_emptyNotes->requestEmptyNotes();
+    }
 }
 
 /*!

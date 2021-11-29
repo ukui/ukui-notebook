@@ -33,7 +33,7 @@ public:
     explicit emptyNotes(QWidget *parent = nullptr);
     ~emptyNotes();
 
-    bool mIsDontShow;
+    bool m_isDontShow;
 
 private slots:
     void on_pushButton_clicked();
