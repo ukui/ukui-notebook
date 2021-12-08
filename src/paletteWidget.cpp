@@ -19,8 +19,18 @@
 #include "paletteWidget.h"
 #include "ui_paletteWidget.h"
 
-extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
+#include <QDebug>
 
+extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
+QString PaletteWidget::BORDER_RADIUS_2PX =  "border-radius:2px";
+QString PaletteWidget::KY_BLUE = "#3790FA";
+QString PaletteWidget::KY_PURPLE = "#722ed1";
+QString PaletteWidget::KY_PINK = "#F559AB";
+QString PaletteWidget::KY_RED = "#FA6C63";
+QString PaletteWidget:: KY_ORANGE = "#F68C27";
+QString PaletteWidget::KY_YELLOW = "#FBC726";
+QString PaletteWidget::KY_GREEN = "#52C429";
+QString PaletteWidget::KY_GREY = "#8C8C8C";
 PaletteWidget::PaletteWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PaletteWidget)
@@ -43,28 +53,26 @@ PaletteWidget::~PaletteWidget()
     delete ui;
 }
 
+
+
 void PaletteWidget::btnSetup()
 {
-    ui->blueBtn->setStyleSheet("background:rgba(76,119,231,1);"
-                               "border-radius:2px;");
-    ui->redBtn->setStyleSheet("background:rgba(250,108,99,1);"
-                               "border-radius:2px;");
-    ui->darkGreenBtn->setStyleSheet("background:rgba(15,161,90,1);"
-                               "border-radius:2px;");
-    ui->orangeBtn->setStyleSheet("background:rgba(255,151,47,1);"
-                               "border-radius:2px;");
-    ui->purpleBtn->setStyleSheet("background:rgba(186,123,216,1);"
-                               "border-radius:2px;");
-    ui->goldenBtn->setStyleSheet("background:rgba(248,209,93,1);"
-                               "border-radius:2px;");
-    ui->lightBlueBtn->setStyleSheet("background:rgba(42,162,217,1);"
-                               "border-radius:2px;");
-    ui->lightGreenBtn->setStyleSheet("background:rgba(110,207,67,1);"
-                               "border-radius:2px;");
-    ui->yellowBtn->setStyleSheet("background:rgba(144,101,255,1);"
-                               "border-radius:2px;");
-    ui->pinkBtn->setStyleSheet("background:rgba(245,80,159,1);"
-                               "border-radius:2px;");
+    QString styleSheet = QString("background: %1;%2;").arg(KY_BLUE).arg(BORDER_RADIUS_2PX);
+    ui->blueBtn->setStyleSheet(styleSheet);
+    styleSheet = QString("background:%1;%2;").arg(KY_RED).arg(BORDER_RADIUS_2PX);
+    ui->redBtn->setStyleSheet(styleSheet);
+    styleSheet = QString("background:%1;%2;").arg(KY_GREEN).arg(BORDER_RADIUS_2PX);
+    ui->darkGreenBtn->setStyleSheet(styleSheet);
+    styleSheet = QString("background:%1;%2;").arg(KY_ORANGE).arg(BORDER_RADIUS_2PX);
+    ui->orangeBtn->setStyleSheet(styleSheet);
+    styleSheet = QString("background:%1;%2;").arg(KY_PURPLE).arg(BORDER_RADIUS_2PX);
+    ui->purpleBtn->setStyleSheet(styleSheet);
+    styleSheet = QString("background:%1;%2;").arg(KY_YELLOW).arg(BORDER_RADIUS_2PX);
+    ui->goldenBtn->setStyleSheet(styleSheet);
+    styleSheet = QString("background:%1;%2;").arg(KY_GREY).arg(BORDER_RADIUS_2PX);
+    ui->greyBtn->setStyleSheet(styleSheet);
+    styleSheet = QString("background:%1;%2;").arg(KY_PINK).arg(BORDER_RADIUS_2PX);
+    ui->pinkBtn->setStyleSheet(styleSheet);
 }
 
 void PaletteWidget::paintEvent(QPaintEvent *event)

@@ -25,22 +25,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pinkBtn">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>10</y>
-     <width>15</width>
-     <height>15</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
   <widget class="QPushButton" name="orangeBtn">
    <property name="geometry">
     <rect>
@@ -48,22 +32,6 @@
      <y>8</y>
      <width>16</width>
      <height>16</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="yellowBtn">
-   <property name="geometry">
-    <rect>
-     <x>205</x>
-     <y>10</y>
-     <width>15</width>
-     <height>15</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -89,7 +57,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="lightBlueBtn">
+  <widget class="QPushButton" name="greyBtn">
    <property name="geometry">
     <rect>
      <x>152</x>
@@ -153,7 +121,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="lightGreenBtn">
+  <widget class="QPushButton" name="pinkBtn">
    <property name="geometry">
     <rect>
      <x>178</x>

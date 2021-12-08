@@ -292,12 +292,8 @@ void EditPage::slotsSetup()
             &EditPage::purpleBtnSlot);
     connect(m_colorPage->paletteWidget->ui->goldenBtn, &QPushButton::clicked, this,
             &EditPage::goldenBtnSlot);
-    connect(m_colorPage->paletteWidget->ui->lightBlueBtn, &QPushButton::clicked, this,
-            &EditPage::lightBlueBtnSlot);
-    connect(m_colorPage->paletteWidget->ui->lightGreenBtn, &QPushButton::clicked, this,
-            &EditPage::lightGreenBtnSlot);
-    connect(m_colorPage->paletteWidget->ui->yellowBtn, &QPushButton::clicked, this,
-            &EditPage::yellowBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->greyBtn, &QPushButton::clicked, this,
+            &EditPage::greyBtnSlot);
     connect(m_colorPage->paletteWidget->ui->pinkBtn, &QPushButton::clicked, this,
             &EditPage::pinkBtnSlot);
     // 字体颜色大小
@@ -751,16 +747,14 @@ void EditPage::setFontSizeSlot()
 // 调色板
 void EditPage::initColor()
 {
-    m_colorNum[0] = QColor(76, 119, 231);
-    m_colorNum[1] = QColor(250, 108, 99);
-    m_colorNum[2] = QColor(15, 161, 90);
-    m_colorNum[3] = QColor(255, 151, 47);
-    m_colorNum[4] = QColor(186, 123, 216);
-    m_colorNum[5] = QColor(248, 209, 93);
-    m_colorNum[6] = QColor(42, 162, 217);
-    m_colorNum[7] = QColor(110, 207, 67);
-    m_colorNum[8] = QColor(144, 101, 255);
-
+    m_colorNum[0] = QColor(PaletteWidget::KY_BLUE);
+    m_colorNum[1] = QColor(PaletteWidget::KY_RED);
+    m_colorNum[2] = QColor(PaletteWidget::KY_GREEN);
+    m_colorNum[3] = QColor(PaletteWidget::KY_ORANGE);
+    m_colorNum[4] = QColor(PaletteWidget::KY_PURPLE);
+    m_colorNum[5] = QColor(PaletteWidget::KY_YELLOW);
+    m_colorNum[6] = QColor(PaletteWidget::KY_GREY);
+    m_colorNum[7] = QColor(PaletteWidget::KY_PINK);
 }
 
 void EditPage::setFontColorSlot(QListWidgetItem *item)
@@ -793,24 +787,21 @@ void EditPage::blueBtnSlot()
 
 void EditPage::redBtnSlot()
 {
-    m_editColor = QColor(255, 108, 99);
+    QColor color((PaletteWidget::KY_RED));
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(250, 108, 99);
-    m_noteHeadMenu->colorWidget = QColor(250, 108, 99);
-
-    // QString _BgColor = m_editColor.name();
-    // QString _Stylesheet = "background-color: %1;";
-    // _Stylesheet = _Stylesheet.arg(_BgColor);
-    // m_noteHeadMenu->ui->pushButtonExit->setStyleSheet(_Stylesheet);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
 void EditPage::darkGreenBtnSlot()
 {
-    m_editColor = QColor(15, 161, 90);
+    QColor color((PaletteWidget::KY_GREEN));
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(15, 161, 90);
-    m_noteHeadMenu->colorWidget = QColor(15, 161, 90);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
@@ -825,28 +816,31 @@ void EditPage::orangeBtnSlot()
 
 void EditPage::purpleBtnSlot()
 {
-    m_editColor = QColor(186, 123, 216);
+    QColor color(PaletteWidget::KY_PURPLE);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(186, 123, 216);
-    m_noteHeadMenu->colorWidget = QColor(186, 123, 216);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
 void EditPage::goldenBtnSlot()
 {
-    m_editColor = QColor(248, 209, 93);
+    QColor color(PaletteWidget::KY_YELLOW);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(248, 209, 93);
-    m_noteHeadMenu->colorWidget = QColor(248, 209, 93);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
-void EditPage::lightBlueBtnSlot()
+void EditPage::greyBtnSlot()
 {
-    m_editColor = QColor(42, 162, 217);
+    QColor color(PaletteWidget::KY_GREY);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(42, 162, 217);
-    m_noteHeadMenu->colorWidget = QColor(42, 162, 217);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
@@ -1057,7 +1051,7 @@ void EditPage::onFontColorClicked()
     QPointF position = this->pos();
     QSize size = this->size();
     qDebug () << "Current size:" << size;
-    m_setColorFontPage->move(position.x()+size.width() - 295 , position.y() + size.height() - 70);
+    m_setColorFontPage->move(position.x()+size.width() - 280 , position.y() + size.height() - 70);
     //m_setColorFontPage->resize(300,30);
     //m_setColorFontPage->ui->listWidget->resize(300,30);
     m_setColorFontPage->show();

@@ -60,7 +60,8 @@ Widget::Widget(QWidget *parent) :
     m_isColorModified(false),
     m_isOperationRunning(false),
     mousePressed(false),
-    m_isTextCpNew(false)
+    m_isTextCpNew(false),
+    m_isThemeChanged(false)   // ukui-default
 {
     QString qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translations
     QString locale = QLocale::system().name();
@@ -273,7 +274,7 @@ void Widget::kyNoteInit()
     qDebug() << "\033[32m" << "kyNote init";
     sortflag = 1;           // 排序
     m_listflag = 1;         // 平铺\列表
-    m_isThemeChanged = 0;   // ukui-default
+
 
     m_searchLine = ui->SearchLine;
     m_newKynote = ui->newKynote;
@@ -419,17 +420,24 @@ void Widget::listenToGsettings()
 
     if (QGSettings::isSchemaInstalled(id)) {
         QGSettings *styleSettings = new QGSettings(id, QByteArray(), this);
+        m_currentTheme = styleSettings->get("styleName").toString();
+        if(m_currentTheme.compare("ukui-dark")==0 || m_currentTheme.compare("ukui-black")==0){
+            m_isThemeChanged = 1;
+        }
         connect(styleSettings, &QGSettings::changed, this, [=](const QString &key){
             auto style = styleSettings->get(key).toString();
             if (key == "styleName") {
-                currentTheme = styleSettings->get(MODE_QT_KEY).toString();
-                if (currentTheme == "ukui-default" || currentTheme == "ukui-white"
-                    || currentTheme == "ukui-light" || currentTheme == "ukui") {
+                m_currentTheme = styleSettings->get(MODE_QT_KEY).toString();
+                if (m_currentTheme == "ukui-default" || m_currentTheme == "ukui-white"
+                    || m_currentTheme == "ukui-light" || m_currentTheme == "ukui") {
                     m_isThemeChanged = 0;
-                        searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
-                } else if (style == "ukui-dark" || currentTheme == "ukui-black") {
+                    m_searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
+                    //edit-find-symbolic
+                    //m_searchAction->setIcon(QIcon::fromTheme("edit-find-symbolic"));
+                } else if (style == "ukui-dark" || m_currentTheme == "ukui-black") {
                     m_isThemeChanged = 1;
-                    searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), searchAction));
+                    m_searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), m_searchAction));
+                    //m_searchAction->setIcon(QIcon::fromTheme("edit-find-symbolic"));
                 }
             }
             QTimer::singleShot(500, this, [=](){
@@ -1214,19 +1222,21 @@ void Widget::searchInit()
 {
     m_searchLine->setContextMenuPolicy(Qt::NoContextMenu);  // 禁用右键菜单
     m_searchLine->setPlaceholderText(tr("Search"));         // 设置详细输入框的提示信息
-    searchAction = new QAction(m_searchLine);
+    m_searchAction = new QAction(m_searchLine);
     //searchAction->setIcon(QIcon::fromTheme("system-search-symbolic"));
     if(m_isThemeChanged)
     {
-       searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), searchAction));
+       m_searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), m_searchAction));
     }
     else
     {
-       searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
+       m_searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
     }
+
+//    m_searchAction->setIcon(QIcon::fromTheme("edit-find-symbolic"));
     m_searchLine->setProperty("useIconHighlightEffect", true);
     m_searchLine->setProperty("iconHighlightEffectMode", 1);
-    m_searchLine->addAction(searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
+    m_searchLine->addAction(m_searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
     // m_searchLine->setAttribute(Qt::WA_Hover, true);
 
     QTimer::singleShot(500, this, [=](){
@@ -1256,7 +1266,7 @@ void Widget::clearSearch()
     m_searchLine->blockSignals(false);
     m_proxyModel->setFilterFixedString(QString());
     m_searchLine->setFocus();
-    m_searchLine->addAction(searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
+    m_searchLine->addAction(m_searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
     m_searchLine->removeAction(delAction);
 }
 
@@ -1621,10 +1631,10 @@ void Widget::onSearchEditTextChanged(const QString &keyword)
     m_searchQueue.enqueue(keyword);
 
     if (m_searchLine->text().isEmpty()) {
-        m_searchLine->addAction(searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
+        m_searchLine->addAction(m_searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
         m_searchLine->removeAction(delAction);
     } else {
-        m_searchLine->removeAction(searchAction);
+        m_searchLine->removeAction(m_searchAction);
         m_searchLine->addAction(delAction, QLineEdit::TrailingPosition);  // 图片在右侧
     }
 

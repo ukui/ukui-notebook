@@ -66,9 +66,9 @@ void noteHeadMenu::slotsInit()
 
 void noteHeadMenu::btnInit()
 {
+    ui->pushButtonPalette->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme(":/image/1x/note_color.png").pixmap(16,16), ui->pushButtonPalette));
     ui->pushButtonExit->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme("window-close-symbolic").pixmap(16,16), ui->pushButtonExit));
     ui->pushButtonMenu->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme("open-menu-symbolic").pixmap(16,16), ui->pushButtonMenu));
-    ui->pushButtonPalette->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme(":/image/1x/note_color.png").pixmap(16,16), ui->pushButtonPalette));
 
     QString _Stylesheet = "QPushButton{background-color: rgba(0,0,0,0);}"
                   "QPushButton:hover{background-color: rgba(0,0,0,0.12);}"
@@ -147,6 +147,13 @@ void noteHeadMenu::btnInit()
     ui->pushButtonPalette->setProperty("useIconHighlightEffect", true);
     ui->pushButtonPalette->setProperty("iconHighlightEffectMode", 1);
     ui->pushButtonPalette->setToolTip(tr("Palette"));
+
+    ui->pushButtonExit->setFocusPolicy(Qt::NoFocus);
+    ui->pushButtonExit->setIconSize(QSize(16,16));
+    ui->pushButtonExit->setProperty("isWindowButton",0x02);
+    ui->pushButtonExit->setProperty("useIconHighlightEffect",0x08);
+    ui->pushButtonExit->setFlat(true);
+
 }
 
 QPixmap drawSymbolicColoredPixmap(const QPixmap& source, QPushButton *btn)

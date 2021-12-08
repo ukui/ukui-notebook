@@ -37,9 +37,9 @@
 extern QFont g_currentFont;
 iconViewModeDelegate::iconViewModeDelegate(QObject *parent)
     : QStyledItemDelegate(parent),
-      m_titleFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 14),              //标题字体
-      m_titleSelectedFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 14),          //
-      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 14),                   //日期字体
+      m_titleFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 16),              //标题字体
+      m_titleSelectedFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 16),          //
+      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 13),                   //日期字体
       m_titleColor(255, 255, 255),                          //标题颜色
       m_dateColor(255, 255, 255),                           //日期颜色
       m_ActiveColor(218, 233, 239),
@@ -241,16 +241,17 @@ void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
 {
     const int leftOffsetX = 20;        // 标题左边距
     const int topOffsetY = 18;         // 标题上方的空格
-    const int spaceY = 160;            // 标题和日期之间的空格
+    const int spaceY = 148 + g_currentFont.pointSize();            // 标题和日期之间的空格
 
     QString fontName = g_currentFont.family();
     double fontSize = (double)g_currentFont.pointSize()/15;
     m_titleFont.setFamily(fontName);
-    m_titleFont.setPointSizeF(fontSize * 14);
+    m_titleFont.setPointSizeF(fontSize * 16);
     m_titleSelectedFont.setFamily(g_currentFont.family());
     m_titleSelectedFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 16);
+    m_titleSelectedFont.setBold(true);
     m_dateFont.setFamily(g_currentFont.family());
-    m_dateFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 14);
+    m_dateFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 13);
 
 
     QStyleOptionViewItem opt = option;

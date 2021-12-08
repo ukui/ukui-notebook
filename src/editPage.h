@@ -124,7 +124,7 @@ private slots:
     void orangeBtnSlot();
     void purpleBtnSlot();
     void goldenBtnSlot();
-    void lightBlueBtnSlot();
+    void greyBtnSlot();
     void lightGreenBtnSlot();
     void yellowBtnSlot();
     void defaultTextColorSlot();

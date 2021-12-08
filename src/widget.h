@@ -129,7 +129,7 @@ private:
     int sortflag;                                                   //升降序切换
     noteExitWindow* m_noteExitWindow;                               //退出弹窗
     emptyNotes* m_emptyNotes;                                       //清除便签页弹窗
-    QAction *searchAction;                                          //搜索栏图标
+    QAction *m_searchAction;                                          //搜索栏图标
     QAction *delAction;                                             //搜索栏删除图标
     QTimer* m_autoSaveTimer;                                        //自动保存定时器
     QSettings* m_settingsDatabase;                                  //配置文件
@@ -156,7 +156,7 @@ private:
     adaptScreenInfo *m_pSreenInfo;                                  //屏幕信息
     QPoint dragPosition;                                            //拖动坐标
     bool mousePressed;                                              //鼠标是否按下
-    QString currentTheme;                                           //当前主题名
+    QString m_currentTheme;                                           //当前主题名
     double m_transparency;                                          //透明度
     QDBusInterface *userGuideInterface;                                   //用户手册
 

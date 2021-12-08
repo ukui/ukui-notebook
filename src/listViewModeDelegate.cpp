@@ -40,7 +40,7 @@ listViewModeDelegate::listViewModeDelegate(QObject *parent)
     : QStyledItemDelegate(parent),
       m_titleFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 16),              //标题字体
       m_titleSelectedFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 16),        //标题选中字体
-      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 14),                  //日期字体
+      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 13),                  //日期字体
       m_titleColor(255, 255, 255),                          //标题颜色
       m_dateColor(255, 255, 255),                           //日期颜色
       m_ActiveColor(218, 233, 239),
