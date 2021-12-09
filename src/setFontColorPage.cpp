@@ -85,10 +85,10 @@ void SetFontColor::setColor()
                 if(currentTheme == "ukui-default" || currentTheme == "ukui-white"
                         || currentTheme == "ukui-light" || currentTheme == "ukui"){
                     m_color[8]="background:rgba(0,0,0,1);";
-                    m_listPage[8]->ui->label->setStyleSheet(m_color[9]+"border-radius:3px;");
+                    m_listPage[8]->ui->label->setStyleSheet(m_color[8]+"border-radius:3px;");
                 }else if(currentTheme == "ukui-dark" || currentTheme == "ukui-black"){
                     m_color[8]="background:rgba(255,255,255,1);";
-                    m_listPage[8]->ui->label->setStyleSheet(m_color[9]+"border-radius:3px;");
+                    m_listPage[8]->ui->label->setStyleSheet(m_color[8]+"border-radius:3px;");
                 }
             }
         });
