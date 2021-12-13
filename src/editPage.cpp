@@ -365,6 +365,19 @@ void EditPage::slotsSetup()
         }
     });
 
+
+    connect(m_noteHeadMenu, &noteHeadMenu::requestUpdateMenuIcon, this, [=](){
+        KWindowInfo info(this->winId(), NET::WMState);
+        bool b = info.state() & NET::KeepAbove;
+
+        if(b){
+            m_noteHeadMenu->m_topAction->setIcon(QPixmap(":/image/1x/select.png"));
+        }
+        else{
+            m_noteHeadMenu->m_topAction->setIcon(QPixmap(""));
+        }
+    });
+
     connect(m_noteHeadMenu, &noteHeadMenu::requestTopMost, this, [=](){
          KWindowInfo info(this->winId(), NET::WMState);
          bool b = info.state() & NET::KeepAbove;
@@ -462,7 +475,6 @@ void EditPage::list(bool checked, QTextListFormat::Style style)
         listFmt.setStyle(style);
 //        QTextDocument *document = ui->textEdit->document();
 //        document->setIndentWidth(15);
-
         cursor.createList(listFmt);
     }
     cursor.endEditBlock();
@@ -974,7 +986,6 @@ void EditPage::setStayOnTopSlot(bool b)
     if (visible) {
         show();
     }
-
     //m_ignoreShowHideEvents = false;
 }
 #endif
@@ -999,7 +1010,7 @@ void EditPage::dropImage(const QImage& image, const QString& format) {
 
     QTextCursor cursor = ui->textEdit->textCursor();
 
-    if(cursor.atStart()){
+    if(cursor.atStart())
         m_isInsImg = true;
     }
 
