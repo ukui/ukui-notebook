@@ -80,13 +80,13 @@
      <property name="minimumSize">
       <size>
        <width>300</width>
-       <height>32</height>
+       <height>34</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>254</width>
-       <height>32</height>
+       <height>34</height>
       </size>
      </property>
      <widget class="QPushButton" name="fontSizeBtn">
@@ -95,7 +95,7 @@
         <x>227</x>
         <y>3</y>
         <width>32</width>
-        <height>27</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -107,14 +107,19 @@
       <property name="minimumSize">
        <size>
         <width>32</width>
-        <height>27</height>
+        <height>30</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>32</width>
-        <height>27</height>
+        <height>30</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
@@ -130,7 +135,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>3</y>
+        <y>5</y>
         <width>24</width>
         <height>24</height>
        </rect>
@@ -161,7 +166,7 @@
       <property name="geometry">
        <rect>
         <x>56</x>
-        <y>3</y>
+        <y>5</y>
         <width>24</width>
         <height>24</height>
        </rect>
@@ -192,7 +197,7 @@
       <property name="geometry">
        <rect>
         <x>133</x>
-        <y>3</y>
+        <y>5</y>
         <width>24</width>
         <height>24</height>
        </rect>
@@ -232,7 +237,7 @@
       <property name="geometry">
        <rect>
         <x>32</x>
-        <y>3</y>
+        <y>5</y>
         <width>24</width>
         <height>24</height>
        </rect>
@@ -263,7 +268,7 @@
       <property name="geometry">
        <rect>
         <x>109</x>
-        <y>3</y>
+        <y>5</y>
         <width>24</width>
         <height>24</height>
        </rect>
@@ -302,13 +307,13 @@
         <x>105</x>
         <y>5</y>
         <width>1</width>
-        <height>16</height>
+        <height>25</height>
        </rect>
       </property>
       <property name="maximumSize">
        <size>
         <width>1</width>
-        <height>20</height>
+        <height>25</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -325,7 +330,7 @@
       <property name="geometry">
        <rect>
         <x>268</x>
-        <y>7</y>
+        <y>10</y>
         <width>16</width>
         <height>16</height>
        </rect>
@@ -353,7 +358,7 @@
       <property name="geometry">
        <rect>
         <x>8</x>
-        <y>3</y>
+        <y>5</y>
         <width>24</width>
         <height>24</height>
        </rect>
@@ -383,19 +388,19 @@
         <x>260</x>
         <y>3</y>
         <width>32</width>
-        <height>27</height>
+        <height>30</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
         <width>32</width>
-        <height>27</height>
+        <height>30</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>32</width>
-        <height>27</height>
+        <height>30</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -411,13 +416,13 @@
         <x>259</x>
         <y>5</y>
         <width>1</width>
-        <height>20</height>
+        <height>25</height>
        </rect>
       </property>
       <property name="maximumSize">
        <size>
         <width>1</width>
-        <height>20</height>
+        <height>25</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -434,7 +439,7 @@
       <property name="geometry">
        <rect>
         <x>157</x>
-        <y>3</y>
+        <y>5</y>
         <width>24</width>
         <height>24</height>
        </rect>

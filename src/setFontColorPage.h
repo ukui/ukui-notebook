@@ -50,12 +50,10 @@ public:
 
     Ui::SetFontColor *ui;
 
-public:
-    QListWidgetItem *list_aItem[10];
-    paletteButton *list_page[10];
-
-    QString color[11];
-    QString color1;
+private:
+    QListWidgetItem *m_listAItem[9];
+    paletteButton *m_listPage[9];
+    QString m_color[9];
 
 protected:
     void paintEvent(QPaintEvent *event) override;

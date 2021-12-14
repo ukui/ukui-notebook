@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>30</width>
-    <height>200</height>
+    <width>262</width>
+    <height>30</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>262</width>
+    <height>30</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>262</width>
+    <height>30</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -18,12 +30,27 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>30</width>
-     <height>200</height>
+     <width>262</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>262</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>262</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="styleSheet">
     <string notr="true"/>
+   </property>
+   <property name="flow">
+    <enum>QListView::LeftToRight</enum>
    </property>
   </widget>
  </widget>

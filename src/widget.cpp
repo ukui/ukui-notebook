@@ -18,8 +18,6 @@
 
 #include "widget.h"
 #include "ui_widget.h"
-#include "listViewModeDelegate.h"
-#include "iconViewModeDelegate.h"
 #include "editPage.h"
 #include "customStyle.h"
 #include "CloseButton/closebutton.h"
@@ -32,7 +30,7 @@
 #define TIME_FORMAT_KEY "hoursystem"
 #define STYLE_ICON                "icon-theme-name"
 #define STYLE_ICON_NAME           "iconThemeName"
-
+QFont g_currentFont;
 extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
 static QPixmap drawSymbolicColoredPixmap (const QPixmap&, QAction *);
 
@@ -62,7 +60,8 @@ Widget::Widget(QWidget *parent) :
     m_isColorModified(false),
     m_isOperationRunning(false),
     mousePressed(false),
-    m_isTextCpNew(false)
+    m_isTextCpNew(false),
+    m_isThemeChanged(false)   // ukui-default
 {
     QString qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translations
     QString locale = QLocale::system().name();
@@ -99,11 +98,21 @@ Widget::~Widget()
         delete *it;
     }
     m_editors.clear();
-    delete ui;
-    delete m_dbManager;
-    m_dbThread->quit();
-    m_dbThread->wait();
-    delete m_dbThread;
+    if(ui!=nullptr){
+        delete ui;
+        ui = nullptr;
+    }
+    if(m_dbManager!=nullptr) {
+        delete m_dbManager;
+        m_dbManager = nullptr;
+    }
+    if(m_dbThread!=nullptr)
+    {
+        m_dbThread->quit();
+        m_dbThread->wait();
+        delete m_dbThread;
+        m_dbThread = nullptr;
+    }
 }
 
 /*!
@@ -158,8 +167,8 @@ void Widget::setupListModeModel()
     m_proxyModel->setFilterKeyColumn(0);                // 此属性保存用于读取源模型内容的键的列,listview只有一列所以是0
     m_proxyModel->setFilterRole(NoteModel::NoteMdContent);// 此属性保留项目角色，该角色用于在过滤项目时查询源模型的数据
     m_proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);//
-
-    m_noteView->setItemDelegate(new listViewModeDelegate(m_noteView));    // 安装定制delegate提供编辑功能
+    m_plistDelegate = new listViewModeDelegate(m_noteView);
+    m_noteView->setItemDelegate(m_plistDelegate);    // 安装定制delegate提供编辑功能
     m_noteView->setModel(m_proxyModel); // 设置view的model是proxyModel，proxyModel作为view和QAbstractListModel的桥梁
 }
 
@@ -265,7 +274,7 @@ void Widget::kyNoteInit()
     qDebug() << "\033[32m" << "kyNote init";
     sortflag = 1;           // 排序
     m_listflag = 1;         // 平铺\列表
-    m_isThemeChanged = 0;   // ukui-default
+
 
     m_searchLine = ui->SearchLine;
     m_newKynote = ui->newKynote;
@@ -355,11 +364,13 @@ void Widget::kyNoteConn()
     connect(m_noteView, &NoteView::viewportPressed, this, [this](){
         if (m_noteModel->rowCount() > 0) {
             QModelIndex index = m_noteView->currentIndex();
-            m_currentSelectedNoteProxy = index;
-            m_noteView->selectionModel()->select(m_currentSelectedNoteProxy,
-                                                 QItemSelectionModel::ClearAndSelect);
-            m_noteView->setCurrentIndex(m_currentSelectedNoteProxy);
-            m_noteView->scrollTo(m_currentSelectedNoteProxy);
+            if(index!=m_currentSelectedNoteProxy) {
+                m_currentSelectedNoteProxy = index;
+                m_noteView->selectionModel()->select(m_currentSelectedNoteProxy,
+                                                     QItemSelectionModel::ClearAndSelect);
+                m_noteView->setCurrentIndex(m_currentSelectedNoteProxy);
+                m_noteView->scrollTo(m_currentSelectedNoteProxy);
+            }
         }
     });
 
@@ -409,17 +420,24 @@ void Widget::listenToGsettings()
 
     if (QGSettings::isSchemaInstalled(id)) {
         QGSettings *styleSettings = new QGSettings(id, QByteArray(), this);
+        m_currentTheme = styleSettings->get("styleName").toString();
+        if(m_currentTheme.compare("ukui-dark")==0 || m_currentTheme.compare("ukui-black")==0){
+            m_isThemeChanged = 1;
+        }
         connect(styleSettings, &QGSettings::changed, this, [=](const QString &key){
             auto style = styleSettings->get(key).toString();
             if (key == "styleName") {
-                currentTheme = styleSettings->get(MODE_QT_KEY).toString();
-                if (currentTheme == "ukui-default" || currentTheme == "ukui-white"
-                    || currentTheme == "ukui-light" || currentTheme == "ukui") {
+                m_currentTheme = styleSettings->get(MODE_QT_KEY).toString();
+                if (m_currentTheme == "ukui-default" || m_currentTheme == "ukui-white"
+                    || m_currentTheme == "ukui-light" || m_currentTheme == "ukui") {
                     m_isThemeChanged = 0;
-                        searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
-                } else if (style == "ukui-dark" || currentTheme == "ukui-black") {
+                    m_searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
+                    //edit-find-symbolic
+                    //m_searchAction->setIcon(QIcon::fromTheme("edit-find-symbolic"));
+                } else if (style == "ukui-dark" || m_currentTheme == "ukui-black") {
                     m_isThemeChanged = 1;
-                    searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), searchAction));
+                    m_searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), m_searchAction));
+                    //m_searchAction->setIcon(QIcon::fromTheme("edit-find-symbolic"));
                 }
             }
             QTimer::singleShot(500, this, [=](){
@@ -433,6 +451,39 @@ void Widget::listenToGsettings()
             ui->iconLabel->setPixmap(QIcon::fromTheme("kylin-notebook").pixmap(24,24));
             }
         });
+        connect(styleSettings,&QGSettings::changed,this, [=] (const QString &key) {
+            if(key == FONT_STYLE || key == FONT_SIZE)
+            {
+                //获取字号的值
+                QString fontStyle = styleSettings->get(FONT_STYLE).toString();
+                int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+
+                QFontDatabase db;
+                //发送改变信号
+                if (db.families().contains(fontStyle))
+                {
+                    g_currentFont.setFamily(fontStyle);
+                    g_currentFont.setPointSize(fontSizeKey);
+                }
+                else
+                {
+                    qDebug() << "获取字体失败！";
+                }
+            }
+            else
+            {}
+        });
+
+        QString fontStyle = styleSettings->get(FONT_STYLE).toString();
+        int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+
+        QFontDatabase db;
+        //发送改变信号
+        if (db.families().contains(fontStyle))
+        {
+            g_currentFont.setFamily(fontStyle);
+            g_currentFont.setPointSize(fontSizeKey);
+        }
     }
 
     // 监听控制面板字体变化
@@ -559,9 +610,9 @@ void Widget::openMemoWithId(int noteId)
     qDebug() << "openMemoWithId" << noteId;
 
     QTimer::singleShot(300, this, [=]() {
-        m_notebook = new Edit_page(this, noteId);
+        m_notebook = new EditPage(this, noteId);
         m_editors.push_back(m_notebook);
-        m_notebook->id = m_editors.size() - 1;
+        m_notebook->m_id = m_editors.size() - 1;
 
         for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
             QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
@@ -592,7 +643,7 @@ void Widget::openMemoWithId(int noteId)
             this->activateWindow();
             this->show();
         });
-        connect(m_editors[m_editors.size() - 1], &Edit_page::requestDel, this, [=](int noteId){
+        connect(m_editors[m_editors.size() - 1], &EditPage::requestDel, this, [=](int noteId){
             for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
                 QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
                 if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {
@@ -696,16 +747,7 @@ void Widget::btnInit()
     palette.setBrush(QPalette::ButtonText, brush);
     // palette.setColor(QPalette::Highlight, Qt::transparent); /* 取消按钮高亮 */
     // ui->pushButton_Mini->setPalette(palette);
-
-    // 设置新建按钮背景文本颜色
-    QPalette palette2 = m_newKynote->palette();
-    QColor ColorPlaceholderText2(61, 107, 229, 255);
-    QBrush brush2;
-    brush2.setColor(ColorPlaceholderText2);
-    palette2.setColor(QPalette::Button, QColor(61, 107, 229, 255));
-    palette2.setBrush(QPalette::ButtonText, QBrush(Qt::white));
-    m_newKynote->setPalette(palette2);
-
+    m_newKynote->setProperty("isImportant",true);
     m_newKynote->setToolTip(tr("Create New Note"));
     m_trashButton->setToolTip(tr("Delete Selected Note"));
     m_viewChangeButton->setToolTip(tr("Switch View"));
@@ -880,12 +922,13 @@ void Widget::showNoteInEditor(const QModelIndex &noteIndex)
     int noteColor = noteIndex.data(NoteModel::NoteColor).toInt();
     // QString mdContent = noteIndex.data(NoteModel::NoteMdContent).toString();
 
-    const listViewModeDelegate delegate;
-    QColor m_color = delegate.intToQcolor(noteColor);
+//    const listViewModeDelegate delegate(m_currentFont);
+//    QColor m_color = delegate.intToQcolor(noteColor);
+    QColor m_color = m_plistDelegate->intToQcolor(noteColor);
     // set text and date
     m_notebook->ui->textEdit->setText(content);
-    m_notebook->m_noteHead->color_widget = QColor(m_color);
-    m_notebook->m_noteHeadMenu->color_widget = QColor(m_color);
+    m_notebook->m_noteHead->colorWidget = QColor(m_color);
+    m_notebook->m_noteHeadMenu->colorWidget = QColor(m_color);
     m_notebook->update();
 
     QString noteDate = dateTime.toString(Qt::ISODate);
@@ -954,9 +997,9 @@ void Widget::createNewNote()
         m_isOperationRunning = false;
     }
     int noteId = m_currentSelectedNoteProxy.data(NoteModel::NoteID).toInt();
-    m_notebook = new Edit_page(this, noteId);
+    m_notebook = new EditPage(this, noteId);
     m_editors.push_back(m_notebook);
-    m_notebook->id = m_editors.size() - 1;
+    m_notebook->m_id = m_editors.size() - 1;
 
     if (sender() != Q_NULLPTR) {
         // 获取当前选中item下标
@@ -965,7 +1008,7 @@ void Widget::createNewNote()
         selectNote(m_currentSelectedNoteProxy);
         m_noteView->setCurrentRowActive(false);
     }
-    connect(m_editors[m_editors.size() - 1], &Edit_page::isEmptyNote, this, [=](int noteId){
+    connect(m_editors[m_editors.size() - 1], &EditPage::isEmptyNote, this, [=](int noteId){
         // m_editors.erase(m_editors[m_editors.size() - 1]);
         qDebug() << "receive signal isEmptyNote" << noteId;
         for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
@@ -977,7 +1020,7 @@ void Widget::createNewNote()
             }
         }
     });
-    connect(m_editors[m_editors.size() - 1], &Edit_page::requestDel, this, [=](int noteId){
+    connect(m_editors[m_editors.size() - 1], &EditPage::requestDel, this, [=](int noteId){
         for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
             QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
             if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {
@@ -1179,19 +1222,21 @@ void Widget::searchInit()
 {
     m_searchLine->setContextMenuPolicy(Qt::NoContextMenu);  // 禁用右键菜单
     m_searchLine->setPlaceholderText(tr("Search"));         // 设置详细输入框的提示信息
-    searchAction = new QAction(m_searchLine);
+    m_searchAction = new QAction(m_searchLine);
     //searchAction->setIcon(QIcon::fromTheme("system-search-symbolic"));
     if(m_isThemeChanged)
     {
-       searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), searchAction));
+       m_searchAction->setIcon(drawSymbolicColoredPixmap(QPixmap(":/image/1x/system-search-symbolic.svg"), m_searchAction));
     }
     else
     {
-       searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
+       m_searchAction->setIcon(QPixmap(":/image/1x/system-search-symbolic.svg"));
     }
+
+//    m_searchAction->setIcon(QIcon::fromTheme("edit-find-symbolic"));
     m_searchLine->setProperty("useIconHighlightEffect", true);
     m_searchLine->setProperty("iconHighlightEffectMode", 1);
-    m_searchLine->addAction(searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
+    m_searchLine->addAction(m_searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
     // m_searchLine->setAttribute(Qt::WA_Hover, true);
 
     QTimer::singleShot(500, this, [=](){
@@ -1221,7 +1266,7 @@ void Widget::clearSearch()
     m_searchLine->blockSignals(false);
     m_proxyModel->setFilterFixedString(QString());
     m_searchLine->setFocus();
-    m_searchLine->addAction(searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
+    m_searchLine->addAction(m_searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
     m_searchLine->removeAction(delAction);
 }
 
@@ -1397,8 +1442,9 @@ void Widget::onColorChanged(const QColor &color, int noteId)
     }
 
     if (m_tmpColorIndex.isValid()) {
-        const listViewModeDelegate delegate;
-        int m_color = delegate.qcolorToInt(color);
+//        const listViewModeDelegate delegate(m_currentFont);
+//        int m_color = delegate.qcolorToInt(color);
+        int m_color = m_plistDelegate->qcolorToInt(color);
         QMap<int, QVariant> dataValue;
         dataValue[NoteModel::NoteColor] = QVariant::fromValue(m_color);
 
@@ -1415,6 +1461,7 @@ void Widget::onColorChanged(const QColor &color, int noteId)
  */
 void Widget::exitSlot()
 {
+    closeAllEditors();
     this->close();
     this->~Widget();
 }
@@ -1425,10 +1472,11 @@ void Widget::exitSlot()
  */
 void Widget::trashSlot()
 {
-    if(!m_emptyNotes->mIsDontShow)
-    m_emptyNotes->exec();
-        else
-    emit m_emptyNotes->requestEmptyNotes();
+    if(!m_emptyNotes->m_isDontShow) {
+        m_emptyNotes->exec();
+    } else{
+        emit m_emptyNotes->requestEmptyNotes();
+    }
 }
 
 /*!
@@ -1446,6 +1494,16 @@ void Widget::textForNewEditpageSigReceived()
     m_isTextCpNew = true;
     newSlot();
 }
+
+void Widget::closeAllEditors()
+{
+    for (auto it = m_editors.begin(); it != m_editors.end(); it++) {
+        (*it)->close();
+        delete *it;
+    }
+    m_editors.clear();
+}
+
 /*!
  * \brief Widget::newSlot
  *
@@ -1516,9 +1574,9 @@ void Widget::listDoubleClickSlot(const QModelIndex &index)
         }
     }
     if (isExistInMeditors == 0) {
-        m_notebook = new Edit_page(this, noteId);
+        m_notebook = new EditPage(this, noteId);
         m_editors.push_back(m_notebook);
-        m_notebook->id = m_editors.size() - 1;
+        m_notebook->m_id = m_editors.size() - 1;
 
         if (sender() != Q_NULLPTR) {
             // 获取当前选中item下标
@@ -1541,7 +1599,7 @@ void Widget::listDoubleClickSlot(const QModelIndex &index)
             this->activateWindow();
             this->show();
         });
-        connect(m_editors[m_editors.size() - 1], &Edit_page::requestDel, this, [=](int noteId){
+        connect(m_editors[m_editors.size() - 1], &EditPage::requestDel, this, [=](int noteId){
             for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
                 QModelIndex m_tmpIndex = m_proxyModel->index(count, 0);
                 if (m_tmpIndex.data(NoteModel::NoteID).toInt() == noteId) {
@@ -1574,10 +1632,10 @@ void Widget::onSearchEditTextChanged(const QString &keyword)
     m_searchQueue.enqueue(keyword);
 
     if (m_searchLine->text().isEmpty()) {
-        m_searchLine->addAction(searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
+        m_searchLine->addAction(m_searchAction, QLineEdit::LeadingPosition);  // 图片在左侧
         m_searchLine->removeAction(delAction);
     } else {
-        m_searchLine->removeAction(searchAction);
+        m_searchLine->removeAction(m_searchAction);
         m_searchLine->addAction(delAction, QLineEdit::TrailingPosition);  // 图片在右侧
     }
 

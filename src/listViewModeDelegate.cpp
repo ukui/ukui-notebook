@@ -35,12 +35,12 @@
  */
 #define FORMAT_SCHEMA   "org.ukui.control-center.panel.plugins"
 #define TIME_FORMAT_KEY "hoursystem"
-
+extern QFont g_currentFont;
 listViewModeDelegate::listViewModeDelegate(QObject *parent)
     : QStyledItemDelegate(parent),
-      m_titleFont(QStringLiteral("Noto Sans CJK SC"), 10.5),              //标题字体
-      m_titleSelectedFont(QStringLiteral("Noto Sans CJK SC"), 11),        //标题选中字体
-      m_dateFont(QStringLiteral("Noto Sans CJK SC"), 9),                  //日期字体
+      m_titleFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 16),              //标题字体
+      m_titleSelectedFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 16),        //标题选中字体
+      m_dateFont(g_currentFont.family(), (double)g_currentFont.pointSizeF()/15 * 13),                  //日期字体
       m_titleColor(255, 255, 255),                          //标题颜色
       m_dateColor(255, 255, 255),                           //日期颜色
       m_ActiveColor(218, 233, 239),
@@ -128,6 +128,8 @@ void listViewModeDelegate::setAnimationDuration(const int duration)
 {
     m_timeLine->setDuration(duration);
 }
+
+
 
 void listViewModeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -291,20 +293,39 @@ void listViewModeDelegate::paintBackground(QPainter *painter, const QStyleOption
 
 void listViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-    const int leftOffsetX = 28;  // 左边距
-    const int topOffsetY = 18;   // 标题上方的空格
-    const int spaceY = 5;        // 标题和日期之间的空格
+    //painter事件
+    auto drawStr = [painter](double posX, double posY, double width, double height, QColor color, QFont font, QString str){
+        QRectF rect(posX, posY, width, height);
+        painter->setPen(color);
+        painter->setFont(font);
+        painter->drawText(rect, Qt::AlignBottom, str);
+    };
+
+    /*
+    * 已知整体高度，两行字的高度，然后算出具体偏移
+    */
+    int leftOffsetX = g_currentFont.pointSize()+12;  // 左边距
+    int spaceY = g_currentFont.pointSize() - 10;// 标题和日期之间的空格, 默认取5
+    int topOffsetY = 18 - (g_currentFont.pointSize()-11)*3;// 标题上方的空格, 根据字号大小计算
+    QString fontName = g_currentFont.family();
+
+    m_titleFont.setFamily(fontName);
+    m_titleFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 16);
+    m_titleSelectedFont.setFamily(g_currentFont.family());
+    m_titleSelectedFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 16);
+    m_titleSelectedFont.setBold(true);
+    m_dateFont.setFamily(g_currentFont.family());
+    m_dateFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 13);
 
     QStyleOptionViewItem opt = option;
+    // `
     QString title{index.data(NoteModel::NoteFullTitle).toString()};
 
-    //QFont titleFont = (option.state & QStyle::State_Selected) == QStyle::State_Selected ? m_titleSelectedFont : m_titleFont;
-    QFont titleFont;
+    QFont titleFont = (option.state & QStyle::State_Selected) == QStyle::State_Selected ? m_titleSelectedFont : m_titleFont;
     QFontMetrics fmTitle(titleFont);
     QRect fmRectTitle = fmTitle.boundingRect(title);
 
-    QFont dateFont;
-    dateFont.setPointSize(9);
+    QFont dateFont = m_dateFont;
     QString date = parseDateTime(index.data(NoteModel::NoteLastModificationDateTime).toDateTime());
     QFontMetrics fmDate(dateFont);
     QRect fmRectDate = fmDate.boundingRect(title);
@@ -326,23 +347,13 @@ void listViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     double rowRate = m_timeLine->currentFrame()/(m_maxFrame * 1.0);
     double currRowHeight = m_rowHeight * rowRate;
 
-    auto drawStr = [painter](double posX, double posY, double width, double height, QColor color, QFont font, QString str){
-        QRectF rect(posX, posY, width, height);
-        painter->setPen(color);
-        painter->setFont(font);
-        painter->drawText(rect, Qt::AlignBottom, str);
-    };
-
     // 设置标题和日期字符串的边界矩形
     if(index.row() == m_animatedIndex.row()){
         if(m_state == MoveIn){
             titleRectHeight = topOffsetY + fmRectTitle.height() + currRowHeight;
-
             dateRectPosY = titleRectHeight;
             dateRectHeight = fmRectDate.height() + spaceY;
-
         }else{
-
             if((fmRectTitle.height() + topOffsetY) >= ((1.0 - rowRate) * m_rowHeight)){
                 titleRectHeight = (fmRectTitle.height() + topOffsetY) - (1.0 - rowRate) * m_rowHeight;
             }else{
@@ -357,14 +368,11 @@ void listViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
                     dateRectHeight = 0;
                 }
             }
-
             dateRectPosY = titleRectHeight + rowPosY;
         }
     }
-
     // 绘图标题和日期
     title = fmTitle.elidedText(title, Qt::ElideRight, int(titleRectWidth));
-
     drawStr(titleRectPosX, titleRectPosY, titleRectWidth, titleRectHeight, opt.palette.color(QPalette::Text), titleFont, title);
     drawStr(dateRectPosX, dateRectPosY, dateRectWidth, dateRectHeight, opt.palette.color(QPalette::Text), dateFont, date);
 }

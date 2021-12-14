@@ -27,6 +27,12 @@
 #include <QSqlQuery>
 #include <QDir>
 
+struct Note{
+    int id;
+    time_t editTime;
+    QString noteText;
+};
+
 class UNoteDbusServer : public QObject
 {
     Q_OBJECT
@@ -38,7 +44,8 @@ public:
 
 public slots:
     QVariantMap keywordMatch(QStringList keyList);
-
+public:
+     bool exportAllNotes(QList<Note>&);
 private:
     QMap<QString, QVariant> loadSqlDB();
 

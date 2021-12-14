@@ -38,7 +38,15 @@ public:
     ~PaletteWidget();
 
     Ui::PaletteWidget *ui;
-
+    static QString BORDER_RADIUS_2PX;
+    static QString KY_BLUE;
+    static QString KY_PURPLE;
+    static QString KY_PINK;
+    static QString KY_RED;
+    static QString KY_ORANGE;
+    static QString KY_YELLOW;
+    static QString KY_GREEN;
+    static QString KY_GREY;
 protected:
     void paintEvent(QPaintEvent *event) override;
 

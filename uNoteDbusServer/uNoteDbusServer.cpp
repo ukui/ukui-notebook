@@ -66,3 +66,31 @@ QMap<QString, QVariant> UNoteDbusServer::loadSqlDB()
 
     return keyMap;
 }
+
+//增加一个读取所有的接口
+bool UNoteDbusServer::exportAllNotes(QList<Note> &data)
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(QDir::homePath() + "/.config/kylin-note/kyNotes.db");
+    if(!db.open()){
+        //如果数据库打开失败
+        qWarning() << "error!" << db.lastError().text();
+        return false;
+    }
+    QString sql = QString("SELECT id, modification_date, md_content FROM active_notes");
+    QSqlQuery query;
+    if(query.exec(sql)) {
+        while(query.next()){
+            int id = query.value(0).toInt();
+            time_t modTime = query.value(1).toInt();
+            QString content = query.value(2).toString();
+            qDebug() << id << modTime << content;
+            Note note;
+            note.id = id;
+            note.editTime = modTime;
+            note.noteText = content;
+            data.push_back(note);
+        }
+    }
+    return true;
+}

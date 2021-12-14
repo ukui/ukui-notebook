@@ -38,18 +38,18 @@
 
 extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
 
-Edit_page::Edit_page(Widget *page, int noteId, QWidget *parent) :
+EditPage::EditPage(Widget *page, int noteId, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Edit_page),
     m_editColor(0, 0, 0),
     m_noteId(noteId),
     m_lastBlockList(0),
-    mousePressed(false),
-    defaultFontColorChanged(false),
-    pNotebook(page),
-    color_page(new SelectColor(pNotebook, this)),
-    set_size_page(new SetFontSize(pNotebook)),
-    set_color_fort_page(new SetFontColor(pNotebook)),
+    m_mousePressed(false),
+    m_defaultFontColorChanged(false),
+    m_notebook(page),
+    m_colorPage(new SelectColor(m_notebook, this)),
+    m_setSizePage(new SetFontSize(m_notebook)),
+    m_setColorFontPage(new SetFontColor(m_notebook)),
     m_isFullscreen(false),
     m_isInsImg(false)
 {
@@ -60,12 +60,12 @@ Edit_page::Edit_page(Widget *page, int noteId, QWidget *parent) :
     installEventFilter(this);
 }
 
-Edit_page::~Edit_page()
+EditPage::~EditPage()
 {
     delete ui;
 }
 
-void Edit_page::paintEvent(QPaintEvent *event)
+void EditPage::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
     QPainter p(this);
@@ -75,14 +75,14 @@ void Edit_page::paintEvent(QPaintEvent *event)
     p.fillPath(rectPath, palette().color(QPalette::Base));
 }
 
-void Edit_page::enterEvent(QEvent *event)
+void EditPage::enterEvent(QEvent *event)
 {
     Q_UNUSED(event);
     m_noteHead->hide();
     m_noteHeadMenu->show();
 }
 
-void Edit_page::leaveEvent(QEvent *event)
+void EditPage::leaveEvent(QEvent *event)
 {
     Q_UNUSED(event);
     if(!m_noteHeadMenu->ui->pushButtonMenu->isActiveWindow() && !m_noteHeadMenu->ui->pushButtonPalette->isActiveWindow())
@@ -92,24 +92,23 @@ void Edit_page::leaveEvent(QEvent *event)
     }
 }
 
-bool Edit_page::eventFilter(QObject *obj,QEvent *event)
+bool EditPage::eventFilter(QObject *obj,QEvent *event)
 {
 
   if(obj == this)
   {
       if(event->type() == QEvent::Close)
       {
-          if (ui->textEdit->document()->isEmpty()) {
-              qDebug() << "ZDEBUG " << __LINE__ ;
-
-              emit isEmptyNote(m_noteId);
-          }
+//          if (ui->textEdit->document()->isEmpty()) {
+//              qDebug() << "ZDEBUG " << __LINE__ ;
+//              emit isEmptyNote(m_noteId);
+//          }
       }
   }
   return false;
 }
 
-void Edit_page::initSetup()
+void EditPage::initSetup()
 {
     // 标题
     this->setWindowTitle(tr("Notes"));
@@ -156,18 +155,18 @@ void Edit_page::initSetup()
     connect(ui->textEdit, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(textRightMenu(QPoint)));
 
     // 设置字体大小
-    set_size_page = new SetFontSize(this);
-    set_size_page->hide();
+    m_setSizePage = new SetFontSize(this);
+    m_setSizePage->hide();
     // 设置字体颜色
-    set_color_fort_page = new SetFontColor(this);
-    set_color_fort_page->hide();
+    m_setColorFontPage = new SetFontColor(this);
+    m_setColorFontPage->hide();
 }
 
-void Edit_page::btnSetup()
+void EditPage::btnSetup()
 {
     ui->unorderedBtn->setIcon(QIcon::fromTheme("view-list.symbolic"));
     ui->strikeOutBtn->setIcon(QIcon::fromTheme("format-text-strikethrough-symbolic"));
-    ui->orderedBtn->setIcon(QIcon::fromTheme("ukui-view-list-numbe.symbolic"));
+    ui->orderedBtn->setIcon(QIcon::fromTheme("ukui-view-list-numbe-symbolic"));
     ui->insertBtn->setIcon(QIcon::fromTheme("view-list-images.symbolic"));
     ui->underlineBtn->setIcon(QIcon::fromTheme("format-text-underline-symbolic"));
     ui->boldBtn->setIcon(QIcon::fromTheme("format-text-bold-symbolic"));
@@ -211,7 +210,7 @@ void Edit_page::btnSetup()
     QPalette palette2 = ui->fontColorBtn->palette();
     palette2.setColor(QPalette::Highlight, Qt::transparent); /* 取消按钮高亮 */
     ui->fontColorBtn->setPalette(palette2);
-
+    ui->fontColorBtn->setAttribute(Qt::WA_TransparentForMouseEvents);
     ui->boldBtn->setCheckable(true);
     ui->italicBtn->setCheckable(true);
     ui->underlineBtn->setCheckable(true);
@@ -261,7 +260,7 @@ void Edit_page::btnSetup()
 #endif
 }
 
-void Edit_page::slotsSetup()
+void EditPage::slotsSetup()
 {
     connect(m_noteHeadMenu->ui->pushButtonExit, &QPushButton::clicked, this, [=](){
         if (ui->textEdit->document()->isEmpty()) {
@@ -273,62 +272,58 @@ void Edit_page::slotsSetup()
         this->close();
         requestDel(m_noteId);
     });
-    connect(ui->textEdit, &QTextEdit::textChanged, this, &Edit_page::textChangedSlot);
+    connect(ui->textEdit, &QTextEdit::textChanged, this, &EditPage::textChangedSlot);
     // 调色板菜单
     connect(m_noteHeadMenu->ui->pushButtonPalette, &QPushButton::clicked, this, [=](){
         QPointF position = this->pos();
-        color_page->move(position.x()+30, position.y()+34);
-        color_page->show();
+        m_colorPage->move(position.x()+30, position.y()+34);
+        m_colorPage->show();
     });
     // 调色按钮
-    connect(color_page->paletteWidget->ui->blueBtn, &QPushButton::clicked, this,
-            &Edit_page::blueBtnSlot);
-    connect(color_page->paletteWidget->ui->redBtn, &QPushButton::clicked, this,
-            &Edit_page::redBtnSlot);
-    connect(color_page->paletteWidget->ui->darkGreenBtn, &QPushButton::clicked, this,
-            &Edit_page::darkGreenBtnSlot);
-    connect(color_page->paletteWidget->ui->orangeBtn, &QPushButton::clicked, this,
-            &Edit_page::orangeBtnSlot);
-    connect(color_page->paletteWidget->ui->purpleBtn, &QPushButton::clicked, this,
-            &Edit_page::purpleBtnSlot);
-    connect(color_page->paletteWidget->ui->goldenBtn, &QPushButton::clicked, this,
-            &Edit_page::goldenBtnSlot);
-    connect(color_page->paletteWidget->ui->lightBlueBtn, &QPushButton::clicked, this,
-            &Edit_page::lightBlueBtnSlot);
-    connect(color_page->paletteWidget->ui->lightGreenBtn, &QPushButton::clicked, this,
-            &Edit_page::lightGreenBtnSlot);
-    connect(color_page->paletteWidget->ui->yellowBtn, &QPushButton::clicked, this,
-            &Edit_page::yellowBtnSlot);
-    connect(color_page->paletteWidget->ui->pinkBtn, &QPushButton::clicked, this,
-            &Edit_page::pinkBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->blueBtn, &QPushButton::clicked, this,
+            &EditPage::blueBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->redBtn, &QPushButton::clicked, this,
+            &EditPage::redBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->darkGreenBtn, &QPushButton::clicked, this,
+            &EditPage::darkGreenBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->orangeBtn, &QPushButton::clicked, this,
+            &EditPage::orangeBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->purpleBtn, &QPushButton::clicked, this,
+            &EditPage::purpleBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->goldenBtn, &QPushButton::clicked, this,
+            &EditPage::goldenBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->greyBtn, &QPushButton::clicked, this,
+            &EditPage::greyBtnSlot);
+    connect(m_colorPage->paletteWidget->ui->pinkBtn, &QPushButton::clicked, this,
+            &EditPage::pinkBtnSlot);
     // 字体颜色大小
-    connect(set_size_page->ui->listWidget, &QListWidget::itemClicked, this,
-            &Edit_page::setFontSizeSlot);
-    connect(set_color_fort_page->ui->listWidget, &QListWidget::itemClicked, this,
-            &Edit_page::setFontColorSlot);
+    connect(m_setSizePage->ui->listWidget, &QListWidget::itemClicked, this,
+            &EditPage::setFontSizeSlot);
+    connect(m_setColorFontPage->ui->listWidget, &QListWidget::itemClicked, this,
+            &EditPage::setFontColorSlot);
     // 文本格式
-    connect(ui->boldBtn, &QPushButton::clicked, this, &Edit_page::setBoldSlot);
-    connect(ui->italicBtn, &QPushButton::clicked, this, &Edit_page::setItalicSlot);
-    connect(ui->underlineBtn, &QPushButton::clicked, this, &Edit_page::setUnderlineSlot);
-    connect(ui->strikeOutBtn, &QPushButton::clicked, this, &Edit_page::setStrikeOutSlot);
-    connect(ui->unorderedBtn, &QPushButton::clicked, this, &Edit_page::setUnorderedListSlot);
-    connect(ui->orderedBtn, &QPushButton::clicked, this, &Edit_page::setOrderedListSlot);
-    connect(ui->insertBtn, &QPushButton::clicked, this, &Edit_page::insertpicture);
+    connect(ui->boldBtn, &QPushButton::clicked, this, &EditPage::setBoldSlot);
+    connect(ui->italicBtn, &QPushButton::clicked, this, &EditPage::setItalicSlot);
+    connect(ui->underlineBtn, &QPushButton::clicked, this, &EditPage::setUnderlineSlot);
+    connect(ui->strikeOutBtn, &QPushButton::clicked, this, &EditPage::setStrikeOutSlot);
+    connect(ui->unorderedBtn, &QPushButton::clicked, this, &EditPage::setUnorderedListSlot);
+    connect(ui->orderedBtn, &QPushButton::clicked, this, &EditPage::setOrderedListSlot);
+    connect(ui->insertBtn, &QPushButton::clicked, this, &EditPage::insertpicture);
     connect(ui->textEdit, &QTextEdit::cursorPositionChanged, this,
-            &Edit_page::cursorPositionChangedSlot);
+            &EditPage::cursorPositionChangedSlot);
     connect(ui->textEdit, &QTextEdit::currentCharFormatChanged, this,
-            &Edit_page::currentCharFormatChangedSlot);
+            &EditPage::currentCharFormatChangedSlot);
 
     connect(ui->fontSizeBtn, &QPushButton::clicked, this, [=](){
 
         QPointF position = this->pos();
-        set_size_page->move(position.x()+227, position.y()+273);
+        m_setSizePage->move(position.x()+227, position.y()+273);
 
         QDesktopWidget* desktopWidget = QApplication::desktop();
         QRect clientRect = desktopWidget->availableGeometry();                                   //获取整个屏幕（不包含任务栏）的rect数据
 
         int listHeight = 194;                                                                    //listwidget 原始高度
-        int heightListCrossPeny = listHeight + set_size_page->pos().y() - clientRect.height();   //listwidget 超出任务栏显示的高度， 不超出时， 该数字为负数
+        int heightListCrossPeny = listHeight + m_setSizePage->pos().y() - clientRect.height();   //listwidget 超出任务栏显示的高度， 不超出时， 该数字为负数
 
         if(heightListCrossPeny > 0)                                                              //listwidget 超出任务栏显示
         {
@@ -338,63 +333,38 @@ void Edit_page::slotsSetup()
 
             //listWidget 向下显示，高度不够，此时，显示到set_size_page的上面
             if(realNum == 0){
-               set_size_page->move(position.x()+227, position.y()+53);
-               set_size_page->resize(30,194);
-               set_size_page->ui->listWidget->resize(30,194);
+               m_setSizePage->move(position.x()+227, position.y()+53);
+               m_setSizePage->resize(30,194);
+               m_setSizePage->ui->listWidget->resize(30,194);
                //set_size_page->ui->listWidget->sortItems(Qt::DescendingOrder);                 //倒序，但是数据会混乱，暂缓
             }
             else{
-               set_size_page->resize(30, realNum);
-               set_size_page->ui->listWidget->resize(30, realNum);
+               m_setSizePage->resize(30, realNum);
+               m_setSizePage->ui->listWidget->resize(30, realNum);
             }
         }
         else
         {
-            set_size_page->move(position.x()+227, position.y()+273);
-            set_size_page->resize(30,194);
-            set_size_page->ui->listWidget->resize(30,194);
+            m_setSizePage->move(position.x()+227, position.y()+273);
+            m_setSizePage->resize(30,194);
+            m_setSizePage->ui->listWidget->resize(30,194);
         }
 
-        set_size_page->show();
+        m_setSizePage->show();
     });
-    connect(ui->fontColorBtn, &QPushButton::clicked, this, [=](){
+    connect(ui->styleBtn, &QPushButton::clicked, this, &EditPage::onFontColorClicked);
+    connect(m_noteHeadMenu, &noteHeadMenu::requestUpdateMenuIcon, this, [=](){
+        KWindowInfo info(this->winId(), NET::WMState);
+        bool b = info.state() & NET::KeepAbove;
 
-        QPointF position = this->pos();
-        set_color_fort_page->move(position.x()+260, position.y()+273);
-
-        QDesktopWidget* desktopWidget = QApplication::desktop();
-        QRect clientRect = desktopWidget->availableGeometry();                   //获取整个屏幕（不包含任务栏）的rect数据
-
-        int listHeight = 194;                                                    //listwidget 原始高度
-        int heightListCrossPeny = listHeight + set_color_fort_page->pos().y() - clientRect.height();   //listwidget 超出任务栏显示的高度， 不超出时， 该数字为负数
-
-        if(heightListCrossPeny > 0)                                              //listwidget 超出任务栏显示
-        {
-            int fontButtonHeight = 27;                                           //每个fontbutton高度,当前为27
-            int keepNum = listHeight - heightListCrossPeny;                      //listwidget 未超出任务栏显示的高度
-            int realNum = keepNum - (keepNum % fontButtonHeight);                //最后，实际显示的高度，应该是每个fontbutton高度（27）的整数倍，小于27时，为0
-
-            //listWidget 向下显示，高度不够，此时，显示到set_color_fort_page的上面
-            if(realNum == 0){
-               set_color_fort_page->move(position.x()+260, position.y()+53);
-               set_color_fort_page->resize(30,194);
-               set_color_fort_page->ui->listWidget->resize(30,194);
-               //set_color_fort_page->ui->listWidget->sortItems(Qt::DescendingOrder);  //倒序，但是数据会混乱，暂缓
-            }
-            else{
-               set_color_fort_page->resize(30, realNum);
-               set_color_fort_page->ui->listWidget->resize(30, realNum);
-            }
+        if(b){
+            m_noteHeadMenu->m_topAction->setIcon(QPixmap(":/image/1x/select.png"));
         }
-        else
-        {
-            set_color_fort_page->move(position.x()+260, position.y()+273);
-            set_color_fort_page->resize(30,194);
-            set_color_fort_page->ui->listWidget->resize(30,194);
+        else{
+            m_noteHeadMenu->m_topAction->setIcon(QPixmap(""));
         }
-
-        set_color_fort_page->show();
     });
+
 
     connect(m_noteHeadMenu, &noteHeadMenu::requestUpdateMenuIcon, this, [=](){
         KWindowInfo info(this->winId(), NET::WMState);
@@ -421,7 +391,7 @@ void Edit_page::slotsSetup()
      });
 }
 
-void Edit_page::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
+void EditPage::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
     QTextCursor cursor = ui->textEdit->textCursor();
     if (!cursor.hasSelection()) {
@@ -432,10 +402,10 @@ void Edit_page::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
     ui->textEdit->setFocus(Qt::TabFocusReason);
 }
 
-void Edit_page::fontChanged(const QFont &f)
+void EditPage::fontChanged(const QFont &f)
 {
     qDebug() << "font Changed" << f.pointSize() << f.bold();
-    set_size_page->ui->listWidget->setCurrentRow(f.pointSize() - 10);
+    m_setSizePage->ui->listWidget->setCurrentRow(f.pointSize() - 10);
     m_fontLabel->setText(QString::number(f.pointSize()));
 
     if(f.pointSize() < 10 )
@@ -469,7 +439,7 @@ void Edit_page::fontChanged(const QFont &f)
     }
 }
 
-void Edit_page::fontColorChanged(const QColor &c)
+void EditPage::fontColorChanged(const QColor &c)
 {
     qDebug() << "fontColorChanged" << c.name();
     QString _Stylesheet;
@@ -481,7 +451,7 @@ void Edit_page::fontColorChanged(const QColor &c)
     ui->fontColorBtn->setStyleSheet(_Stylesheet +"border-radius:3px;");
 }
 
-void Edit_page::list(bool checked, QTextListFormat::Style style)
+void EditPage::list(bool checked, QTextListFormat::Style style)
 {
     QTextCursor cursor = ui->textEdit->textCursor();
     cursor.beginEditBlock();
@@ -495,6 +465,9 @@ void Edit_page::list(bool checked, QTextListFormat::Style style)
 //        document->setIndentWidth(0);
     } else {
         qDebug() << "checked";
+        QTextCharFormat charFormat = cursor.charFormat();
+        qDebug() << charFormat.fontPointSize() << cursor.selectedText() ;
+        qDebug() << cursor.anchor() << cursor.position();
         QTextListFormat listFmt;
         if (cursor.currentList()) {
             listFmt = cursor.currentList()->format();
@@ -511,7 +484,7 @@ void Edit_page::list(bool checked, QTextListFormat::Style style)
  * \brief Edit_page::listenToGsettings
  *
  */
-void Edit_page::listenToGsettings()
+void EditPage::listenToGsettings()
 {
     // 监听主题改变
     const QByteArray id(THEME_QT_SCHEMA);
@@ -530,7 +503,7 @@ void Edit_page::listenToGsettings()
         //}
 
         connect(styleSettings, &QGSettings::changed, this, [=](const QString &key){
-            if (/*ui->textEdit->document()->isEmpty() && */!defaultFontColorChanged) {
+            if (/*ui->textEdit->document()->isEmpty() && */!m_defaultFontColorChanged) {
                 if (key == "styleName") {
                     QString currentTheme = styleSettings->get(MODE_QT_KEY).toString();
                     if (currentTheme == "ukui-default" || currentTheme == "ukui-white"
@@ -555,7 +528,7 @@ void Edit_page::listenToGsettings()
 
 /**************** Slots *******************/
 
-void Edit_page::cursorPositionChangedSlot()
+void EditPage::cursorPositionChangedSlot()
 {
     qDebug() << "cursorPositionChangedSlot";
     QTextList *l = ui->textEdit->textCursor().currentList();
@@ -583,7 +556,7 @@ void Edit_page::cursorPositionChangedSlot()
     }
 }
 
-void Edit_page::currentCharFormatChangedSlot(const QTextCharFormat &format)
+void EditPage::currentCharFormatChangedSlot(const QTextCharFormat &format)
 {
     qDebug() << "currentCharFormatChangedSlot";
     fontChanged(format.font());
@@ -591,14 +564,14 @@ void Edit_page::currentCharFormatChangedSlot(const QTextCharFormat &format)
     fontColorChanged(format.foreground().color());
 }
 
-void Edit_page::textChangedSlot()
+void EditPage::textChangedSlot()
 {
-    qDebug() << "emit textchange" << "note id" << m_noteId << this->id;
-    emit texthasChanged(m_noteId, this->id);
+    qDebug() << "emit textchange" << "note id" << m_noteId << this->m_id;
+    emit texthasChanged(m_noteId, this->m_id);
 }
 
 //textedit右键菜单
-void Edit_page::textRightMenu(QPoint)
+void EditPage::textRightMenu(QPoint)
 {
     QMenu *m_rightMenu = new QMenu;
 
@@ -667,17 +640,17 @@ void Edit_page::textRightMenu(QPoint)
 }
 
 //拷贝选中内容到新便签页
-void Edit_page::textForNewEditpageSlot()
+void EditPage::textForNewEditpageSlot()
 {
     if(!ui->textEdit->textCursor().selectedText().isEmpty())
     {
         ui->textEdit->copy();
-        emit textForNewEditpageSig();
+        emit textForNewEditpage();
     }
 }
 
 // 加粗
-void Edit_page::setBoldSlot()
+void EditPage::setBoldSlot()
 {
     qDebug() << "setBoldSlot";
     QTextCharFormat fmt;
@@ -696,7 +669,7 @@ void Edit_page::setBoldSlot()
 }
 
 // 斜体
-void Edit_page::setItalicSlot()
+void EditPage::setItalicSlot()
 {
     qDebug()<<"-------setItalicSlot------------";
     QTextCharFormat fmt;
@@ -714,7 +687,7 @@ void Edit_page::setItalicSlot()
 }
 
 // 划线
-void Edit_page::setUnderlineSlot()
+void EditPage::setUnderlineSlot()
 {
     qDebug() << "setUnderlineSlot";
     QTextCharFormat fmt;
@@ -731,7 +704,7 @@ void Edit_page::setUnderlineSlot()
 }
 
 // 除线
-void Edit_page::setStrikeOutSlot()
+void EditPage::setStrikeOutSlot()
 {
     qDebug() << "setStrikeOutSlot";
     QTextCharFormat fmt;
@@ -748,7 +721,7 @@ void Edit_page::setStrikeOutSlot()
 }
 
 // 无序列表
-void Edit_page::setUnorderedListSlot(bool checked)
+void EditPage::setUnorderedListSlot(bool checked)
 {
     qDebug() << "setUnorderedListSlot" << checked;
     if (checked) {
@@ -761,7 +734,7 @@ void Edit_page::setUnorderedListSlot(bool checked)
 }
 
 // 序列表
-void Edit_page::setOrderedListSlot(bool checked)
+void EditPage::setOrderedListSlot(bool checked)
 {
     qDebug() << "show num list";
     if (checked) {
@@ -771,12 +744,12 @@ void Edit_page::setOrderedListSlot(bool checked)
 }
 
 // 字号
-void Edit_page::setFontSizeSlot()
+void EditPage::setFontSizeSlot()
 {
     qDebug() << "setFontSizeSlot";
-    int num = set_size_page->ui->listWidget->currentRow();
+    int num = m_setSizePage->ui->listWidget->currentRow();
     m_fontLabel->setText(QString::number(num+10));
-    set_size_page->close();
+    m_setSizePage->close();
 
     QTextCharFormat fmt;
     fmt.setFontPointSize(num+10);
@@ -784,149 +757,139 @@ void Edit_page::setFontSizeSlot()
 }
 
 // 调色板
-void Edit_page::initColor()
+void EditPage::initColor()
 {
-    color[0] = "background:rgba(76,119,231,1);";
-    color[1] = "background:rgba(250,108,99,1);";
-    color[2] = "background:rgba(15,161,90,1);";
-    color[3] = "background:rgba(255,151,47,1);";
-    color[4] = "background:rgba(186,123,216,1);";
-    color[5] = "background:rgba(248,209,93,1);";
-    color[6] = "background:rgba(42,162,217,1);";
-    color[7] = "background:rgba(110,207,67,1);";
-    color[8] = "background:rgba(144,101,255,1);";
-
-    color_num[0] = QColor(76, 119, 231);
-    color_num[1] = QColor(250, 108, 99);
-    color_num[2] = QColor(15, 161, 90);
-    color_num[3] = QColor(255, 151, 47);
-    color_num[4] = QColor(186, 123, 216);
-    color_num[5] = QColor(248, 209, 93);
-    color_num[6] = QColor(42, 162, 217);
-    color_num[7] = QColor(110, 207, 67);
-    color_num[8] = QColor(144, 101, 255);
+    m_colorNum[0] = QColor(PaletteWidget::KY_BLUE);
+    m_colorNum[1] = QColor(PaletteWidget::KY_RED);
+    m_colorNum[2] = QColor(PaletteWidget::KY_GREEN);
+    m_colorNum[3] = QColor(PaletteWidget::KY_ORANGE);
+    m_colorNum[4] = QColor(PaletteWidget::KY_PURPLE);
+    m_colorNum[5] = QColor(PaletteWidget::KY_YELLOW);
+    m_colorNum[6] = QColor(PaletteWidget::KY_GREY);
+    m_colorNum[7] = QColor(PaletteWidget::KY_PINK);
 }
 
-void Edit_page::setFontColorSlot()
+void EditPage::setFontColorSlot(QListWidgetItem *item)
 {
-    qDebug() << "setFontColorSlot";
-    int num = set_color_fort_page->ui->listWidget->currentRow();
-
+    qDebug() << "Sender" << sender();
+    qDebug() << "Item" << item;
+    int num = m_setColorFontPage->ui->listWidget->currentRow();
     QTextCharFormat fmt;
     if (num != 9) {
-        defaultFontColorChanged = true;
-        fmt.setForeground(color_num[num]);
+        m_defaultFontColorChanged = true;
+        fmt.setForeground(m_colorNum[num]);
         ui->textEdit->mergeCurrentCharFormat(fmt);
     } else {
+        m_defaultFontColorChanged = false;
         fmt.setForeground(palette().color(QPalette::Text));
         // fmt.clearForeground();
         ui->textEdit->mergeCurrentCharFormat(fmt);
     }
-    set_color_fort_page->close();
+    m_setColorFontPage->close();
 }
 
-void Edit_page::blueBtnSlot()
+void EditPage::blueBtnSlot()
 {
     m_editColor = QColor(76, 119, 231);
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(76, 119, 231);
-    m_noteHeadMenu->color_widget = QColor(76, 119, 231);
+    m_noteHead->colorWidget = QColor(76, 119, 231);
+    m_noteHeadMenu->colorWidget = QColor(76, 119, 231);
     update();
 }
 
-void Edit_page::redBtnSlot()
+void EditPage::redBtnSlot()
 {
-    m_editColor = QColor(255, 108, 99);
+    QColor color((PaletteWidget::KY_RED));
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(250, 108, 99);
-    m_noteHeadMenu->color_widget = QColor(250, 108, 99);
-
-    // QString _BgColor = m_editColor.name();
-    // QString _Stylesheet = "background-color: %1;";
-    // _Stylesheet = _Stylesheet.arg(_BgColor);
-    // m_noteHeadMenu->ui->pushButtonExit->setStyleSheet(_Stylesheet);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
-void Edit_page::darkGreenBtnSlot()
+void EditPage::darkGreenBtnSlot()
 {
-    m_editColor = QColor(15, 161, 90);
+    QColor color((PaletteWidget::KY_GREEN));
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(15, 161, 90);
-    m_noteHeadMenu->color_widget = QColor(15, 161, 90);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
-void Edit_page::orangeBtnSlot()
+void EditPage::orangeBtnSlot()
 {
     m_editColor = QColor(255, 151, 47);
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(255, 151, 47);
-    m_noteHeadMenu->color_widget = QColor(255, 151, 47);
+    m_noteHead->colorWidget = QColor(255, 151, 47);
+    m_noteHeadMenu->colorWidget = QColor(255, 151, 47);
     update();
 }
 
-void Edit_page::purpleBtnSlot()
+void EditPage::purpleBtnSlot()
 {
-    m_editColor = QColor(186, 123, 216);
+    QColor color(PaletteWidget::KY_PURPLE);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(186, 123, 216);
-    m_noteHeadMenu->color_widget = QColor(186, 123, 216);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
-void Edit_page::goldenBtnSlot()
+void EditPage::goldenBtnSlot()
 {
-    m_editColor = QColor(248, 209, 93);
+    QColor color(PaletteWidget::KY_YELLOW);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(248, 209, 93);
-    m_noteHeadMenu->color_widget = QColor(248, 209, 93);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
-void Edit_page::lightBlueBtnSlot()
+void EditPage::greyBtnSlot()
 {
-    m_editColor = QColor(42, 162, 217);
+    QColor color(PaletteWidget::KY_GREY);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(42, 162, 217);
-    m_noteHeadMenu->color_widget = QColor(42, 162, 217);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
-void Edit_page::lightGreenBtnSlot()
+void EditPage::lightGreenBtnSlot()
 {
     m_editColor = QColor(110, 207, 67);
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(110, 207, 67);
-    m_noteHeadMenu->color_widget = QColor(110, 207, 67);
+    m_noteHead->colorWidget = QColor(110, 207, 67);
+    m_noteHeadMenu->colorWidget = QColor(110, 207, 67);
     update();
 }
 
-void Edit_page::yellowBtnSlot()
+void EditPage::yellowBtnSlot()
 {
     m_editColor = QColor(144, 101, 255);
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(144, 101, 255);
-    m_noteHeadMenu->color_widget = QColor(144, 101, 255);
+    m_noteHead->colorWidget = QColor(144, 101, 255);
+    m_noteHeadMenu->colorWidget = QColor(144, 101, 255);
     update();
 }
 
-void Edit_page::pinkBtnSlot()
+void EditPage::pinkBtnSlot()
 {
     m_editColor = QColor(245, 80, 159);
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->color_widget = QColor(245, 80, 159);
-    m_noteHeadMenu->color_widget = QColor(245, 80, 159);
+    m_noteHead->colorWidget = QColor(245, 80, 159);
+    m_noteHeadMenu->colorWidget = QColor(245, 80, 159);
     update();
 }
 
-void Edit_page::defaultBtnSlot()
+void EditPage::defaultBtnSlot()
 {
-    if (pNotebook->m_isThemeChanged) {
+    if (m_notebook->m_isThemeChanged) {
         qDebug() << "白色便签头";
         m_editColor = QColor(255, 255, 255);
-        m_noteHead->color_widget = QColor(255, 255, 255);
-        m_noteHeadMenu->color_widget = QColor(255, 255, 255);
+        m_noteHead->colorWidget = QColor(255, 255, 255);
+        m_noteHeadMenu->colorWidget = QColor(255, 255, 255);
         m_noteHeadMenu->ui->pushButtonExit->setIcon(QPixmap(":/image/1x/close_block.png"));
         m_noteHeadMenu->ui->pushButtonExit->setIconSize(QSize(20, 20));
         m_noteHeadMenu->ui->pushButtonMenu->setIcon(QPixmap(":/image/1x/more_block.png"));
@@ -945,8 +908,8 @@ void Edit_page::defaultBtnSlot()
     } else {
         qDebug() << "黑色便签头";
         m_editColor = QColor(0, 0, 0);
-        m_noteHead->color_widget = QColor(0, 0, 0);
-        m_noteHeadMenu->color_widget = QColor(0, 0, 0);
+        m_noteHead->colorWidget = QColor(0, 0, 0);
+        m_noteHeadMenu->colorWidget = QColor(0, 0, 0);
         m_noteHeadMenu->ui->pushButtonExit->setIcon(QPixmap(":/image/1x/close_block.png"));
         m_noteHeadMenu->ui->pushButtonExit->setIconSize(QSize(20, 20));
         m_noteHeadMenu->ui->pushButtonMenu->setIcon(QPixmap(":/image/1x/more_block.png"));
@@ -970,7 +933,7 @@ void Edit_page::defaultBtnSlot()
     update();
 }
 
-void Edit_page::showFullScreenSlot()
+void EditPage::showFullScreenSlot()
 {
     if (!m_isFullscreen) {
         this->showFullScreen();
@@ -981,18 +944,18 @@ void Edit_page::showFullScreenSlot()
     }
 }
 
-void Edit_page::setWindowKeepAbove()
+void EditPage::setWindowKeepAbove()
 {
     KWindowSystem::setState(this->winId(), NET::KeepAbove);
 }
 
-void Edit_page::setWindowStatusClear()
+void EditPage::setWindowStatusClear()
 {
     KWindowSystem::clearState(this->winId(), NET::KeepAbove);
 }
 
 #if 0
-void Edit_page::setStayOnTopSlot(bool b)
+void EditPage::setStayOnTopSlot(bool b)
 {
     //m_ignoreShowHideEvents = true;
 
@@ -1027,7 +990,7 @@ void Edit_page::setStayOnTopSlot(bool b)
 }
 #endif
 
-void Edit_page::dropImage(const QImage& image, const QString& format) {
+void EditPage::dropImage(const QImage& image, const QString& format) {
     QByteArray bytes;
     QBuffer buffer(&bytes);
     buffer.open(QIODevice::WriteOnly);
@@ -1048,8 +1011,6 @@ void Edit_page::dropImage(const QImage& image, const QString& format) {
     QTextCursor cursor = ui->textEdit->textCursor();
 
     if(cursor.atStart())
-    {
-        qDebug() <<"ZDEBUG " << "cursor.atStart() " <<endl;
         m_isInsImg = true;
     }
 
@@ -1064,7 +1025,7 @@ void Edit_page::dropImage(const QImage& image, const QString& format) {
 }
 
 
-void Edit_page::insertpicture()
+void EditPage::insertpicture()
 {
         QSettings s;
         QString attdir = s.value("general/filedialog-path").toString();
@@ -1076,7 +1037,7 @@ void Edit_page::insertpicture()
         dropImage(image, QFileInfo(file).suffix().toUpper().toLocal8Bit().data());
 }
 
-void Edit_page::setHints()
+void EditPage::setHints()
 {
     // 添加窗管协议
     MotifWmHints hints;
@@ -1086,3 +1047,23 @@ void Edit_page::setHints()
     XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
 }
 
+void EditPage::defaultTextColorSlot()
+{
+    QPalette pal;
+    m_editColor = pal.text().color();
+    emit colorhasChanged(m_editColor, m_noteId);
+    m_noteHead->colorWidget = m_editColor;
+    m_noteHeadMenu->colorWidget = m_editColor;
+    update();
+}
+
+void EditPage::onFontColorClicked()
+{
+    QPointF position = this->pos();
+    QSize size = this->size();
+    qDebug () << "Current size:" << size;
+    m_setColorFontPage->move(position.x()+size.width() - 280 , position.y() + size.height() - 70);
+    //m_setColorFontPage->resize(300,30);
+    //m_setColorFontPage->ui->listWidget->resize(300,30);
+    m_setColorFontPage->show();
+}

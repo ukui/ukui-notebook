@@ -55,9 +55,9 @@ public:
     QColor intToQcolor(int &intColor) const;
 
 private:
-    QFont m_titleFont;
-    QFont m_titleSelectedFont;
-    QFont m_dateFont;
+    mutable QFont m_titleFont;
+    mutable QFont m_titleSelectedFont;
+    mutable QFont m_dateFont;
     QColor m_titleColor;
     QColor m_dateColor;
     QColor m_ActiveColor;
@@ -84,7 +84,6 @@ private:
     void paintBackground(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index)const;
     void paintLabels(QPainter* painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     QString parseDateTime(const QDateTime& dateTime) const;
-
 signals:
     void update(const QModelIndex &index);
 };

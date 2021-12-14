@@ -45,30 +45,30 @@ class Edit_page;
 }
 class Widget;
 
-class Edit_page : public QWidget
+class EditPage : public QWidget
 {
     Q_OBJECT
 
 public:
-    Edit_page(Widget* p , int noteId, QWidget *parent = nullptr);
-    ~Edit_page();
+    EditPage(Widget* p , int noteId, QWidget *parent = nullptr);
+    ~EditPage();
     Ui::Edit_page *ui;
-    Widget* pNotebook;
+    Widget* m_notebook = nullptr;
     QColor m_editColor;
-    noteHead *m_noteHead;
-    noteHeadMenu *m_noteHeadMenu;
+    noteHead *m_noteHead = nullptr;
+    noteHeadMenu *m_noteHeadMenu = nullptr;
     QModelIndex m_index;
-    SetFontSize *set_size_page = nullptr ;
-    SetFontColor *set_color_fort_page = nullptr ;
+    SetFontSize *m_setSizePage = nullptr ;
+    SetFontColor *m_setColorFontPage = nullptr ;
     QLabel *m_fontLabel = nullptr;
     QVBoxLayout *m_fontBtnLayout = nullptr;
 
-    int id;
+    int m_id;
     int m_noteId;
 
-    bool m_isFullscreen;
+    bool m_isFullscreen = false;
     //bool m_ignoreShowHideEvents;
-    bool m_isInsImg;
+    bool m_isInsImg = false;
 
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
     void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
@@ -92,16 +92,16 @@ private:
     void listenToGsettings();
 
 private:
-    SelectColor *color_page;
-    QTimer *timer;
-    QString color[11];
-    QColor color_num[11];
+    SelectColor *m_colorPage = nullptr;
+    QTimer *m_timer = nullptr;
+//    QString color[11];
+    QColor m_colorNum[11];
 
     QPointer<QTextList> m_lastBlockList;
 
-    QPoint dragPosition;                                             // 拖动坐标
-    bool mousePressed;                                               // 鼠标是否按下
-    bool defaultFontColorChanged;                                    // 黑白字体颜色
+    QPoint m_dragPosition;                                             // 拖动坐标
+    bool m_mousePressed = false;                                               // 鼠标是否按下
+    bool m_defaultFontColorChanged = false;                                    // 黑白字体颜色
 
 private slots:
     void cursorPositionChangedSlot();                                // 当前光标位置改变
@@ -115,17 +115,19 @@ private slots:
     void setOrderedListSlot(bool checked);                           // 有序列表
     void list(bool checked, QTextListFormat::Style style);
     void setFontSizeSlot();                                          // 设置字体大小
-    void setFontColorSlot();                                         // 设置字体颜色
+    void setFontColorSlot(QListWidgetItem *item);                                         // 设置字体颜色
     // 调色按钮
+    void onFontColorClicked();
     void blueBtnSlot();
     void redBtnSlot();
     void darkGreenBtnSlot();
     void orangeBtnSlot();
     void purpleBtnSlot();
     void goldenBtnSlot();
-    void lightBlueBtnSlot();
+    void greyBtnSlot();
     void lightGreenBtnSlot();
     void yellowBtnSlot();
+    void defaultTextColorSlot();
     void defaultBtnSlot();
     void pinkBtnSlot();
     void showFullScreenSlot();
@@ -139,7 +141,7 @@ signals:
     void colorhasChanged(const QColor &color,int);
     void isEmptyNote(int noteId);
     void requestDel(int noteId);
-    void textForNewEditpageSig();
+    void textForNewEditpage();
 
 };
 

@@ -64,18 +64,18 @@
 #include "adaptscreeninfo.h"
 #include "about.h"
 #include "emptyNotes.h"
+#include "listViewModeDelegate.h"
+#include "iconViewModeDelegate.h"
 
 #define     FIRST_LINE_MAX 80
-#define     tristateButton(className,imageUrl)     (""#className"{image:url("#imageUrl".svg);}   \
-            "#className":hover{image:url("#imageUrl"-hover.svg);}  \
-            "#className":pressed{image:url("#imageUrl"-click.svg);}")
 
 /**
  * ukui style
  */
 #define THEME_QT_SCHEMA "org.ukui.style"
 #define MODE_QT_KEY "style-name"
-#define FONT_SIZE "system-font-size"
+#define FONT_SIZE "systemFontSize"
+#define FONT_STYLE "systemFont"
 
 /**
  * ukui-control-center
@@ -87,6 +87,7 @@
  */
 #define USER_GUIDE_SCHEMA "com.kylinUserGuide.hotel_1000"
 
+extern QFont g_currentFont;
 
 namespace Ui {
 class Widget;
@@ -101,7 +102,7 @@ public:
     ~Widget();
 
     Ui::Widget *ui;                                                 //主ui
-    std::vector<Edit_page*> m_editors;                              //c++数组容器
+    std::vector<EditPage*> m_editors;                              //c++数组容器
 
     int m_isThemeChanged;                                           //主题
     void error_throw();                                             //异常处理抛出
@@ -123,12 +124,12 @@ protected:
     //void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    Edit_page *m_notebook;                                          //新建便签指针
+    EditPage *m_notebook;                                          //新建便签指针
     int m_listflag;                                                 //平铺/展开列表切换
     int sortflag;                                                   //升降序切换
     noteExitWindow* m_noteExitWindow;                               //退出弹窗
     emptyNotes* m_emptyNotes;                                       //清除便签页弹窗
-    QAction *searchAction;                                          //搜索栏图标
+    QAction *m_searchAction;                                          //搜索栏图标
     QAction *delAction;                                             //搜索栏删除图标
     QTimer* m_autoSaveTimer;                                        //自动保存定时器
     QSettings* m_settingsDatabase;                                  //配置文件
@@ -137,6 +138,7 @@ private:
     QPushButton* m_trashButton;                                     //删除按钮
     QPushButton* m_viewChangeButton;                                //列表/平铺切换按钮
     NoteView* m_noteView;                                           //listview
+    listViewModeDelegate* m_plistDelegate;
     QTableView* m_noteTable;                                        //tableview
     NoteModel* m_noteModel;                                         //便签模板
     NoteModel* m_deletedNotesModel;                                 //删除模板
@@ -154,7 +156,7 @@ private:
     adaptScreenInfo *m_pSreenInfo;                                  //屏幕信息
     QPoint dragPosition;                                            //拖动坐标
     bool mousePressed;                                              //鼠标是否按下
-    QString currentTheme;                                           //当前主题名
+    QString m_currentTheme;                                           //当前主题名
     double m_transparency;                                          //透明度
     QDBusInterface *userGuideInterface;                                   //用户手册
 
@@ -193,7 +195,7 @@ private:
     void selectNote(const QModelIndex& noteIndex);                  //双击前选中目标列表
     void checkMigration();                                          //迁移sync
     void migrateNote(QString notePath);                             //便签数据迁移
-
+    void closeAllEditors();
 
 
 private slots:

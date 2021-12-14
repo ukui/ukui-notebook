@@ -55,9 +55,9 @@ public:
     QColor intToQcolor(int &intColor) const;
 
 private:
-    QFont m_titleFont;
-    QFont m_titleSelectedFont;
-    QFont m_dateFont;
+    mutable QFont m_titleFont;
+    mutable QFont m_titleSelectedFont;
+    mutable QFont m_dateFont;
     QColor m_titleColor;
     QColor m_dateColor;
     QColor m_ActiveColor;
