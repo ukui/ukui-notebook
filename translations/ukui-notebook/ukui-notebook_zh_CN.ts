@@ -84,92 +84,92 @@
 <context>
     <name>EditPage</name>
     <message>
-        <location filename="../../src/editPage.cpp" line="115"/>
+        <location filename="../../src/editPage.cpp" line="114"/>
         <source>Notes</source>
         <translation>便签贴</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="184"/>
+        <location filename="../../src/editPage.cpp" line="183"/>
         <source>Bold</source>
         <translation>加粗</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="185"/>
+        <location filename="../../src/editPage.cpp" line="184"/>
         <source>Italic</source>
         <translation>斜体</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="186"/>
+        <location filename="../../src/editPage.cpp" line="185"/>
         <source>Underline</source>
         <translation>下划线</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="187"/>
+        <location filename="../../src/editPage.cpp" line="186"/>
         <source>Strikeout</source>
         <translation>删除线</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="188"/>
+        <location filename="../../src/editPage.cpp" line="187"/>
         <source>Unordered</source>
         <translation>无序列表</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="189"/>
+        <location filename="../../src/editPage.cpp" line="188"/>
         <source>Ordered</source>
         <translation>有序列表</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="191"/>
+        <location filename="../../src/editPage.cpp" line="190"/>
         <source>Font Size</source>
         <translation>字号</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="192"/>
+        <location filename="../../src/editPage.cpp" line="191"/>
         <source>Font Color</source>
         <translation>字体颜色</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="193"/>
+        <location filename="../../src/editPage.cpp" line="192"/>
         <source>InsertPicture</source>
         <translation>插入图片</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="568"/>
+        <location filename="../../src/editPage.cpp" line="567"/>
         <source>undo</source>
         <translation>撤销</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="569"/>
+        <location filename="../../src/editPage.cpp" line="568"/>
         <source>redo</source>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="570"/>
+        <location filename="../../src/editPage.cpp" line="569"/>
         <source>cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="571"/>
+        <location filename="../../src/editPage.cpp" line="570"/>
         <source>copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="572"/>
+        <location filename="../../src/editPage.cpp" line="571"/>
         <source>paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="573"/>
+        <location filename="../../src/editPage.cpp" line="572"/>
         <source>copy to newpage</source>
         <translation>将选中区域复制到新便签</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1025"/>
+        <location filename="../../src/editPage.cpp" line="1022"/>
         <source>Select an image</source>
         <translation>请选择图片</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1027"/>
+        <location filename="../../src/editPage.cpp" line="1024"/>
         <source>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; All (*)</source>
         <translation>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; 全部 (*)</translation>
     </message>
@@ -385,7 +385,7 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="677"/>
+        <location filename="../../src/widget.cpp" line="685"/>
         <source>About</source>
         <translatorcomment>关于</translatorcomment>
         <translation>关于</translation>
@@ -396,13 +396,13 @@
         <translation type="vanished">欢迎使用麒麟便签本。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1216"/>
+        <location filename="../../src/widget.cpp" line="1224"/>
         <source>Search</source>
         <translatorcomment>搜索</translatorcomment>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="743"/>
+        <location filename="../../src/widget.cpp" line="751"/>
         <source>Create New Note</source>
         <translatorcomment>新建便签</translatorcomment>
         <translation>新建便签</translation>
@@ -413,43 +413,48 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="300"/>
-        <location filename="../../src/widget.cpp" line="304"/>
+        <location filename="../../src/widget.cpp" line="301"/>
+        <location filename="../../src/widget.cpp" line="305"/>
         <source>Notes</source>
         <translatorcomment>便签贴</translatorcomment>
         <translation>便签贴</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="676"/>
+        <location filename="../../src/widget.cpp" line="684"/>
         <source>Help</source>
         <translatorcomment>帮助</translatorcomment>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="678"/>
+        <location filename="../../src/widget.cpp" line="686"/>
         <source>Empty Note</source>
         <translatorcomment>清空便签本</translatorcomment>
         <translation>清空便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="746"/>
+        <location filename="../../src/widget.cpp" line="754"/>
         <source>Close</source>
         <translatorcomment>关闭</translatorcomment>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="747"/>
+        <location filename="../../src/widget.cpp" line="755"/>
         <source>Minimize</source>
         <translatorcomment>最小化</translatorcomment>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1137"/>
-        <location filename="../../src/widget.cpp" line="1184"/>
-        <location filename="../../src/widget.cpp" line="1845"/>
+        <location filename="../../src/widget.cpp" line="1145"/>
+        <location filename="../../src/widget.cpp" line="1192"/>
+        <location filename="../../src/widget.cpp" line="1855"/>
         <source>Welcome to use Notes.</source>
         <translatorcomment>欢迎使用便签贴，双击可编辑便签内容。</translatorcomment>
         <translation>欢迎使用便签贴，双击可编辑便签内容。</translation>
+    </message>
+    <message>
+        <location filename="../../src/widget.cpp" line="1401"/>
+        <source>[picture]</source>
+        <translation>[图片]</translation>
     </message>
     <message>
         <source>Welcome to use Kylin Memo.</source>
@@ -472,13 +477,13 @@
         <translation type="vanished">便签名称</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="744"/>
+        <location filename="../../src/widget.cpp" line="752"/>
         <source>Delete Selected Note</source>
         <translatorcomment>删除</translatorcomment>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="745"/>
+        <location filename="../../src/widget.cpp" line="753"/>
         <source>Switch View</source>
         <translatorcomment>切换视图</translatorcomment>
         <translation>切换视图</translation>
@@ -494,7 +499,7 @@
         <translation type="vanished">换肤</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="680"/>
+        <location filename="../../src/widget.cpp" line="688"/>
         <source>Exit</source>
         <translatorcomment>退出</translatorcomment>
         <translation>退出</translation>
@@ -505,7 +510,7 @@
         <translation type="vanished">最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="748"/>
+        <location filename="../../src/widget.cpp" line="756"/>
         <source>Menu</source>
         <translatorcomment>菜单</translatorcomment>
         <translation>菜单</translation>
@@ -519,30 +524,30 @@
 <context>
     <name>emptyNotes</name>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="14"/>
+        <location filename="../../src/emptyNotes.ui" line="26"/>
         <source>Dialog</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="39"/>
+        <location filename="../../src/emptyNotes.ui" line="56"/>
         <source>Are you sure empty notebook?</source>
         <translatorcomment>确定要清空便签本吗？</translatorcomment>
         <translation>确定要清空便签本吗？</translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="55"/>
+        <location filename="../../src/emptyNotes.ui" line="72"/>
         <source>No Tips</source>
         <translatorcomment>不再提示</translatorcomment>
         <translation>不再提示</translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="71"/>
+        <location filename="../../src/emptyNotes.ui" line="88"/>
         <source>cancel</source>
         <translatorcomment>取消</translatorcomment>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="84"/>
+        <location filename="../../src/emptyNotes.ui" line="101"/>
         <source>yes</source>
         <translatorcomment>确定</translatorcomment>
         <translation>确定</translation>
@@ -575,13 +580,13 @@
         <translation type="vanished">昨天  </translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="347"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="348"/>
         <source>Today  </source>
         <translatorcomment>今天  </translatorcomment>
         <translation>今天  </translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="356"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="357"/>
         <source>Yesterday  </source>
         <translatorcomment>昨天  </translatorcomment>
         <translation>昨天  </translation>
@@ -600,12 +605,12 @@
         <translation type="vanished">昨天</translation>
     </message>
     <message>
-        <location filename="../../src/listViewModeDelegate.cpp" line="388"/>
+        <location filename="../../src/listViewModeDelegate.cpp" line="387"/>
         <source>Today  </source>
         <translation>今天  </translation>
     </message>
     <message>
-        <location filename="../../src/listViewModeDelegate.cpp" line="397"/>
+        <location filename="../../src/listViewModeDelegate.cpp" line="396"/>
         <source>Yesterday  </source>
         <translation>昨天  </translation>
     </message>
