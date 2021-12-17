@@ -1398,7 +1398,7 @@ void Widget::onTextEditTextChanged(int noteId, int i)
             // Get the new data
             QString firstline;
             if(m_editors[i]->m_isInsImg) {
-                firstline = getFirstLine("[图片]");
+                firstline = getFirstLine(tr("[picture]"));
             }
             else {
                 firstline = getFirstLine(m_editors[i]->ui->textEdit->toPlainText());
