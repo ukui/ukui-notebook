@@ -1,0 +1,77 @@
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.so.*
+*.dll
+*.dylib
+
+# Qt-es
+object_script.*.Release
+object_script.*.Debug
+*_plugin_import.cpp
+/.qmake.cache
+/.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
+Makefile*
+*build-*
+*.qm
+*.prl
+
+# Qt unit tests
+target_wrapper.*
+
+# QtCreator
+*.autosave
+
+# QtCreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCreator CMake
+CMakeLists.txt.user*
+
+# QtCreator 4.8< compilation database 
+compile_commands.json
+
+# QtCreator local machine specific files for imported projects
+*creator.user*
+
+# VSCode
+.vscode
+.VSCode*
+
+# build
+build
+build-*
+
+#doc
+doc
+
+#vscode
+.vscode
+
+#debian
+debian/files
+debian/.debhelper
+debian/ukui-notebook
+debian/*.debhelper.log
+debian/*.substvars
+/src/ukui-notebook
+/uNoteDbusServer/note_adaptor.*
+/uNoteDbusServer/note_interface.*
+/uNoteDbusServer/ukui-notebook-server
