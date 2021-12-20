@@ -696,7 +696,7 @@ void Widget::btnInit()
 
     connect(m_helpAction, &QAction::triggered, this, [=](){
         qDebug() << "help clicked";
-        userGuideInterface->call(QString("showGuide"), "ukui/ukui-notebook");
+        userGuideInterface->call(QString("showGuide"), "ukui-notebook");
     });
     connect(m_aboutAction, &QAction::triggered, this, [=](){
         About *dialog = new About(this);
@@ -1758,8 +1758,7 @@ void Widget::setNoteNullSlot()
 void Widget::onF1ButtonClicked()
 {
     qDebug() << "onF1ButtonClicked";
-    userGuideInterface->call(QString("showGuide"), "ukui/ukui-notebook");
-    //userGuideInterface->call(QString("showGuide"), "tools/ukui-notebook");
+    userGuideInterface->call(QString("showGuide"), "ukui-notebook");
 }
 
 /*!

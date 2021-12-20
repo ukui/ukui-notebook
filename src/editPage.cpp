@@ -998,19 +998,24 @@ void EditPage::dropImage(const QImage& image, const QString& format) {
     buffer.close();
     QByteArray base64 = bytes.toBase64();
     QByteArray base64l;
-    for (int i=0; i<base64.size(); i++) {
+    for (int i=0; i<base64.size(); i++) 
+    {
         base64l.append(base64[i]);
-        if (i%80 == 0) {
+        if (i%80 == 0) 
+        {
             base64l.append("\n");
-            }
         }
+    }
 
     if(image.isNull())
-    {return ;}
+    {
+        return ;
+    }
 
     QTextCursor cursor = ui->textEdit->textCursor();
 
     if(cursor.atStart())
+    {
         m_isInsImg = true;
     }
 
