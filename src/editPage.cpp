@@ -1010,7 +1010,7 @@ void EditPage::dropImage(const QImage& image, const QString& format) {
 
     QTextCursor cursor = ui->textEdit->textCursor();
 
-    if(cursor.atStart()) {
+    if(cursor.atStart())
         m_isInsImg = true;
     }
 
