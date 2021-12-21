@@ -1463,7 +1463,7 @@ void Widget::exitSlot()
 {
     closeAllEditors();
     this->close();
-    this->~Widget();
+    // this->~Widget();
 }
 
 /*!
