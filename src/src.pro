@@ -123,7 +123,9 @@ unix {
 
     translation.path = /usr/share/ukui-notebook
     translation.files += ../translations/ukui-notebook/*.qm
-    INSTALLS += translation
+    manual.path = /usr/share/kylin-user-guide/data/guide/ukui-notebook
+    manual.files += ../data/ukui-notebook/*
+    INSTALLS += translation  manual
 }
 
 desktopfile.files = ../data/ukui-notebook.desktop

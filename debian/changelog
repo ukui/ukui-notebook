@@ -1,3 +1,13 @@
+ukui-notebook (3.1.0-1-0044) v101; urgency=medium
+
+  * Bug:  95385 【便签】【用户手册】便签帮助手册未跳转到指定页面
+  * Bug:  67440 【便签本】从便签本打开帮助，没有直接跳到便签本的介绍
+  * 任务：
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- hanzehui <hanzehui@kylinos.cn>  Thu, 20 Dec 2021 16:19:21 +0800
+
 ukui-notebook (3.1.0-1-0043) v101; urgency=medium
 
   * Bug:
