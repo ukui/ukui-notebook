@@ -445,6 +445,21 @@ void EditPage::fontColorChanged(const QColor &c)
     QString _Stylesheet;
     QString _BgColor;
     _BgColor = c.name();
+
+    if (_BgColor == "#000000" || _BgColor == "#FFFFFF" || c == QColor()) {
+        m_defaultFontColorChanged = false;
+        if (_BgColor == "#000000" && QGSettings::isSchemaInstalled(THEME_QT_SCHEMA)) {
+            QByteArray qtThemeID(THEME_QT_SCHEMA);
+            auto qtThemeSetting = new QGSettings(qtThemeID,QByteArray(),this);
+            QString style = qtThemeSetting->get("styleName").toString();
+            if(style == "ukui-dark") {
+                _BgColor = "#FFFFFF";
+            }
+            else if(style == "ukui-default" || style == "ukui-white" || style == "ukui-light"){
+                _BgColor = "#000000";
+            }
+        }
+    }
     _Stylesheet = "background-color: %1;";
     _Stylesheet = _Stylesheet.arg(_BgColor);
 
