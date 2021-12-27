@@ -36,6 +36,8 @@ emptyNotes::emptyNotes(QWidget *parent) :
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedSize(width(),height());
 
+    ui->pushButton_3->setFlat(true);
+    ui->pushButton_3->setStyleSheet("border-radius:4px;");
     ui->pushButton->setAutoRepeat(true);
     ui->pushButton->setAutoRepeatDelay(1);
     ui->pushButton->setAutoRepeatInterval(1);
