@@ -1398,7 +1398,7 @@ void Widget::onTextEditTextChanged(int noteId, int i)
             // Get the new data
             QString firstline;
             if(m_editors[i]->m_isInsImg) {
-                firstline = getFirstLine(tr("[picture]"));
+                firstline = getFirstLine(("[picture]"));
             }
             else {
                 firstline = getFirstLine(m_editors[i]->ui->textEdit->toPlainText());
@@ -1853,5 +1853,8 @@ void Widget::transFisrtLine()
 
         if (note != Q_NULLPTR && note->content() == NULL)
             note->setFullTitle(tr("Welcome to use Notes."));
+        else if (note->fullTitle() == "[picture]" || note->fullTitle() == "[图片]") {
+            note->setFullTitle(tr("[picture]"));
+        }
     }
 }
