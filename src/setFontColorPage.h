@@ -49,11 +49,16 @@ public:
     ~SetFontColor();
 
     Ui::SetFontColor *ui;
+    static QString KY_BLUE;
+    static QString KY_RED;
+    static QString KY_GREEN;
+    static QString KY_ORANGE;
+    static QString KY_PURPLE;
 
 private:
-    QListWidgetItem *m_listAItem[9];
-    paletteButton *m_listPage[9];
-    QString m_color[9];
+    QListWidgetItem *m_listAItem[6];
+    paletteButton *m_listPage[6];
+    QString m_color[6];
 
 protected:
     void paintEvent(QPaintEvent *event) override;

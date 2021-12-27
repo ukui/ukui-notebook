@@ -759,14 +759,11 @@ void EditPage::setFontSizeSlot()
 // 调色板
 void EditPage::initColor()
 {
-    m_colorNum[0] = QColor(PaletteWidget::KY_BLUE);
-    m_colorNum[1] = QColor(PaletteWidget::KY_RED);
-    m_colorNum[2] = QColor(PaletteWidget::KY_GREEN);
-    m_colorNum[3] = QColor(PaletteWidget::KY_ORANGE);
-    m_colorNum[4] = QColor(PaletteWidget::KY_PURPLE);
-    m_colorNum[5] = QColor(PaletteWidget::KY_YELLOW);
-    m_colorNum[6] = QColor(PaletteWidget::KY_GREY);
-    m_colorNum[7] = QColor(PaletteWidget::KY_PINK);
+    m_colorNum[0] = QColor(SetFontColor::KY_BLUE);
+    m_colorNum[1] = QColor(SetFontColor::KY_RED);
+    m_colorNum[2] = QColor(SetFontColor::KY_GREEN);
+    m_colorNum[3] = QColor(SetFontColor::KY_ORANGE);
+    m_colorNum[4] = QColor(SetFontColor::KY_PURPLE);
 }
 
 void EditPage::setFontColorSlot(QListWidgetItem *item)
@@ -775,7 +772,7 @@ void EditPage::setFontColorSlot(QListWidgetItem *item)
     qDebug() << "Item" << item;
     int num = m_setColorFontPage->ui->listWidget->currentRow();
     QTextCharFormat fmt;
-    if (num != 9) {
+    if (num != 5) {
         m_defaultFontColorChanged = true;
         fmt.setForeground(m_colorNum[num]);
         ui->textEdit->mergeCurrentCharFormat(fmt);
@@ -1067,7 +1064,7 @@ void EditPage::onFontColorClicked()
     QPointF position = this->pos();
     QSize size = this->size();
     qDebug () << "Current size:" << size;
-    m_setColorFontPage->move(position.x()+size.width() - 280 , position.y() + size.height() - 70);
+    m_setColorFontPage->move(position.x()+size.width() - 168 - 8 , position.y() + size.height() - 70);
     //m_setColorFontPage->resize(300,30);
     //m_setColorFontPage->ui->listWidget->resize(300,30);
     m_setColorFontPage->show();
