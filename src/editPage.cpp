@@ -787,10 +787,11 @@ void EditPage::setFontColorSlot(QListWidgetItem *item)
 
 void EditPage::blueBtnSlot()
 {
-    m_editColor = QColor(76, 119, 231);
+    QColor color((PaletteWidget::KY_BLUE));
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(76, 119, 231);
-    m_noteHeadMenu->colorWidget = QColor(76, 119, 231);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
@@ -806,7 +807,7 @@ void EditPage::redBtnSlot()
 
 void EditPage::darkGreenBtnSlot()
 {
-    QColor color((PaletteWidget::KY_GREEN));
+    QColor color(PaletteWidget::KY_GREEN);
     m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
     m_noteHead->colorWidget = color;
@@ -816,10 +817,11 @@ void EditPage::darkGreenBtnSlot()
 
 void EditPage::orangeBtnSlot()
 {
-    m_editColor = QColor(255, 151, 47);
+    QColor color(PaletteWidget::KY_ORANGE);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(255, 151, 47);
-    m_noteHeadMenu->colorWidget = QColor(255, 151, 47);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
@@ -873,10 +875,11 @@ void EditPage::yellowBtnSlot()
 
 void EditPage::pinkBtnSlot()
 {
-    m_editColor = QColor(245, 80, 159);
+    QColor color(PaletteWidget::KY_PINK);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(245, 80, 159);
-    m_noteHeadMenu->colorWidget = QColor(245, 80, 159);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
