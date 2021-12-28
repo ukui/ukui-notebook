@@ -94,8 +94,8 @@ private:
 private:
     SelectColor *m_colorPage = nullptr;
     QTimer *m_timer = nullptr;
-//    QString color[11];
-    QColor m_colorNum[11];
+//    QString color[6];
+    QColor m_colorNum[6];
 
     QPointer<QTextList> m_lastBlockList;
 

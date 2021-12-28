@@ -17,7 +17,7 @@
 #define STYLE_ICON                "icon-theme-name"
 #define STYLE_ICON_NAME           "iconThemeName"
 
-static  QString SOFTWARE_VERSION = "3.1.0";
+static  QString SOFTWARE_VERSION = "3.1.1";
 
 extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
 

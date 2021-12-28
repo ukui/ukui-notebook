@@ -445,6 +445,21 @@ void EditPage::fontColorChanged(const QColor &c)
     QString _Stylesheet;
     QString _BgColor;
     _BgColor = c.name();
+
+    if (_BgColor == "#000000" || _BgColor == "#FFFFFF" || c == QColor()) {
+        m_defaultFontColorChanged = false;
+        if (_BgColor == "#000000" && QGSettings::isSchemaInstalled(THEME_QT_SCHEMA)) {
+            QByteArray qtThemeID(THEME_QT_SCHEMA);
+            auto qtThemeSetting = new QGSettings(qtThemeID,QByteArray(),this);
+            QString style = qtThemeSetting->get("styleName").toString();
+            if(style == "ukui-dark") {
+                _BgColor = "#FFFFFF";
+            }
+            else if(style == "ukui-default" || style == "ukui-white" || style == "ukui-light"){
+                _BgColor = "#000000";
+            }
+        }
+    }
     _Stylesheet = "background-color: %1;";
     _Stylesheet = _Stylesheet.arg(_BgColor);
 
@@ -759,14 +774,11 @@ void EditPage::setFontSizeSlot()
 // 调色板
 void EditPage::initColor()
 {
-    m_colorNum[0] = QColor(PaletteWidget::KY_BLUE);
-    m_colorNum[1] = QColor(PaletteWidget::KY_RED);
-    m_colorNum[2] = QColor(PaletteWidget::KY_GREEN);
-    m_colorNum[3] = QColor(PaletteWidget::KY_ORANGE);
-    m_colorNum[4] = QColor(PaletteWidget::KY_PURPLE);
-    m_colorNum[5] = QColor(PaletteWidget::KY_YELLOW);
-    m_colorNum[6] = QColor(PaletteWidget::KY_GREY);
-    m_colorNum[7] = QColor(PaletteWidget::KY_PINK);
+    m_colorNum[0] = QColor(SetFontColor::KY_BLUE);
+    m_colorNum[1] = QColor(SetFontColor::KY_RED);
+    m_colorNum[2] = QColor(SetFontColor::KY_GREEN);
+    m_colorNum[3] = QColor(SetFontColor::KY_ORANGE);
+    m_colorNum[4] = QColor(SetFontColor::KY_PURPLE);
 }
 
 void EditPage::setFontColorSlot(QListWidgetItem *item)
@@ -775,7 +787,7 @@ void EditPage::setFontColorSlot(QListWidgetItem *item)
     qDebug() << "Item" << item;
     int num = m_setColorFontPage->ui->listWidget->currentRow();
     QTextCharFormat fmt;
-    if (num != 9) {
+    if (num != 5) {
         m_defaultFontColorChanged = true;
         fmt.setForeground(m_colorNum[num]);
         ui->textEdit->mergeCurrentCharFormat(fmt);
@@ -790,10 +802,11 @@ void EditPage::setFontColorSlot(QListWidgetItem *item)
 
 void EditPage::blueBtnSlot()
 {
-    m_editColor = QColor(76, 119, 231);
+    QColor color((PaletteWidget::KY_BLUE));
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(76, 119, 231);
-    m_noteHeadMenu->colorWidget = QColor(76, 119, 231);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
@@ -809,7 +822,7 @@ void EditPage::redBtnSlot()
 
 void EditPage::darkGreenBtnSlot()
 {
-    QColor color((PaletteWidget::KY_GREEN));
+    QColor color(PaletteWidget::KY_GREEN);
     m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
     m_noteHead->colorWidget = color;
@@ -819,10 +832,11 @@ void EditPage::darkGreenBtnSlot()
 
 void EditPage::orangeBtnSlot()
 {
-    m_editColor = QColor(255, 151, 47);
+    QColor color(PaletteWidget::KY_ORANGE);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(255, 151, 47);
-    m_noteHeadMenu->colorWidget = QColor(255, 151, 47);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
@@ -876,10 +890,11 @@ void EditPage::yellowBtnSlot()
 
 void EditPage::pinkBtnSlot()
 {
-    m_editColor = QColor(245, 80, 159);
+    QColor color(PaletteWidget::KY_PINK);
+    m_editColor = color;
     emit colorhasChanged(m_editColor, m_noteId);
-    m_noteHead->colorWidget = QColor(245, 80, 159);
-    m_noteHeadMenu->colorWidget = QColor(245, 80, 159);
+    m_noteHead->colorWidget = color;
+    m_noteHeadMenu->colorWidget = color;
     update();
 }
 
@@ -1067,7 +1082,7 @@ void EditPage::onFontColorClicked()
     QPointF position = this->pos();
     QSize size = this->size();
     qDebug () << "Current size:" << size;
-    m_setColorFontPage->move(position.x()+size.width() - 280 , position.y() + size.height() - 70);
+    m_setColorFontPage->move(position.x()+size.width() - 168 - 8 , position.y() + size.height() - 70);
     //m_setColorFontPage->resize(300,30);
     //m_setColorFontPage->ui->listWidget->resize(300,30);
     m_setColorFontPage->show();

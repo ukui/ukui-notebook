@@ -134,42 +134,42 @@
         <translation>插入图片</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="567"/>
+        <location filename="../../src/editPage.cpp" line="592"/>
         <source>undo</source>
         <translation>撤销</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="568"/>
+        <location filename="../../src/editPage.cpp" line="593"/>
         <source>redo</source>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="569"/>
+        <location filename="../../src/editPage.cpp" line="594"/>
         <source>cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="570"/>
+        <location filename="../../src/editPage.cpp" line="595"/>
         <source>copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="571"/>
+        <location filename="../../src/editPage.cpp" line="596"/>
         <source>paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="572"/>
+        <location filename="../../src/editPage.cpp" line="597"/>
         <source>copy to newpage</source>
         <translation>将选中区域复制到新便签</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1022"/>
+        <location filename="../../src/editPage.cpp" line="1054"/>
         <source>Select an image</source>
         <translation>请选择图片</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1024"/>
+        <location filename="../../src/editPage.cpp" line="1056"/>
         <source>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; All (*)</source>
         <translation>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; 全部 (*)</translation>
     </message>
@@ -312,6 +312,14 @@
     </message>
 </context>
 <context>
+    <name>NoteData</name>
+    <message>
+        <location filename="../../src/noteData.cpp" line="45"/>
+        <source>[picture]</source>
+        <translation>[图片]</translation>
+    </message>
+</context>
+<context>
     <name>PaletteWidget</name>
     <message>
         <location filename="../../src/paletteWidget.ui" line="26"/>
@@ -385,7 +393,7 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="685"/>
+        <location filename="../../src/widget.cpp" line="686"/>
         <source>About</source>
         <translatorcomment>关于</translatorcomment>
         <translation>关于</translation>
@@ -396,13 +404,13 @@
         <translation type="vanished">欢迎使用麒麟便签本。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1224"/>
+        <location filename="../../src/widget.cpp" line="1226"/>
         <source>Search</source>
         <translatorcomment>搜索</translatorcomment>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="751"/>
+        <location filename="../../src/widget.cpp" line="752"/>
         <source>Create New Note</source>
         <translatorcomment>新建便签</translatorcomment>
         <translation>新建便签</translation>
@@ -420,39 +428,38 @@
         <translation>便签贴</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="684"/>
+        <location filename="../../src/widget.cpp" line="685"/>
         <source>Help</source>
         <translatorcomment>帮助</translatorcomment>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="686"/>
+        <location filename="../../src/widget.cpp" line="687"/>
         <source>Empty Note</source>
         <translatorcomment>清空便签本</translatorcomment>
         <translation>清空便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="754"/>
+        <location filename="../../src/widget.cpp" line="755"/>
         <source>Close</source>
         <translatorcomment>关闭</translatorcomment>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="755"/>
+        <location filename="../../src/widget.cpp" line="756"/>
         <source>Minimize</source>
         <translatorcomment>最小化</translatorcomment>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1145"/>
-        <location filename="../../src/widget.cpp" line="1192"/>
-        <location filename="../../src/widget.cpp" line="1855"/>
+        <location filename="../../src/widget.cpp" line="1147"/>
+        <location filename="../../src/widget.cpp" line="1194"/>
+        <location filename="../../src/widget.cpp" line="1857"/>
         <source>Welcome to use Notes.</source>
         <translatorcomment>欢迎使用便签贴，双击可编辑便签内容。</translatorcomment>
         <translation>欢迎使用便签贴，双击可编辑便签内容。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1401"/>
         <source>[picture]</source>
         <translation>[图片]</translation>
     </message>
@@ -477,13 +484,13 @@
         <translation type="vanished">便签名称</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="752"/>
+        <location filename="../../src/widget.cpp" line="753"/>
         <source>Delete Selected Note</source>
         <translatorcomment>删除</translatorcomment>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="753"/>
+        <location filename="../../src/widget.cpp" line="754"/>
         <source>Switch View</source>
         <translatorcomment>切换视图</translatorcomment>
         <translation>切换视图</translation>
@@ -499,7 +506,7 @@
         <translation type="vanished">换肤</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="688"/>
+        <location filename="../../src/widget.cpp" line="689"/>
         <source>Exit</source>
         <translatorcomment>退出</translatorcomment>
         <translation>退出</translation>
@@ -510,7 +517,7 @@
         <translation type="vanished">最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="756"/>
+        <location filename="../../src/widget.cpp" line="757"/>
         <source>Menu</source>
         <translatorcomment>菜单</translatorcomment>
         <translation>菜单</translation>
@@ -524,30 +531,30 @@
 <context>
     <name>emptyNotes</name>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="26"/>
+        <location filename="../../src/emptyNotes.ui" line="32"/>
         <source>Dialog</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="56"/>
+        <location filename="../../src/emptyNotes.ui" line="190"/>
         <source>Are you sure empty notebook?</source>
-        <translatorcomment>确定要清空便签本吗？</translatorcomment>
-        <translation>确定要清空便签本吗？</translation>
+        <translatorcomment>您确定要清空便签本吗？</translatorcomment>
+        <translation>您确定要清空便签本吗？</translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="72"/>
+        <location filename="../../src/emptyNotes.ui" line="251"/>
         <source>No Tips</source>
         <translatorcomment>不再提示</translatorcomment>
         <translation>不再提示</translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="88"/>
+        <location filename="../../src/emptyNotes.ui" line="305"/>
         <source>cancel</source>
         <translatorcomment>取消</translatorcomment>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/emptyNotes.ui" line="101"/>
+        <location filename="../../src/emptyNotes.ui" line="328"/>
         <source>yes</source>
         <translatorcomment>确定</translatorcomment>
         <translation>确定</translation>

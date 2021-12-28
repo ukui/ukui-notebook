@@ -20,6 +20,12 @@
 #include "ui_setFontColorPage.h"
 #include "paletteWidget.h"
 
+QString SetFontColor::KY_BLUE = "#1D52E1";
+QString SetFontColor::KY_RED = "#EE0000";
+QString SetFontColor::KY_GREEN = "#00D600";
+QString SetFontColor::KY_ORANGE = "#E39900";
+QString SetFontColor::KY_PURPLE = "#FF2F96";
+
 SetFontColor::SetFontColor(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SetFontColor)
@@ -33,7 +39,7 @@ SetFontColor::~SetFontColor()
 {
     delete ui;
     //释放内存
-    for (int i=0; i < 9;i++)
+    for (int i=0; i < 6;i++)
     {
         delete m_listAItem[i];
     }
@@ -60,14 +66,11 @@ void SetFontColor::paintEvent(QPaintEvent *event)
 
 void SetFontColor::setColor()
 {
-    m_color[0] = QString("background:%1;").arg(PaletteWidget::KY_BLUE);
-    m_color[1] = QString("background:%1;").arg(PaletteWidget::KY_RED);
-    m_color[2] = QString("background:%1;").arg(PaletteWidget::KY_GREEN);
-    m_color[3] = QString("background:%1;").arg(PaletteWidget::KY_ORANGE);
-    m_color[4] = QString("background:%1;").arg(PaletteWidget::KY_PURPLE);
-    m_color[5] = QString("background:%1;").arg(PaletteWidget::KY_YELLOW);
-    m_color[6] = QString("background:%1;").arg(PaletteWidget::KY_GREY);
-    m_color[7] = QString("background:%1;").arg(PaletteWidget::KY_PINK);
+    m_color[0] = QString("background:%1;").arg(SetFontColor::KY_BLUE);
+    m_color[1] = QString("background:%1;").arg(SetFontColor::KY_RED);
+    m_color[2] = QString("background:%1;").arg(SetFontColor::KY_GREEN);
+    m_color[3] = QString("background:%1;").arg(SetFontColor::KY_ORANGE);
+    m_color[4] = QString("background:%1;").arg(SetFontColor::KY_PURPLE);
     //监听主题改变
     const QByteArray id(THEME_QT_SCHEMA);
     if(QGSettings::isSchemaInstalled(id)){
@@ -75,20 +78,20 @@ void SetFontColor::setColor()
         QString style = styleSettings->get(MODE_QT_KEY).toString();
         if(style == "ukui-default" || style == "ukui-white"
                 || style == "ukui-light" || style == "ukui"){
-            m_color[8]="background:rgba(0,0,0,1);";
+            m_color[5]="background:rgba(0,0,0,1);";
         }else if(style == "ukui-dark" || style == "ukui-black"){
-            m_color[8]="background:rgba(255,255,255,1);";
+            m_color[5]="background:rgba(255,255,255,1);";
         }
         connect(styleSettings, &QGSettings::changed, this, [=](const QString &key){
             if (key == "styleName"){
                 QString currentTheme = styleSettings->get(MODE_QT_KEY).toString();
                 if(currentTheme == "ukui-default" || currentTheme == "ukui-white"
                         || currentTheme == "ukui-light" || currentTheme == "ukui"){
-                    m_color[8]="background:rgba(0,0,0,1);";
-                    m_listPage[8]->ui->label->setStyleSheet(m_color[8]+"border-radius:3px;");
+                    m_color[5]="background:rgba(0,0,0,1);";
+                    m_listPage[5]->ui->label->setStyleSheet(m_color[5]+"border-radius:3px;");
                 }else if(currentTheme == "ukui-dark" || currentTheme == "ukui-black"){
-                    m_color[8]="background:rgba(255,255,255,1);";
-                    m_listPage[8]->ui->label->setStyleSheet(m_color[8]+"border-radius:3px;");
+                    m_color[5]="background:rgba(255,255,255,1);";
+                    m_listPage[5]->ui->label->setStyleSheet(m_color[5]+"border-radius:3px;");
                 }
             }
         });
@@ -106,7 +109,7 @@ void SetFontColor::initSetup()
     ui->listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->listWidget->setSelectionMode(QAbstractItemView::NoSelection);
 
-    for(int n=0; n<9; n++){
+    for(int n=0; n<6; n++){
         m_listAItem[n] = new QListWidgetItem;
         m_listAItem[n]->setSizeHint(QSize(28,27));
 

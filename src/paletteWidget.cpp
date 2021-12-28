@@ -24,11 +24,11 @@
 extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
 QString PaletteWidget::BORDER_RADIUS_2PX =  "border-radius:2px";
 QString PaletteWidget::KY_BLUE = "#3790FA";
-QString PaletteWidget::KY_PURPLE = "#722ed1";
+QString PaletteWidget::KY_PURPLE = "#BA7BD8";
 QString PaletteWidget::KY_PINK = "#F559AB";
-QString PaletteWidget::KY_RED = "#FA6C63";
+QString PaletteWidget::KY_RED = "#FF4D4F";
 QString PaletteWidget:: KY_ORANGE = "#F68C27";
-QString PaletteWidget::KY_YELLOW = "#FBC726";
+QString PaletteWidget::KY_YELLOW = "#F9C53D";
 QString PaletteWidget::KY_GREEN = "#52C429";
 QString PaletteWidget::KY_GREY = "#8C8C8C";
 PaletteWidget::PaletteWidget(QWidget *parent) :
