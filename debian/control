@@ -3,7 +3,8 @@ Section: x11
 Priority: optional
 Maintainer: Kylin Team <team+kylin@tracker.debian.org>
 Uploaders: handsome_feng <jianfengli@ubuntukylin.com>,
-Build-Depends: debhelper-compat (= 12),
+           Kevin Duan <duankaiwen@ubuntukylin.com>
+Build-Depends: debhelper-compat (= 13),
                libglib2.0-dev,
                qtbase5-dev,
                libqt5svg5-dev,
@@ -13,8 +14,8 @@ Build-Depends: debhelper-compat (= 12),
 	       libdconf-dev,
                libx11-dev,
 	       libxtst-dev,
-	       libburner-media3-1,   
-	       gstreamer1.0-plugins-good,  
+	       libburner-media3-1,
+	       gstreamer1.0-plugins-good,
 	       gstreamer1.0-pulseaudio,
 	       libkf5windowsystem-dev,
 	       libqt5x11extras5-dev,
@@ -24,9 +25,9 @@ Build-Depends: debhelper-compat (= 12),
 	       libxcursor-dev,
 	       libukui-log4qt-dev,
                ukui-sidebar
-Standards-Version: 4.5.0
+Standards-Version: 4.6.0.1
 Rules-Requires-Root: no
-Homepage: https://github.com/ukui/ukui-sidebar.git
+Homepage: https://github.com/ukui/
 Vcs-Git: https://github.com/ukui/ukui-sidebar.git
 Vcs-Browser: https://github.com/ukui/ukui-sidebar
 
@@ -34,7 +35,6 @@ Package: ukui-notebook
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends}
-Conflicts:ukui-sidebar( < 3.1.0-1-0037.2)
 Description: parallels toolbox for UKUI
  The ukui-sidebar is mainly used in the desktop operating system.
  It pops up from the right side of the desktop in the form of a tray,
