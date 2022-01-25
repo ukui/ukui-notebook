@@ -21,3 +21,185 @@ License: GPL-3+
  .
  On Debian systems, the complete text of the GNU General
  Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: src/CloseButton/*
+Copyright: 2020, KylinSoft Co., Ltd.
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU Genaral Public License for more details.
+ .
+ You should have received a copy og the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: src/about.cpp
+  src/about.h
+  src/adaptscreeninfo.cpp
+  src/adaptscreeninfo.h
+Copyright: 2020, KylinSoft Co., Ltd.
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU Genaral Public License for more details.
+ .
+ You should have received a copy og the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: src/common/*
+Copyright: 2020, KylinSoft Co., Ltd.
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU Genaral Public License for more details.
+ .
+ You should have received a copy og the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: src/customStyle.cpp
+  src/customStyle.h
+  src/dbManager.cpp
+  src/dbManager.h
+  src/editPage.cpp
+  src/editPage.h
+  src/emptyNotes.cpp
+  src/emptyNotes.h
+  src/fontButton.cpp
+  src/fontButton.h
+  src/headerbar.cpp
+  src/headerbar.h
+  src/iconViewModeDelegate.cpp
+  src/iconViewModeDelegate.h
+  src/listViewModeDelegate.cpp
+  src/listViewModeDelegate.h
+  src/main.cpp
+  src/myThrow.cpp
+  src/myThrow.h
+  src/noteData.cpp
+  src/noteData.h
+  src/noteExitWindow.cpp
+  src/noteExitWindow.h
+  src/noteHead.cpp
+  src/noteHead.h
+  src/noteHeadMenu.cpp
+  src/noteHeadMenu.h
+  src/noteModel.cpp
+  src/noteModel.h
+  src/noteView.cpp
+  src/noteView.h
+  src/paletteButton.cpp
+  src/paletteButton.h
+  src/paletteWidget.cpp
+  src/paletteWidget.h
+  src/selectColorPage.cpp
+  src/selectColorPage.h
+  src/setFontColorPage.cpp
+  src/setFontColorPage.h
+  src/setFontSizePage.cpp
+  src/setFontSizePage.h
+  src/singleApplication.cpp
+  src/singleApplication.h
+  src/singleitemButton.cpp
+  src/singleitemButton.h
+  src/widget.cpp
+  src/widget.h
+Copyright: 2020, 2021, Tianjin KYLIN Information Technology Co., Ltd.
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU Genaral Public License for more details.
+ .
+ You should have received a copy og the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: src/utils/*
+Copyright: 2020, KylinSoft Co., Ltd.
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU Genaral Public License for more details.
+ .
+ You should have received a copy og the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: uNoteDbusServer/*
+Copyright: 2020, KylinSoft Co., Ltd.
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU Genaral Public License for more details.
+ .
+ You should have received a copy og the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+Files: uNoteDbusServer/uNoteDbusServer.h
+Copyright: 2020, 2021, Tianjin KYLIN Information Technology Co., Ltd.
+License: GPL-3+
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU Genaral Public License for more details.
+ .
+ You should have received a copy og the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
