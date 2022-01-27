@@ -23,20 +23,18 @@ Build-Depends: debhelper-compat (= 13),
 	       libxrandr-dev,
 	       libxinerama-dev,
 	       libxcursor-dev,
-	       libukui-log4qt-dev,
-               ukui-sidebar
+	       libukui-log4qt-dev
 Standards-Version: 4.6.0.1
 Rules-Requires-Root: no
 Homepage: https://github.com/ukui/
-Vcs-Git: https://github.com/ukui/ukui-sidebar.git
-Vcs-Browser: https://github.com/ukui/ukui-sidebar
+Vcs-Git: https://github.com/ukui/ukui-notebook.git
+Vcs-Browser: https://github.com/ukui/ukui-notebook
 
 Package: ukui-notebook
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends}
-Description: parallels toolbox for UKUI
- The ukui-sidebar is mainly used in the desktop operating system.
- It pops up from the right side of the desktop in the form of a tray,
- displaying some application notification messages and some cutting
- storage information.
+Description: Notebook for UKUI
+ Kylin Notepad is a small plug-in in the ukui desktop,
+ which provides convenient text recording and
+ flexible interface display. 

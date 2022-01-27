@@ -1,2 +1,2 @@
 version=4
-https://github.com/ukui/ukui-sidebar/releases .*/ukui-sidebar_(\d\S+)\.orig\.tar\.gz
+https://github.com/ukui/ukui-notebook/releases .*/ukui-notebook_(\d\S+)\.orig\.tar\.gz
