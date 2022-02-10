@@ -1,0 +1,42 @@
+Source: ukui-notebook
+Section: x11
+Priority: optional
+Maintainer: Kylin Team <team+kylin@tracker.debian.org>
+Uploaders: handsome_feng <jianfengli@ubuntukylin.com>,
+           Kevin Duan <duankaiwen@ubuntukylin.com>
+Build-Depends: debhelper-compat (= 13),
+               libglib2.0-dev,
+               qtbase5-dev,
+               libqt5svg5-dev,
+               qtmultimedia5-dev,
+               qttools5-dev-tools,
+	       libgsettings-qt-dev,
+	       libdconf-dev,
+               libx11-dev,
+	       libxtst-dev,
+	       libburner-media3-1,
+	       gstreamer1.0-plugins-good,
+	       gstreamer1.0-pulseaudio,
+	       libkf5windowsystem-dev,
+	       libqt5x11extras5-dev,
+	       pkg-config,
+	       libxrandr-dev,
+	       libxinerama-dev,
+	       libxcursor-dev,
+	       libukui-log4qt-dev,
+Standards-Version: 4.6.0.1
+Rules-Requires-Root: no
+Homepage: https://github.com/ukui/
+Vcs-Git: https://github.com/ukui/ukui-notebook.git
+Vcs-Browser: https://github.com/ukui/ukui-notebook
+
+Package: ukui-notebook
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Replaces: ukui-sidebar (<<3.1.2-1)
+Breaks: ukui-sidebar (<<3.1.2-1)
+Description: Notebook for UKUI desktop environment
+ UKUI Notebook is a small plug-in for the ukui desktop
+ environment which makes it easy to create notes and
+ pin it on desktop.
