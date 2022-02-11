@@ -119,8 +119,8 @@ int HeaderBarStyle::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *
 
 void HeaderBarStyle::drawComplexControl(QStyle::ComplexControl control, const QStyleOptionComplex *option, QPainter *painter, const QWidget *widget) const
 {
-    //This is a "lie". We want to use instant popup menu for tool button, and we aslo
-    //want use popup menu style with this tool button, so we change the related flags
+    //This is a "lie". We want to use instant popup menu for tool button, and we also
+    //want to use popup menu style with this tool button, so we change the related flags
     //to draw in our expected.
     if (control == CC_ToolButton) {
         QStyleOptionToolButton button = *qstyleoption_cast<const QStyleOptionToolButton *>(option);
