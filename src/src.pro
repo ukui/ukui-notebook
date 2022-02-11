@@ -15,7 +15,7 @@ TARGET = ukui-notebook
 TEMPLATE = app
 
 LIBS  +=  -lpthread
-LIBS  +=  -lX11 -lXrandr -lXinerama -lXi -lXcursor
+LIBS  +=  -lX11 -lXi
 
 PKGCONFIG += gsettings-qt
 
