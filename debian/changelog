@@ -1,3 +1,15 @@
+ukui-notebook (3.1.1-1) v101; urgency=medium
+  
+  * Bug:
+        #59697 【便签贴】更改通过便签页打开便签贴时按钮文案为“打开便签贴”
+        #101214【sp2 UI走查】便签本ui问题
+          - 用户手册文案部分
+  * 任务:
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Wed, 02 Mar 2022 14:29:27 +0800
+
 ukui-notebook (3.1.1) v101; urgency=medium
   
   * Bug:
