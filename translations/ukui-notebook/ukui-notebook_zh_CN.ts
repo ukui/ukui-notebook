@@ -672,8 +672,8 @@
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="102"/>
         <source>Open note list</source>
-        <translatorcomment>打开便签本</translatorcomment>
-        <translation>打开便签本</translation>
+        <translatorcomment>打开便签贴</translatorcomment>
+        <translation>打开便签贴</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="103"/>
