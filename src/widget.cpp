@@ -19,8 +19,6 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "editPage.h"
-#include "customStyle.h"
-#include "CloseButton/closebutton.h"
 #include "utils/xatom-helper.h"
 
 /*!
@@ -249,20 +247,6 @@ void Widget::setupDatabases()
     connect(this, &Widget::requestOpenDBManager, m_dbManager, &DBManager::onOpenDBManagerRequested);
     connect(m_dbThread, &QThread::finished, m_dbManager, &QObject::deleteLater);
     m_dbThread->start();
-}
-
-/*!
- * \brief Widget::error_throw
- *
- */
-void Widget::error_throw()
-{
-    try{
-        MY_THROW(ExceptionDerived, "error throw");
-    }
-    catch (ExceptionDerived &e) {
-        std::cout << e.what() << std::endl;
-    }
 }
 
 /*!

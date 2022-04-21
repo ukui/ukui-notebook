@@ -53,7 +53,6 @@
 #include <QShortcut>
 #include <QClipboard>
 
-#include "myThrow.h"
 #include "noteView.h"
 #include "noteData.h"
 #include "noteModel.h"
@@ -105,7 +104,6 @@ public:
     std::vector<EditPage*> m_editors;                              //c++数组容器
 
     int m_isThemeChanged;                                           //主题
-    void error_throw();                                             //异常处理抛出
     int getListFlag() const;                                        //获取列表切换标志位
     void setListFlag(const int &listflag);                          //设置列表切换标志位
     void createNewNote();                                           //新建便签
