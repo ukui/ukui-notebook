@@ -153,6 +153,31 @@
     <string/>
    </property>
   </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>200</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+  </widget>
+  <zorder>frame</zorder>
+  <zorder>orangeBtn</zorder>
+  <zorder>purpleBtn</zorder>
+  <zorder>greyBtn</zorder>
+  <zorder>redBtn</zorder>
+  <zorder>darkGreenBtn</zorder>
+  <zorder>blueBtn</zorder>
+  <zorder>pinkBtn</zorder>
+  <zorder>goldenBtn</zorder>
  </widget>
  <resources/>
  <connections/>

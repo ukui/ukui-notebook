@@ -1,3 +1,11 @@
+ukui-notebook (3.1.1.2-0k0) v101; urgency=medium
+  
+  * 任务: 84515 【麒麟便签v3.2.0】SDK日志适配（非功能性需求）
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Wed, 01 Jun 2022 09:38:17 +0800
+
 ukui-notebook (3.1.1-1) v101; urgency=medium
   
   * Bug:

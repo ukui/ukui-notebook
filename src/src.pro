@@ -4,9 +4,6 @@
 #
 #-------------------------------------------------
 
-include(./env.pri)
-include($$PROJECT_COMPONENTSOURCE/closebutton.pri)
-
 QT  +=  core gui printsupport sql concurrent network KWindowSystem dbus x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -18,7 +15,7 @@ LIBS  +=  -lpthread
 LIBS  +=  -lX11 -lXi
 
 PKGCONFIG += gsettings-qt
-
+PKGCONFIG += kysdk-kabase
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -45,16 +42,13 @@ SOURCES += \
     utils/utils.cpp \
     utils/xatom-helper.cpp \
     adaptscreeninfo.cpp \
-    customStyle.cpp \
     dbManager.cpp \
     editPage.cpp \
     emptyNotes.cpp \
     fontButton.cpp \
-    headerbar.cpp \
     iconViewModeDelegate.cpp \
     listViewModeDelegate.cpp \
     main.cpp \
-    myThrow.cpp \
     noteData.cpp \
     noteExitWindow.cpp \
     noteHead.cpp \
@@ -67,7 +61,6 @@ SOURCES += \
     setFontColorPage.cpp \
     setFontSizePage.cpp \
     singleApplication.cpp \
-    singleitemButton.cpp \
     widget.cpp
 
 HEADERS += \
@@ -75,15 +68,12 @@ HEADERS += \
     utils/utils.h \
     utils/xatom-helper.h \
     adaptscreeninfo.h \
-    customStyle.h \
     dbManager.h \
     editPage.h \
     emptyNotes.h \
     fontButton.h \
-    headerbar.h \
     iconViewModeDelegate.h \
     listViewModeDelegate.h \
-    myThrow.h \
     noteData.h \
     noteExitWindow.h \
     noteHead.h \
@@ -96,7 +86,6 @@ HEADERS += \
     setFontColorPage.h \
     setFontSizePage.h \
     singleApplication.h \
-    singleitemButton.h \
     widget.h
 
 FORMS += \
