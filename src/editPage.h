@@ -27,6 +27,7 @@
 #include <QModelIndex>
 #include <QTextList>
 #include <QPointer>
+#include <QFocusEvent>
 
 #include "noteHead.h"
 #include "noteHeadMenu.h"
@@ -71,8 +72,6 @@ public:
     bool m_isInsImg = false;
 
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-    void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
-    void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
     bool eventFilter(QObject *obj, QEvent *event);
 
     Qt::WindowFlags m_flags;

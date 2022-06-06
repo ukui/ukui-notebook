@@ -1,3 +1,15 @@
+ukui-notebook (3.1.2-0k0) v101; urgency=medium
+
+  * Bug:  
+        #114596 【便签UI走查】ui细节优化
+        #101214 【sp2 UI走查】便签本ui问题
+        #114593 【便签UI走查】新建窗口时菜单栏隐藏
+  * 任务: 无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Mon, 06 Jun 2022 09:21:28 +0800
+
 ukui-notebook (3.1.1-1) v101; urgency=medium
   
   * Bug:

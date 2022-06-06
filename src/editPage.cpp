@@ -75,28 +75,20 @@ void EditPage::paintEvent(QPaintEvent *event)
     p.fillPath(rectPath, palette().color(QPalette::Base));
 }
 
-void EditPage::enterEvent(QEvent *event)
-{
-    Q_UNUSED(event);
-    m_noteHead->hide();
-    m_noteHeadMenu->show();
-}
-
-void EditPage::leaveEvent(QEvent *event)
-{
-    Q_UNUSED(event);
-    if(!m_noteHeadMenu->ui->pushButtonMenu->isActiveWindow() && !m_noteHeadMenu->ui->pushButtonPalette->isActiveWindow())
-    {
-        m_noteHead->show();
-        m_noteHeadMenu->hide();
-    }
-}
-
 bool EditPage::eventFilter(QObject *obj,QEvent *event)
 {
-
   if(obj == this)
   {
+      if (event->type() == QEvent::WindowActivate) {
+          qDebug() << "WindowActivate";
+          m_noteHead->hide();
+            m_noteHeadMenu->show();
+      }
+      if (event->type() == QEvent::WindowDeactivate) {
+           qDebug() << "WindowDeactivate";
+          m_noteHead->show();
+            m_noteHeadMenu->hide();
+      }
       if(event->type() == QEvent::Close)
       {
 //          if (ui->textEdit->document()->isEmpty()) {
@@ -164,10 +156,10 @@ void EditPage::initSetup()
 
 void EditPage::btnSetup()
 {
-    ui->unorderedBtn->setIcon(QIcon::fromTheme("view-list.symbolic"));
+    ui->unorderedBtn->setIcon(QIcon::fromTheme("view-list-symbolic"));
     ui->strikeOutBtn->setIcon(QIcon::fromTheme("format-text-strikethrough-symbolic"));
     ui->orderedBtn->setIcon(QIcon::fromTheme("ukui-view-list-numbe-symbolic"));
-    ui->insertBtn->setIcon(QIcon::fromTheme("view-list-images.symbolic"));
+    ui->insertBtn->setIcon(QIcon::fromTheme("folder-pictures-symbolic"));
     ui->underlineBtn->setIcon(QIcon::fromTheme("format-text-underline-symbolic"));
     ui->boldBtn->setIcon(QIcon::fromTheme("format-text-bold-symbolic"));
     ui->italicBtn->setIcon(QIcon::fromTheme("format-text-italic-symbolic"));
@@ -192,72 +184,34 @@ void EditPage::btnSetup()
     ui->insertBtn->setToolTip(tr("InsertPicture"));
 
 
-    // 取消按钮默认灰色背景
-    QPalette palette = ui->boldBtn->palette();
-    QColor ColorPlaceholderText(255, 255, 255, 0);
-    QBrush brush;
-    brush.setColor(ColorPlaceholderText);
-    palette.setBrush(QPalette::Button, brush);
-    palette.setBrush(QPalette::ButtonText, brush);
-    ui->boldBtn->setPalette(palette);
-    ui->italicBtn->setPalette(palette);
-    ui->underlineBtn->setPalette(palette);
-    ui->strikeOutBtn->setPalette(palette);
-    ui->unorderedBtn->setPalette(palette);
-    ui->orderedBtn->setPalette(palette);
-    ui->insertBtn->setPalette(palette);
-
-    QPalette palette2 = ui->fontColorBtn->palette();
-    palette2.setColor(QPalette::Highlight, Qt::transparent); /* 取消按钮高亮 */
-    ui->fontColorBtn->setPalette(palette2);
-    ui->fontColorBtn->setAttribute(Qt::WA_TransparentForMouseEvents);
-    ui->boldBtn->setCheckable(true);
-    ui->italicBtn->setCheckable(true);
-    ui->underlineBtn->setCheckable(true);
-    ui->strikeOutBtn->setCheckable(true);
-    ui->unorderedBtn->setCheckable(true);
-    ui->orderedBtn->setCheckable(true);
-    ui->fontSizeBtn->setCheckable(false);
-    ui->insertBtn->setCheckable(false);
-
-//变更btn的属性，hover态，蓝色变为灰色
-#if 1
     ui->boldBtn->setProperty("isWindowButton", 0x1);
     ui->boldBtn->setProperty("useIconHighlightEffect", 0x2);
+    ui->boldBtn->setFlat(true);
 
     ui->italicBtn->setProperty("isWindowButton", 0x1);
     ui->italicBtn->setProperty("useIconHighlightEffect", 0x2);
+    ui->italicBtn->setFlat(true);
 
     ui->underlineBtn->setProperty("isWindowButton", 0x1);
     ui->underlineBtn->setProperty("useIconHighlightEffect", 0x2);
+    ui->underlineBtn->setFlat(true);
 
     ui->strikeOutBtn->setProperty("isWindowButton", 0x1);
     ui->strikeOutBtn->setProperty("useIconHighlightEffect", 0x2);
+    ui->strikeOutBtn->setFlat(true);
 
     ui->unorderedBtn->setProperty("isWindowButton", 0x1);
     ui->unorderedBtn->setProperty("useIconHighlightEffect", 0x2);
+    ui->unorderedBtn->setFlat(true);
 
     ui->orderedBtn->setProperty("isWindowButton", 0x1);
     ui->orderedBtn->setProperty("useIconHighlightEffect", 0x2);
+    ui->orderedBtn->setFlat(true);
 
     ui->insertBtn->setProperty("isWindowButton", 0x1);
     ui->insertBtn->setProperty("useIconHighlightEffect", 0x2);
-#else
-    ui->boldBtn->setProperty("useIconHighlightEffect", true);
-    ui->boldBtn->setProperty("iconHighlightEffectMode", 1);
-    ui->italicBtn->setProperty("useIconHighlightEffect", true);
-    ui->italicBtn->setProperty("iconHighlightEffectMode", 1);
-    ui->underlineBtn->setProperty("useIconHighlightEffect", true);
-    ui->underlineBtn->setProperty("iconHighlightEffectMode", 1);
-    ui->strikeOutBtn->setProperty("useIconHighlightEffect", true);
-    ui->strikeOutBtn->setProperty("iconHighlightEffectMode", 1);
-    ui->unorderedBtn->setProperty("useIconHighlightEffect", true);
-    ui->unorderedBtn->setProperty("iconHighlightEffectMode", 1);
-    ui->orderedBtn->setProperty("useIconHighlightEffect", true);
-    ui->orderedBtn->setProperty("iconHighlightEffectMode", 1);
-    ui->insertBtn->setProperty("useIconHighlightEffect", true);
-    ui->insertBtn->setProperty("iconHighlightEffectMode", 1);
-#endif
+    ui->insertBtn->setFlat(true);
+
 }
 
 void EditPage::slotsSetup()

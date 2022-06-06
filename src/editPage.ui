@@ -305,15 +305,15 @@
       <property name="geometry">
        <rect>
         <x>105</x>
-        <y>5</y>
+        <y>10</y>
         <width>1</width>
-        <height>25</height>
+        <height>15</height>
        </rect>
       </property>
       <property name="maximumSize">
        <size>
         <width>1</width>
-        <height>25</height>
+        <height>15</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -381,6 +381,9 @@
       <property name="text">
        <string/>
       </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QPushButton" name="styleBtn">
       <property name="geometry">
@@ -414,15 +417,15 @@
       <property name="geometry">
        <rect>
         <x>259</x>
-        <y>5</y>
+        <y>10</y>
         <width>1</width>
-        <height>25</height>
+        <height>15</height>
        </rect>
       </property>
       <property name="maximumSize">
        <size>
         <width>1</width>
-        <height>25</height>
+        <height>15</height>
        </size>
       </property>
       <property name="styleSheet">
