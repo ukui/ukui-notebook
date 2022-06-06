@@ -25,9 +25,10 @@
 #include <X11/Xlib.h>
 //#include <KWindowEffects>
 
+#define KYDEBUG
 //SDK统一格式日志
 #ifdef KYDEBUG
-#include <ukui-log4qt.h>
+#include <kysdk/applications/kabase/log.hpp>
 #endif
 
 /*!
@@ -106,7 +107,8 @@ int main(int argc, char *argv[])
 
     //SDK统一格式日志
     #ifdef KYDEBUG
-       initUkuiLog4qt("ukui-notebook");
+        qInstallMessageHandler(kdk::kabase::Log::logOutput);
+
     #endif
 
     if (getScreenWidth() > 2560) {
