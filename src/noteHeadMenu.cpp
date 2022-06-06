@@ -66,7 +66,7 @@ void noteHeadMenu::slotsInit()
 
 void noteHeadMenu::btnInit()
 {
-    ui->pushButtonPalette->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme(":/image/1x/note_color.png").pixmap(16,16), ui->pushButtonPalette));
+    ui->pushButtonPalette->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme("ukui-note-color-symbolic").pixmap(16,16), ui->pushButtonPalette));
     ui->pushButtonExit->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme("window-close-symbolic").pixmap(16,16), ui->pushButtonExit));
     ui->pushButtonMenu->setIcon(drawSymbolicColoredPixmap(QIcon::fromTheme("open-menu-symbolic").pixmap(16,16), ui->pushButtonMenu));
 

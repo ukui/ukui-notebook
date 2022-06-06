@@ -23,9 +23,12 @@
 #include "xatom-helper.h"
 
 #include <limits.h>
+
 #include <QX11Info>
+#include <X11/Xlib.h>
 #include <X11/X.h>
 #include <X11/Xatom.h>
+#include <NETWM>
 
 static XAtomHelper *global_instance = nullptr;
 

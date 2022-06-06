@@ -571,7 +571,7 @@ void Widget::migrateNote(QString notePath)
         QString contentText
             = notesIni.value(noteName + QStringLiteral("/content"), "Error").toString();
         newNote->setContent(contentText);
-        QString firstLine = getFirstLine(contentText);
+        QString firstLine = contentText;
         newNote->setFullTitle(firstLine);
 
         noteList.append(newNote);
@@ -1046,6 +1046,8 @@ void Widget::createNewNote()
         m_isTextCpNew = false;
     }
     m_notebook->show();
+    m_notebook->m_noteHead->hide();
+    m_notebook->m_noteHeadMenu->show();
 }
 
 /*!

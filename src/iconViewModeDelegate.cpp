@@ -165,7 +165,7 @@ void iconViewModeDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     painter->setOpacity(1);
     paintBackground(painter, opt, index);
     painter->setOpacity(1);
-    paintLabels(painter, option, index);
+    paintLabels(painter, option, opt, index);
 }
 
 QSize iconViewModeDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -237,7 +237,7 @@ void iconViewModeDelegate::paintBackground(QPainter *painter, const QStyleOption
     }
 }
 
-void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionViewItem& option,const QStyleOptionViewItem &opt, const QModelIndex& index) const
 {
     const int leftOffsetX = 20;        // 标题左边距
     const int topOffsetY = 18;         // 标题上方的空格
@@ -254,8 +254,7 @@ void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     m_dateFont.setPointSizeF(g_currentFont.pointSizeF()/15 * 13);
 
 
-    QStyleOptionViewItem opt = option;
-    QString title{index.data(NoteModel::NoteFullTitle).toString()};
+    QString title{index.data(NoteModel::NoteMdContent).toString()};
 
     QFont titleFont = (option.state & QStyle::State_Selected) == QStyle::State_Selected ? m_titleSelectedFont : m_titleFont;
     QFontMetrics fmTitle(titleFont);
@@ -264,28 +263,35 @@ void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     QString date = parseDateTime(index.data(NoteModel::NoteLastModificationDateTime).toDateTime());
     QFontMetrics fmDate(m_dateFont);
     QRect fmRectDate = fmDate.boundingRect(date);
+    painter->setBrush(QColor(255,0,0,255));
 
+    painter->setPen(QColor(0,0,0));
+    painter->setBrush(QColor(255,255,255,0));
+    // painter->drawRect(option.rect);
     double rowPosX = option.rect.x();
     double rowPosY = option.rect.y();
     double rowWidth = option.rect.width();
+    // qDebug() << rowPosX << " " << rowPosY << " " << rowWidth;
 
-    double titleRectPosX = rowPosX + leftOffsetX;
-    double titleRectPosY = rowPosY;
-    double titleRectWidth = rowWidth - 2.0 * leftOffsetX;
-    double titleRectHeight = fmRectTitle.height() + topOffsetY;
-    double dateRectPosX = rowPosX + (rowWidth / 2 - fmRectDate.width() / 2);
-    double dateRectPosY = rowPosY + 26 + topOffsetY;
-    double dateRectWidth = rowWidth;
-    double dateRectHeight = 18 + spaceY;
-
+    double titleRectPosX = opt.rect.x() + leftOffsetX;
+    double titleRectPosY = opt.rect.y() + topOffsetY;
+    double titleRectWidth = opt.rect.width() - 2 * leftOffsetX;
+    double titleRectHeight = opt.rect.height() - 2 * topOffsetY;
+    double dateRectPosX = option.rect.x();
+    double dateRectPosY = opt.rect.y() + opt.rect.height();
+    double dateRectWidth = opt.rect.width();
+    double dateRectHeight = (option.rect.height() - opt.rect.height()) * 0.8;
+    // painter->drawRect(titleRectPosX,titleRectPosY,titleRectWidth,titleRectHeight);
+    // painter->drawRect(dateRectPosX,dateRectPosY,dateRectWidth,dateRectHeight);
     double rowRate = m_timeLine->currentFrame()/(m_maxFrame * 1.0);
     double currRowHeight = m_rowHeight * rowRate;
 
-    auto drawStr = [painter](double posX, double posY, double width, double height, QColor color, QFont font, QString str){
+    auto drawStr = [painter](double posX, double posY, double width, double height, QColor color, QFont font, QString str, int flags){
         QRectF rect(posX, posY, width, height);
         painter->setPen(color);
+        painter->setBrush(QColor(255,0,0,100));
         painter->setFont(font);
-        painter->drawText(rect, Qt::AlignBottom, str);
+        painter->drawText(rect, flags, str);
     };
 
     // 设置标题和日期字符串的边界矩形
@@ -320,8 +326,8 @@ void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     // 超出字符串转换为...
     title = fmTitle.elidedText(title, Qt::ElideRight, int(titleRectWidth));
 
-    drawStr(titleRectPosX, titleRectPosY, titleRectWidth, titleRectHeight, opt.palette.color(QPalette::Text), titleFont, title);
-    drawStr(dateRectPosX, dateRectPosY, dateRectWidth, dateRectHeight, opt.palette.color(QPalette::Text), m_dateFont, date);
+    drawStr(titleRectPosX, titleRectPosY, titleRectWidth, titleRectHeight, opt.palette.color(QPalette::Text), titleFont, title, Qt::AlignLeft);
+    drawStr(dateRectPosX, dateRectPosY, dateRectWidth, dateRectHeight, opt.palette.color(QPalette::Text), m_dateFont, date, Qt::AlignCenter);
 }
 
 void iconViewModeDelegate::paintSeparator(QPainter*painter, const QStyleOptionViewItem&option, const QModelIndex&index) const

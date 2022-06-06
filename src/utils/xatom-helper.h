@@ -24,7 +24,13 @@
 #define XATOMHELPER_H
 
 #include <QObject>
-#include <X11/Xlib.h>
+
+#include <NETWM>
+
+#  ifndef _XTYPEDEF_ATOM
+#    define _XTYPEDEF_ATOM
+typedef unsigned long Atom;		/* Also in Xdefs.h */
+#  endif
 
 struct UnityCorners {
     ulong topLeft = 0;
@@ -75,15 +81,15 @@ class Decoration;
 
 class XAtomHelper : public QObject
 {
-    friend class UKUI::Decoration;
+    // friend class UKUI::Decoration;
     Q_OBJECT
 public:
     static XAtomHelper *getInstance();
 
     static bool isFrameLessWindow(int winId);
 
-    bool isWindowDecorateBorderOnly(int winId);
-    bool isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint);
+    static bool isWindowDecorateBorderOnly(int winId);
+    static bool isWindowMotifHintDecorateBorderOnly(const MotifWmHints &hint);
     bool isUKUICsdSupported();
     bool isUKUIDecorationWindow(int winId);
 
@@ -101,9 +107,9 @@ private:
     Atom registerUKUICsdNetWmSupportAtom();
     void unregisterUKUICsdNetWmSupportAtom();
 
-    Atom m_motifWMHintsAtom = None;
-    Atom m_unityBorderRadiusAtom = None;
-    Atom m_ukuiDecorationAtion = None;
+    Atom m_motifWMHintsAtom;
+    Atom m_unityBorderRadiusAtom;
+    Atom m_ukuiDecorationAtion;
 };
 
 #endif // XATOMHELPER_H
