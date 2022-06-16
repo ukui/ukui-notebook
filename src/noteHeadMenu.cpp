@@ -141,12 +141,14 @@ void noteHeadMenu::btnInit()
     ui->pushButtonNew->setToolTip(tr("Create New Note"));
     ui->pushButtonExit->setToolTip(tr("Close"));
     ui->pushButtonMenu->setToolTip(tr("Menu"));
+    ui->pushButtonMenu->setFlat(true);
 
     ui->pushButtonPalette->setProperty("isOptionButton", true);
     ui->pushButtonPalette->setIconSize(QSize(16,16));
     ui->pushButtonPalette->setProperty("useIconHighlightEffect", true);
     ui->pushButtonPalette->setProperty("iconHighlightEffectMode", 1);
     ui->pushButtonPalette->setToolTip(tr("Palette"));
+    ui->pushButtonPalette->setFlat(true);
 
     ui->pushButtonExit->setFocusPolicy(Qt::NoFocus);
     ui->pushButtonExit->setIconSize(QSize(16,16));
