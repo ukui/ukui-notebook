@@ -25,6 +25,9 @@ fontButton::fontButton(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->label->setAlignment(Qt::AlignHCenter);
+    QFont ft;
+    ft.setPointSize(12);
+    ui->label->setFont(ft);
 }
 
 fontButton::~fontButton()
