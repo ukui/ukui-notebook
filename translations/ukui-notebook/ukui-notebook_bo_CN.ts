@@ -184,7 +184,7 @@
 <context>
     <name>SetFontSize</name>
     <message>
-        <location filename="../../src/setFontSizePage.ui" line="14"/>
+        <location filename="../../src/setFontSizePage.ui" line="26"/>
         <source>Form</source>
         <translation>རྣམ་པ།</translation>
     </message>
@@ -327,12 +327,17 @@
 <context>
     <name>iconViewModeDelegate</name>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="354"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="328"/>
+        <source>Welcome to use Notes.</source>
+        <translation>ཟིན་བྲིས་སྤྱོད་རྒྱུར་དགའ་བསུ་ཞུ་རྒྱུ་ཡིན།</translation>
+    </message>
+    <message>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="357"/>
         <source>Today  </source>
         <translation>དེ་རིང་།  </translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="363"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="366"/>
         <source>Yesterday  </source>
         <translation>ཁ་སང་།  </translation>
     </message>
@@ -433,7 +438,7 @@
         <translation>ཟས་ཐོ།</translation>
     </message>
     <message>
-        <location filename="../../src/noteHeadMenu.cpp" line="149"/>
+        <location filename="../../src/noteHeadMenu.cpp" line="150"/>
         <source>Palette</source>
         <translation>ཚོན་མདངས་བཀྲ་བ།</translation>
     </message>

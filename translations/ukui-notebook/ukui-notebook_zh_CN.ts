@@ -350,7 +350,7 @@
 <context>
     <name>SetFontSize</name>
     <message>
-        <location filename="../../src/setFontSizePage.ui" line="14"/>
+        <location filename="../../src/setFontSizePage.ui" line="26"/>
         <source>Form</source>
         <translation></translation>
     </message>
@@ -579,13 +579,18 @@
         <translation type="vanished">昨天  </translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="354"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="328"/>
+        <source>Welcome to use Notes.</source>
+        <translation>欢迎使用便签贴，双击可编辑便签内容。</translation>
+    </message>
+    <message>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="357"/>
         <source>Today  </source>
         <translatorcomment>今天  </translatorcomment>
         <translation>今天  </translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="363"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="366"/>
         <source>Yesterday  </source>
         <translatorcomment>昨天  </translatorcomment>
         <translation>昨天  </translation>
@@ -709,7 +714,7 @@
         <translation>菜单</translation>
     </message>
     <message>
-        <location filename="../../src/noteHeadMenu.cpp" line="149"/>
+        <location filename="../../src/noteHeadMenu.cpp" line="150"/>
         <source>Palette</source>
         <translation>调色板</translation>
     </message>

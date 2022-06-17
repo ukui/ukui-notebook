@@ -179,7 +179,7 @@
 <context>
     <name>SetFontSize</name>
     <message>
-        <location filename="../../src/setFontSizePage.ui" line="14"/>
+        <location filename="../../src/setFontSizePage.ui" line="26"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
@@ -314,12 +314,17 @@
 <context>
     <name>iconViewModeDelegate</name>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="354"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="328"/>
+        <source>Welcome to use Notes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="357"/>
         <source>Today  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="363"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="366"/>
         <source>Yesterday  </source>
         <translation type="unfinished"></translation>
     </message>
@@ -416,7 +421,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/noteHeadMenu.cpp" line="149"/>
+        <location filename="../../src/noteHeadMenu.cpp" line="150"/>
         <source>Palette</source>
         <translation type="unfinished"></translation>
     </message>
