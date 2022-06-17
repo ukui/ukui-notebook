@@ -1,3 +1,16 @@
+ukui-notebook (3.2.0-0k1) v101; urgency=medium
+
+  * Bug:  
+        # 123638 【UKUI 3.1.4 走查】【设计】【便签本】切换字号与字体颜色不居中
+        # 123640 【UKUI 3.1.4 走查】【设计】【便签本】窗口三态有问题
+        # 123959 【UKUI 3.1.4 走查】【设计】【便签】便签列表两种视图不一致
+        # 118896 【藏文】【便签本】藏文系统下便签本显示为英文界面
+  * 任务: 无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Thu, 16 Jun 2022 16:49:14 +0800
+
 ukui-notebook (3.2.0-0k0) v101; urgency=medium
 
   * Bug:  
