@@ -68,12 +68,12 @@ void SetFontSize::initSetup()
     {
         int n = i-10;
         list_aItem[n] =new QListWidgetItem;
-        list_aItem[n]->setSizeHint(QSize(30,27));
+        list_aItem[n]->setSizeHint(QSize(15,27));
 
         ui->listWidget->addItem(list_aItem[n]);
 
         list_page[n] = new fontButton(this);
-        list_page[n]->resize(QSize(30,23));
+        list_page[n]->resize(QSize(15,23));
 
         ui->listWidget->setItemWidget(list_aItem[n],list_page[n]);
         list_page[n]->ui->label->setText(QString::number(i));

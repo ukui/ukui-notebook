@@ -324,6 +324,9 @@ void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     }
     // 绘图标题和日期
     // 超出字符串转换为...
+    if (title.isEmpty()) {
+        title = tr("Welcome to use Notes.");
+    }
     title = fmTitle.elidedText(title, Qt::ElideRight, int(titleRectWidth));
 
     drawStr(titleRectPosX, titleRectPosY, titleRectWidth, titleRectHeight, opt.palette.color(QPalette::Text), titleFont, title, Qt::AlignLeft);
