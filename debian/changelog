@@ -1,3 +1,10 @@
+ukui-notebook (3.1.1-2) UNRELEASED; urgency=medium
+
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+ -- Debian Janitor <janitor@jelmer.uk>  Sun, 24 Apr 2022 09:14:25 -0000
+
 ukui-notebook (3.1.1-1) unstable; urgency=medium
 
   * Initial release. (Closes: 1005182)
