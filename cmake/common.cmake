@@ -1,0 +1,50 @@
+function(target_link_kysdk_libraries prj_name)
+    find_package(PkgConfig REQUIRED)
+
+    pkg_check_modules(KYSDKQTWIDGETS_PKG kysdk-qtwidgets)
+    target_include_directories(${prj_name} PRIVATE ${KYSDKQTWIDGETS_PKG_INCLUDE_DIRS})
+    target_link_directories(${prj_name} PRIVATE ${KYSDKQTWIDGETS_PKG_LIBRARY_DIRS})
+    target_link_libraries(${prj_name} Qt5::Widgets ${KYSDKQTWIDGETS_PKG_LIBRARIES})
+
+    pkg_check_modules(KYSDKDIAGNOSTICS_PKG kysdk-diagnostics)
+    target_include_directories(${prj_name} PRIVATE ${KYSDKDIAGNOSTICS_PKG_INCLUDE_DIRS})
+    target_link_directories(${prj_name} PRIVATE ${KYSDKDIAGNOSTICS_PKG_LIBRARY_DIRS})
+    target_link_libraries(${prj_name}  ${KYSDKDIAGNOSTICS_PKG_LIBRARIES})
+
+    pkg_check_modules(KYSDKLOG_PKG kysdk-log)
+    target_include_directories(${prj_name} PRIVATE ${KYSDKLOG_PKG_INCLUDE_DIRS})
+    target_link_directories(${prj_name} PRIVATE ${KYSDKLOG_PKG_LIBRARY_DIRS})
+    target_link_libraries(${prj_name}  ${KYSDKLOG_PKG_LIBRARIES})
+
+    pkg_check_modules(KYSDKUTILS_PKG kysdk-utils)
+    target_include_directories(${prj_name} PRIVATE ${KYSDKUTILS_PKG_INCLUDE_DIRS})
+    target_link_directories(${prj_name} PRIVATE ${KYSDKUTILS_PKG_LIBRARY_DIRS})
+    target_link_libraries(${prj_name}  ${KYSDKUTILS_PKG_LIBRARIES})
+
+    pkg_check_modules(KYSDKCONFIG_PKG kysdk-config)
+    target_include_directories(${prj_name} PRIVATE ${KYSDKCONFIG_PKG_INCLUDE_DIRS})
+    target_link_directories(${prj_name} PRIVATE ${KYSDKCONFIG_PKG_LIBRARY_DIRS})
+    target_link_libraries(${prj_name}  ${KYSDKCONFIG_PKG_LIBRARIES})
+endfunction()
+
+function(target_link_glib_libraries prj_name)
+    find_package(PkgConfig REQUIRED)
+    pkg_search_module(GLIB REQUIRED glib-2.0)
+    include_directories(${GLIB_INCLUDE_DIRS})
+    target_link_libraries(${prj_name} "-lglib-2.0")
+endfunction()
+
+function(target_link_qgsettings_libraries prj_name)
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(QGSETTINGS REQUIRED IMPORTED_TARGET gsettings-qt)
+    target_link_libraries(${prj_name} PkgConfig::QGSETTINGS)
+endfunction()
+
+function(target_link_X11_libraries prj_name)
+    target_link_libraries(${prj_name} -lX11)
+endfunction()
+
+function(target_link_KWindowSystem_libraries prj_name)
+    find_package(KF5WindowSystem REQUIRED)
+    target_link_libraries(${prj_name} KF5::WindowSystem)
+endfunction()

@@ -13,9 +13,11 @@ Build-Depends: debhelper-compat (= 12),
 	           libkf5windowsystem-dev,
 	           libqt5x11extras5-dev,
 	           pkg-config,
-	           libukui-log4qt-dev,
-               libkysdk-base-dev,
-               libkysdk-kabase-dev
+	           libkysdk-qtwidgets-dev,
+               libkysdk-log-dev,
+               libkysdk-diagnostics-dev,
+               libkysdk-config-dev,
+               libkysdk-utils-dev
 Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Homepage: https://github.com/ukui/ukui-sidebar.git
