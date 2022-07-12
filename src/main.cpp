@@ -25,63 +25,7 @@
 #include <X11/Xlib.h>
 //#include <KWindowEffects>
 
-#define KYDEBUG
-//SDK统一格式日志
-#ifdef KYDEBUG
-#include <kysdk/applications/kabase/log.hpp>
-#endif
-
-/*!
- * \brief myMessageOutput
- * 日志打印输出
- */
-void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    // 加锁
-    static QMutex mutex;
-    mutex.lock();
-
-    QByteArray localMsg = msg.toLocal8Bit();
-
-    QString strMsg("");
-    switch(type)
-    {
-    case QtDebugMsg:
-        strMsg = QString("Debug    ");
-        break;
-    case QtWarningMsg:
-        strMsg = QString("Warning    ");
-        break;
-    case QtCriticalMsg:
-        strMsg = QString("Critical    ");
-        break;
-    case QtFatalMsg:
-        strMsg = QString("Fatal    ");
-        break;
-    case QtInfoMsg:
-        strMsg = QString("Info    ");
-        break;
-    }
-
-    // 设置输出信息格式
-    QString strDateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ddd");
-    //QString strMessage = QString("[Message]: %1 [File]: %2  [Line]: %3  [Function]: %4  [DateTime]: %5")
-    //        .arg(localMsg.constData()).arg(context.file).arg(context.line).arg(context.function).arg(strDateTime);
-    QString strMessage = QString("[DateTime]: %1  [Message]: %2  [Line]: %3  [Function]: %4")
-            .arg(strDateTime).arg(localMsg.constData()).arg(context.line).arg(context.function);
-
-    // 输出信息至文件中（读写、追加形式）
-    QString url_filepath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.config/kylin-note/output.log";
-    QFile file(url_filepath);
-    file.open(QIODevice::ReadWrite | QIODevice::Append);
-    QTextStream stream(&file);
-    stream << strMsg << strMessage << "\r\n";
-    file.flush();
-    file.close();
-
-    // 解锁
-    mutex.unlock();
-}
+#include "log.h"
 
 int getScreenWidth() {
     Display *disp = XOpenDisplay(NULL);
@@ -102,15 +46,12 @@ int getScreenWidth() {
  */
 int main(int argc, char *argv[])
 {
-    //自定义消息处理
-    //qInstallMessageHandler(myMessageOutput);
-
-    //SDK统一格式日志
-    #ifdef KYDEBUG
-        qInstallMessageHandler(kdk::kabase::Log::logOutput);
-
-    #endif
-
+#ifndef TEST_DEBUG
+    qInstallMessageHandler(logOutput);
+#else
+    qInstallMessageHandler(myMessageOutput);
+#endif
+    InformationCollector::getInstance().addMessage("便签应用启动!");
     if (getScreenWidth() > 2560) {
         #if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
                 QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -122,7 +63,7 @@ int main(int argc, char *argv[])
 
     a.setWindowIcon(QIcon::fromTheme("kylin-notebook"));
     a.setApplicationVersion ("1.0.0");
-
+    
     QCommandLineParser parser;
     Utils::setCLIName(parser);
     /* 处理命令行参数。
