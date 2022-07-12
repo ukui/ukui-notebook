@@ -62,21 +62,19 @@ Widget::Widget(QWidget *parent) :
     m_isTextCpNew(false),
     m_isThemeChanged(false)   // ukui-default
 {
-    QString qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translations
-    QString locale = QLocale::system().name();
-    QTranslator *trans_global = new QTranslator;
-    QTranslator *trans_menu = new QTranslator;
-    if (locale == "zh_CN") {
-        if(!trans_global->load(QLocale(), "ukui-notebook", "_", QLatin1String("/usr/share/ukui-notebook")))
-            qDebug() << "Load translations file" <<QLocale() << "failed!";
-        else
-            QApplication::installTranslator(trans_global);
+    QString qtTranslationsPath;
+    qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translationsQString locale = QLocale::system().name();
+    QTranslator trans_global, trans_menu;
+    if(!trans_global->load("ukui-notebook_" + locale + ".qm", QLatin1String("/usr/share/ukui-notebook")))
+        qDebug() << "Load translations file" <<QLocale() << "failed!";
+    else
+        QApplication::installTranslator(&trans_global);
 
-        if(!trans_menu->load(QLocale(), "qt", "_", qtTranslationsPath))
-            qDebug() << "Load translations file" <<QLocale() << "failed!";
-        else
-            QApplication::installTranslator(trans_menu);
-    }
+    if(!trans_menu.load("qt_" + locale + ".qm", qtTranslationsPath))
+        qDebug() << "Load translations file" <<QLocale() << "failed!";
+    else
+        QApplication::installTranslator(&trans_menu);
+
     ui->setupUi(this);
     m_noteView = static_cast<NoteView *>(ui->listView);
     setupDatabases();
