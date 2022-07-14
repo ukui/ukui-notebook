@@ -1,11 +1,29 @@
-ukui-notebook (3.2.0-0k2) v101; urgency=medium
+ukui-notebook (3.2.0-0k4) v101; urgency=medium
+
+  * BUG:无
+  * 需求号: 无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+  * 其他：debuild
+
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Tue, 12 Jul 2022 15:28:33 +0800
+
+ukui-notebook (3.2.0-0k3) v101; urgency=medium
 
   * BUG #127608 【便签本】便签本模块未适配藏语
+  * BUG #118896 【藏文】【便签本】藏文系统下便签本显示为英文界面
+  * 需求号: 无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Tue, 12 Jul 2022 15:28:33 +0800
+
+ukui-notebook (3.2.0-0k2) v101; urgency=medium
+
   * BUG #126047 【大数据平台】【便签贴】便签贴未按需求实现埋点
   * BUG #125344 【大数据平台】【便签贴】【用例364764】删除便签贴没有打印上传数据日志，也没有上传数据到数据平台服务器上
   * BUG #125337 【大数据平台】【便签贴】【用例364762】新建便签贴没有打印上传数据日志，也没有上传数据到数据平台服务器上
   * BUG #123638 【UKUI 3.1.4 走查】【设计】【便签本】切换字号与字体颜色不居中
-  * BUG #118896 【藏文】【便签本】藏文系统下便签本显示为英文界面
   * 需求号: 无
   * 其他改动说明：无
   * 其他改动影响域：无

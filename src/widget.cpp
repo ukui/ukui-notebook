@@ -65,8 +65,8 @@ Widget::Widget(QWidget *parent) :
     QString locale = QLocale::system().name();
     QString qtTranslationsPath;
     qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translationsQString locale = QLocale::system().name();
-    QTranslator trans_global, trans_menu;
-    if(!trans_global.load("ukui-notebook_" + locale + ".qm", QLatin1String("/usr/share/ukui-notebook")))
+    static QTranslator trans_global, trans_menu;
+    if(!trans_global.load("ukui-notebook_" + locale + ".qm", QLatin1String("/usr/share/ukui-notebook/translations")))
         qDebug() << "Load translations file" <<QLocale() << "failed!";
     else
         QApplication::installTranslator(&trans_global);
