@@ -62,10 +62,11 @@ Widget::Widget(QWidget *parent) :
     m_isTextCpNew(false),
     m_isThemeChanged(false)   // ukui-default
 {
+    QString locale = QLocale::system().name();
     QString qtTranslationsPath;
     qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translationsQString locale = QLocale::system().name();
     QTranslator trans_global, trans_menu;
-    if(!trans_global->load("ukui-notebook_" + locale + ".qm", QLatin1String("/usr/share/ukui-notebook")))
+    if(!trans_global.load("ukui-notebook_" + locale + ".qm", QLatin1String("/usr/share/ukui-notebook")))
         qDebug() << "Load translations file" <<QLocale() << "failed!";
     else
         QApplication::installTranslator(&trans_global);
@@ -763,7 +764,7 @@ void Widget::setListFlag(const int &listflag)
  */
 void Widget::initIconMode()
 {
-    InformationCollector::addPoint(InformationCollector::IconMode);
+    InformationCollector::getInstance().addPoint(InformationCollector::IconMode);
     qDebug() << "当前函数 :" << __FUNCTION__ << "当前行号 :" << __LINE__;
     m_noteView->setViewMode(QListView::IconMode);
     m_noteView->setSelectionMode(QListView::ExtendedSelection);
@@ -782,7 +783,7 @@ void Widget::initIconMode()
  */
 void Widget::initListMode()
 {
-    InformationCollector::addPoint(InformationCollector::ListMode);
+    InformationCollector::getInstance().addPoint(InformationCollector::ListMode);
     qDebug() << "当前函数 :" << __FUNCTION__ << "当前行号 :" << __LINE__;
     // 列表模式
     m_noteView->setViewMode(QListView::ListMode);
@@ -1423,7 +1424,7 @@ void Widget::onTextEditTextChanged(int noteId, int i)
  */
 void Widget::onColorChanged(const QColor &color, int noteId)
 {
-    InformationCollector::getInstance().addMessage(QString("set widget color to %1.").arg(color));
+    InformationCollector::getInstance().addMessage(QString("set widget color to %1.").arg(color.name()));
     qDebug() << "receive signal onColorChanged";
     for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
         m_tmpColorIndex = m_proxyModel->index(count, 0);

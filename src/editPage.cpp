@@ -751,7 +751,7 @@ void EditPage::setFontColorSlot(QListWidgetItem *item)
     int num = m_setColorFontPage->ui->listWidget->currentRow();
     QTextCharFormat fmt;
     if (num != 5) {
-        InformationCollector::getInstance().addMessage(QString("set font color to %1.").arg(m_colorNum[num]));
+        InformationCollector::getInstance().addMessage(QString("set font color to %1.").arg(m_colorNum[num].name()));
         m_defaultFontColorChanged = true;
         fmt.setForeground(m_colorNum[num]);
         ui->textEdit->mergeCurrentCharFormat(fmt);

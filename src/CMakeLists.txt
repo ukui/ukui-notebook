@@ -10,6 +10,10 @@ if (TEST_DEBUG)
     add_definitions(-DPROJECT_BINARY_DIR=\"${PROJECT_BINARY_DIR}\")
 endif(TEST_DEBUG)
 
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools X11Extras Network DBus Sql Concurrent REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools X11Extras Network DBus Sql Concurrent REQUIRED)
 
@@ -23,14 +27,16 @@ file(GLOB SRC
     "*.h"
     "utils/*.cpp"
     "utils/*.h"
+    "common/*.cpp"
+    "common/*.h"
 )
 
-file(GLOB file_ui "*.ui")
-QT5_WRAP_UI(ui_FILES ${file_ui} )
+SET(ui_RESOURCE ${PROJECT_SOURCE_DIR}/src.qrc
+                ${PROJECT_SOURCE_DIR}/image.qrc)
 
 add_executable(${PROJECT_NAME}
     ${SRC}
-    ${ui_FILES}
+    ${ui_RESOURCE}
 )
 
 target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::X11Extras Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::DBus Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Concurrent)
@@ -48,4 +54,4 @@ install(TARGETS ${PROJECT_NAME} DESTINATION /usr/bin/)
 file(GLOB TRANS "${PROJECT_SOURCE_DIR}/../translations/${PROJECT_NAME}/*.qm")
 install(FILES ${TRANS} DESTINATION  /usr/share/${PROJECT_NAME}/translations/)
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/../data/${PROJECT_NAME} DESTINATION /usr/share/kylin-user-guide/data/guide/)
-install(FILES ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}.desktop DESTINATION /usr/share/applications/)
+install(FILES ${PROJECT_SOURCE_DIR}/../data/${PROJECT_NAME}.desktop DESTINATION /usr/share/applications/)

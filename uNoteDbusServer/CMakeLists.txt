@@ -1,5 +1,11 @@
 project(ukui-notebook-server)
 
+execute_process(COMMAND qdbusxml2cpp ${PROJECT_SOURCE_DIR}/../data/org.ukui.note.xml -a ${PROJECT_SOURCE_DIR}/note_adaptor)
+execute_process(COMMAND qdbusxml2cpp ${PROJECT_SOURCE_DIR}/../data/org.ukui.note.xml -p ${PROJECT_SOURCE_DIR}/note_interface)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(KYSDKQTWIDGETS_PKG kysdk-qtwidgets)
 pkg_check_modules(KYSDKKABASE_PKG kysdk-kabase)
@@ -16,13 +22,12 @@ pkg_check_modules(QGSETTINGS REQUIRED IMPORTED_TARGET gsettings-qt)
 include_directories(${PROJECT_SOURCE_DIR})
 
 file(GLOB SRC 
-    "*.cpp"
-    "*.h"
+    "${PROJECT_SOURCE_DIR}/*.cpp"
+    "${PROJECT_SOURCE_DIR}/*.h"
 )
 
 add_executable(${PROJECT_NAME}
     ${SRC}
-    ${ui_FILES}
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${KYSDKQTWIDGETS_PKG_INCLUDE_DIRS})

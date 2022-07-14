@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>about.ui</file>
+        <file>editPage.ui</file>
+        <file>emptyNotes.ui</file>
+        <file>fontButton.ui</file>
+        <file>noteExitWindow.ui</file>
+        <file>noteHeadMenu.ui</file>
+        <file>noteHead.ui</file>
+        <file>paletteButton.ui</file>
+        <file>paletteWidget.ui</file>
+        <file>selectColorPage.ui</file>
+        <file>setFontColorPage.ui</file>
+        <file>setFontSizePage.ui</file>
+        <file>widget.ui</file>
+    </qresource>
+</RCC>

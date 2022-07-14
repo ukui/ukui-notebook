@@ -26,6 +26,7 @@
 //#include <KWindowEffects>
 
 #include "log.h"
+#include "information_collector.h"
 
 int getScreenWidth() {
     Display *disp = XOpenDisplay(NULL);

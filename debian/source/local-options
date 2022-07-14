@@ -8,3 +8,5 @@ tar-ignore =  .gitignore
 tar-ignore =  *.user*
 tar-ignore =  .qt_for_python
 tar-ignore =  .qmake.stash
+tar-ignore = uNoteDbusServer/note_adaptor.*
+tar-ignore = uNoteDbusServer/note_interface.*
