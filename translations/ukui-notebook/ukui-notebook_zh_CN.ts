@@ -84,92 +84,92 @@
 <context>
     <name>EditPage</name>
     <message>
-        <location filename="../../src/editPage.cpp" line="106"/>
+        <location filename="../../src/editPage.cpp" line="107"/>
         <source>Notes</source>
         <translation>便签贴</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="175"/>
+        <location filename="../../src/editPage.cpp" line="176"/>
         <source>Bold</source>
         <translation>加粗</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="176"/>
+        <location filename="../../src/editPage.cpp" line="177"/>
         <source>Italic</source>
         <translation>斜体</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="177"/>
+        <location filename="../../src/editPage.cpp" line="178"/>
         <source>Underline</source>
         <translation>下划线</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="178"/>
+        <location filename="../../src/editPage.cpp" line="179"/>
         <source>Strikeout</source>
         <translation>删除线</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="179"/>
+        <location filename="../../src/editPage.cpp" line="180"/>
         <source>Unordered</source>
         <translation>无序列表</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="180"/>
+        <location filename="../../src/editPage.cpp" line="181"/>
         <source>Ordered</source>
         <translation>有序列表</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="182"/>
+        <location filename="../../src/editPage.cpp" line="183"/>
         <source>Font Size</source>
         <translation>字号</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="183"/>
+        <location filename="../../src/editPage.cpp" line="184"/>
         <source>Font Color</source>
         <translation>字体颜色</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="184"/>
+        <location filename="../../src/editPage.cpp" line="185"/>
         <source>InsertPicture</source>
         <translation>插入图片</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="548"/>
+        <location filename="../../src/editPage.cpp" line="550"/>
         <source>undo</source>
         <translation>撤销</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="549"/>
+        <location filename="../../src/editPage.cpp" line="551"/>
         <source>redo</source>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="550"/>
+        <location filename="../../src/editPage.cpp" line="552"/>
         <source>cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="551"/>
+        <location filename="../../src/editPage.cpp" line="553"/>
         <source>copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="552"/>
+        <location filename="../../src/editPage.cpp" line="554"/>
         <source>paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="553"/>
+        <location filename="../../src/editPage.cpp" line="555"/>
         <source>copy to newpage</source>
         <translation>将选中区域复制到新便签</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1007"/>
+        <location filename="../../src/editPage.cpp" line="1018"/>
         <source>Select an image</source>
         <translation>请选择图片</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1009"/>
+        <location filename="../../src/editPage.cpp" line="1020"/>
         <source>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; All (*)</source>
         <translation>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; 全部 (*)</translation>
     </message>
@@ -395,7 +395,7 @@
         <translation type="vanished">欢迎使用麒麟便签本。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1210"/>
+        <location filename="../../src/widget.cpp" line="1215"/>
         <source>Search</source>
         <translatorcomment>搜索</translatorcomment>
         <translation>搜索</translation>
@@ -443,15 +443,15 @@
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1131"/>
-        <location filename="../../src/widget.cpp" line="1178"/>
-        <location filename="../../src/widget.cpp" line="1841"/>
+        <location filename="../../src/widget.cpp" line="1136"/>
+        <location filename="../../src/widget.cpp" line="1183"/>
+        <location filename="../../src/widget.cpp" line="1849"/>
         <source>Welcome to use Notes.</source>
         <translatorcomment>欢迎使用便签贴，双击可编辑便签内容。</translatorcomment>
         <translation>欢迎使用便签贴，双击可编辑便签内容。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1843"/>
+        <location filename="../../src/widget.cpp" line="1851"/>
         <source>[picture]</source>
         <translation>[图片]</translation>
     </message>
@@ -725,6 +725,14 @@
         <location filename="../../src/paletteButton.ui" line="14"/>
         <source>Form</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name></name>
+    <message>
+        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
+        <source>Notes</source>
+        <translation>便签贴</translation>
     </message>
 </context>
 </TS>

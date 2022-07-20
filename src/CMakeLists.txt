@@ -17,6 +17,11 @@ set(CMAKE_AUTORCC ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools X11Extras Network DBus Sql Concurrent REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools X11Extras Network DBus Sql Concurrent REQUIRED)
 
+execute_process(COMMAND bash ${PROJECT_SOURCE_DIR}/../sh/update_translations.sh
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+execute_process(COMMAND bash ${PROJECT_SOURCE_DIR}/../sh/apply_translations.sh
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+
 include_directories(${PROJECT_SOURCE_DIR}
                     ${PROJECT_SOURCE_DIR}/common
                     ${PROJECT_SOURCE_DIR}/utils

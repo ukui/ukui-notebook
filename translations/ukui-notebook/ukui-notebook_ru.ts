@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ug">
+<TS version="2.1" language="ru">
 <context>
     <name>About</name>
     <message>
         <location filename="../../src/about.ui" line="26"/>
         <source>Dialog</source>
-        <translation>دىئالوگ</translation>
+        <translation>Диалог</translation>
     </message>
     <message>
         <location filename="../../src/about.cpp" line="47"/>
         <source>About</source>
-        <translation>ھەققىدە</translation>
+        <translation>Около</translation>
     </message>
     <message>
         <location filename="../../src/about.cpp" line="60"/>
         <location filename="../../src/about.cpp" line="78"/>
         <source>Notes</source>
-        <translation>ئىزاھاتلار</translation>
+        <translation>Примечания</translation>
     </message>
     <message>
         <location filename="../../src/about.cpp" line="71"/>
         <source>Version: %1</source>
-        <translation>نەشرى: ٪1</translation>
+        <translation>Версия: %1</translation>
     </message>
     <message>
         <location filename="../../src/about.cpp" line="79"/>
         <source>Notes is a self-developed sidebar application plug-in, which provides a rich interface, convenient operation and stable functions, aiming at a friendly user experience.</source>
-        <translation>ئىزاھات ئۆزى تەتقىق قىلىپ ياسىغان يانبالدىقى ئەپ قىستۇرمىسى بولۇپ، ئۇ مول ئارايۈز، قولايلىق مەشغۇلات ۋە مۇقىم ئىقتىدار بىلەن تەمىنلەيدۇ، دوستانە ئابونتلار تەجرىبىسىنى نىشان قىلىدۇ.</translation>
+        <translation>Notes - это самостоятельно разработанный плагин приложения боковой панели, который обеспечивает богатый интерфейс, удобную работу и стабильные функции, нацеленные на дружественный пользовательский опыт.</translation>
     </message>
     <message>
         <location filename="../../src/about.cpp" line="118"/>
@@ -35,7 +35,7 @@
         <location filename="../../src/about.cpp" line="132"/>
         <location filename="../../src/about.cpp" line="137"/>
         <source>Service &amp; Support: </source>
-        <translation>مۇلازىمەت &gt; قوللاش: </translation>
+        <translation>Сервис и поддержка: </translation>
     </message>
 </context>
 <context>
@@ -43,92 +43,92 @@
     <message>
         <location filename="../../src/editPage.cpp" line="107"/>
         <source>Notes</source>
-        <translation>ئىزاھاتلار</translation>
+        <translation>Примечания</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="176"/>
         <source>Bold</source>
-        <translation>قاپ يۈرەك</translation>
+        <translation>Смелый</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="177"/>
         <source>Italic</source>
-        <translation>ئىتاچى</translation>
+        <translation>Курсив</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="178"/>
         <source>Underline</source>
-        <translation>ئاستى سىزىق</translation>
+        <translation>Подчеркнуть</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="179"/>
         <source>Strikeout</source>
-        <translation>ھۇجۇم قىلىش</translation>
+        <translation>Вычеркивание</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="180"/>
         <source>Unordered</source>
-        <translation>تەشكىللەنمىگەن</translation>
+        <translation>Неупорядоченный</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="181"/>
         <source>Ordered</source>
-        <translation>بۇيرۇتما</translation>
+        <translation>Упорядоченный</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="183"/>
         <source>Font Size</source>
-        <translation>خەت چوڭلۇقى</translation>
+        <translation>Размер шрифта</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="184"/>
         <source>Font Color</source>
-        <translation>خەت نۇسخىسى رەڭگى</translation>
+        <translation>Цвет шрифта</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="185"/>
         <source>InsertPicture</source>
-        <translation>InsertPicture</translation>
+        <translation>ВставкаФотография</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="550"/>
         <source>undo</source>
-        <translation>ئاغدۇر</translation>
+        <translation>отменить</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="551"/>
         <source>redo</source>
-        <translation>redo</translation>
+        <translation>повторить</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="552"/>
         <source>cut</source>
-        <translation>كېسىش</translation>
+        <translation>резать</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="553"/>
         <source>copy</source>
-        <translation>كۆچۈرۈش</translation>
+        <translation>копировать</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="554"/>
         <source>paste</source>
-        <translation>چاپلاش</translation>
+        <translation>паста</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="555"/>
         <source>copy to newpage</source>
-        <translation>يېڭى بەتكە كۆچۈرۈش</translation>
+        <translation>скопировать на новую страницу</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="1018"/>
         <source>Select an image</source>
-        <translation>سۈرەت تاللاش</translation>
+        <translation>Выберите изображение</translation>
     </message>
     <message>
         <location filename="../../src/editPage.cpp" line="1020"/>
         <source>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; All (*)</source>
-        <translation>JPEG (*.jpg);؛ GIF (*.gif);؛ PNG (*.png);؛ BMP (*.bmp);؛ ھەممە (*)</translation>
+        <translation>JPEG (*.jpg);; GIF (*.gif);; ПНГ (*.png);; БМП (*.bmp);; Все (*)</translation>
     </message>
 </context>
 <context>
@@ -136,7 +136,7 @@
     <message>
         <location filename="../../src/editPage.ui" line="26"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../../src/editPage.ui" line="131"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../../src/paletteWidget.ui" line="26"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -157,7 +157,7 @@
     <message>
         <location filename="../../src/utils/utils.cpp" line="22"/>
         <source>show</source>
-        <translation>كۆرسەت</translation>
+        <translation>показывать</translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@
     <message>
         <location filename="../../src/selectColorPage.ui" line="14"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../../src/setFontColorPage.ui" line="26"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -181,7 +181,7 @@
     <message>
         <location filename="../../src/setFontSizePage.ui" line="26"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -189,85 +189,85 @@
     <message>
         <location filename="../../src/widget.ui" line="26"/>
         <source>Widget</source>
-        <translation>ۋىكىپىدىيە</translation>
+        <translation>Виджет</translation>
     </message>
     <message>
         <location filename="../../src/widget.ui" line="245"/>
         <source>New</source>
-        <translation>يېڭى</translation>
+        <translation>Новые функции</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="285"/>
         <location filename="../../src/widget.cpp" line="289"/>
         <source>Notes</source>
-        <translation>ئىزاھاتلار</translation>
+        <translation>Примечания</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="668"/>
         <source>Help</source>
-        <translation>ياردەم</translation>
+        <translation>Справка</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="669"/>
         <source>About</source>
-        <translation>ھەققىدە</translation>
+        <translation>Около</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="670"/>
         <source>Empty Note</source>
-        <translation>بوش ئەسكەرتىش</translation>
+        <translation>Пустая заметка</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="672"/>
         <source>Exit</source>
-        <translation>چىقىش ئېغىزى</translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="735"/>
         <source>Create New Note</source>
-        <translation>يېڭى خاتىرە يارىتىش</translation>
+        <translation>Создать новую заметку</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="736"/>
         <source>Delete Selected Note</source>
-        <translation>تاللانغان ئەسكەرتىشنى ئۆچۈرۈش</translation>
+        <translation>Удаление выбранной заметки</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="737"/>
         <source>Switch View</source>
-        <translation>ۋىكليۇچاتېل كۆرۈش</translation>
+        <translation>Переключить вид</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="738"/>
         <source>Close</source>
-        <translation>ياپ</translation>
+        <translation>Закрывать</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="739"/>
         <source>Minimize</source>
-        <translation>كىچىكلىتىش</translation>
+        <translation>Минимизировать</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="740"/>
         <source>Menu</source>
-        <translation>تىزىملىك</translation>
+        <translation>Меню</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="1136"/>
         <location filename="../../src/widget.cpp" line="1183"/>
         <location filename="../../src/widget.cpp" line="1849"/>
         <source>Welcome to use Notes.</source>
-        <translation>ئىزاھاتلارنى ئىشلىتىشىڭىزنى قارشى ئالىمىز.</translation>
+        <translation>Добро пожаловать в Заметки.</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="1215"/>
         <source>Search</source>
-        <translation>ئىزدە</translation>
+        <translation>Искать</translation>
     </message>
     <message>
         <location filename="../../src/widget.cpp" line="1851"/>
         <source>[picture]</source>
-        <translation>[رەسىم]</translation>
+        <translation>[рисунок]</translation>
     </message>
 </context>
 <context>
@@ -275,32 +275,32 @@
     <message>
         <location filename="../../src/emptyNotes.ui" line="32"/>
         <source>Dialog</source>
-        <translation>دىئالوگ</translation>
+        <translation>Диалог</translation>
     </message>
     <message>
         <location filename="../../src/emptyNotes.ui" line="190"/>
         <source>Are you sure empty notebook?</source>
-        <translation>سىز راستىنلا قۇرۇق خاتىرە دەپتىرىنى جەزىملەشتۈرەلەمسىز؟</translation>
+        <translation>Вы уверены, что пустой блокнот?</translation>
     </message>
     <message>
         <location filename="../../src/emptyNotes.ui" line="251"/>
         <source>No Tips</source>
-        <translation>ئەسكەرتىش يوق</translation>
+        <translation>Нет подсказок</translation>
     </message>
     <message>
         <location filename="../../src/emptyNotes.ui" line="305"/>
         <source>cancel</source>
-        <translation>ئەمەلدىن قالدۇرۇش</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../../src/emptyNotes.ui" line="328"/>
         <source>yes</source>
-        <translation>ھەئە</translation>
+        <translation>да</translation>
     </message>
     <message>
         <location filename="../../src/emptyNotes.cpp" line="34"/>
         <source>emptyNotes</source>
-        <translation>emptyNotes</translation>
+        <translation>emptyПримечания</translation>
     </message>
 </context>
 <context>
@@ -308,7 +308,7 @@
     <message>
         <location filename="../../src/fontButton.ui" line="14"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -316,17 +316,17 @@
     <message>
         <location filename="../../src/iconViewModeDelegate.cpp" line="328"/>
         <source>Welcome to use Notes.</source>
-        <translation>ئىزاھاتلارنى ئىشلىتىشىڭىزنى قارشى ئالىمىز.</translation>
+        <translation>Добро пожаловать в Заметки.</translation>
     </message>
     <message>
         <location filename="../../src/iconViewModeDelegate.cpp" line="357"/>
         <source>Today  </source>
-        <translation>تارىخ-بۈگۈن  </translation>
+        <translation>Сегодня  </translation>
     </message>
     <message>
         <location filename="../../src/iconViewModeDelegate.cpp" line="366"/>
         <source>Yesterday  </source>
-        <translation>تۈنۈگۈن  </translation>
+        <translation>Вчера  </translation>
     </message>
 </context>
 <context>
@@ -334,12 +334,12 @@
     <message>
         <location filename="../../src/listViewModeDelegate.cpp" line="387"/>
         <source>Today  </source>
-        <translation>تارىخ-بۈگۈن  </translation>
+        <translation>Сегодня  </translation>
     </message>
     <message>
         <location filename="../../src/listViewModeDelegate.cpp" line="396"/>
         <source>Yesterday  </source>
-        <translation>تۈنۈگۈن  </translation>
+        <translation>Вчера  </translation>
     </message>
 </context>
 <context>
@@ -347,27 +347,27 @@
     <message>
         <location filename="../../src/noteExitWindow.ui" line="31"/>
         <source>Dialog</source>
-        <translation>دىئالوگ</translation>
+        <translation>Диалог</translation>
     </message>
     <message>
         <location filename="../../src/noteExitWindow.ui" line="83"/>
         <source>Are you sure to exit the note book?</source>
-        <translation>سىز چوقۇم خاتىرە دەپتىرىدىن چىقامسىز؟</translation>
+        <translation>Вы обязательно выйдете из записной книжки?</translation>
     </message>
     <message>
         <location filename="../../src/noteExitWindow.ui" line="104"/>
         <source>Close the desktop note page at the same time</source>
-        <translation>ئۈستەل يۈزى خاتىرە بېتىنى بىرلا ۋاقىتتا تاقاش</translation>
+        <translation>Одновременно закройте страницу заметки на рабочем столе</translation>
     </message>
     <message>
         <location filename="../../src/noteExitWindow.ui" line="149"/>
         <source>No</source>
-        <translation>ياق</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <location filename="../../src/noteExitWindow.ui" line="171"/>
         <source>Yes</source>
-        <translation>شۇنداق</translation>
+        <translation>Да</translation>
     </message>
 </context>
 <context>
@@ -375,7 +375,7 @@
     <message>
         <location filename="../../src/noteHead.ui" line="14"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -383,47 +383,47 @@
     <message>
         <location filename="../../src/noteHeadMenu.ui" line="14"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="102"/>
         <source>Open note list</source>
-        <translation>ئەسكەرتىش تىزىملىكىنى ئېچىش</translation>
+        <translation>Открыть список заметок</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="103"/>
         <source>Always in the front</source>
-        <translation>دائىم ئالدىدا</translation>
+        <translation>Всегда впереди</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="104"/>
         <source>Delete this note</source>
-        <translation>بۇ ئەسكەرتىشنى ئۆچۈرۈش</translation>
+        <translation>Удалить это примечание</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="105"/>
         <source>Share</source>
-        <translation>تەڭ بەھرىمان بولۇش</translation>
+        <translation>Предоставить общий доступ</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="141"/>
         <source>Create New Note</source>
-        <translation>يېڭى خاتىرە يارىتىش</translation>
+        <translation>Создать новую заметку</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="142"/>
         <source>Close</source>
-        <translation>ياپ</translation>
+        <translation>Закрывать</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="143"/>
         <source>Menu</source>
-        <translation>تىزىملىك</translation>
+        <translation>Меню</translation>
     </message>
     <message>
         <location filename="../../src/noteHeadMenu.cpp" line="150"/>
         <source>Palette</source>
-        <translation>پالتا</translation>
+        <translation>Палитра</translation>
     </message>
 </context>
 <context>
@@ -431,7 +431,7 @@
     <message>
         <location filename="../../src/paletteButton.ui" line="14"/>
         <source>Form</source>
-        <translation>جەدۋەل</translation>
+        <translation>Форма</translation>
     </message>
 </context>
 <context>
@@ -439,7 +439,7 @@
     <message>
         <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
         <source>Notes</source>
-        <translation>ئىزاھاتلار</translation>
+        <translation>Примечания</translation>
     </message>
 </context>
 </TS>
