@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>about.ui</file>
         <file>editPage.ui</file>
         <file>emptyNotes.ui</file>
         <file>fontButton.ui</file>
