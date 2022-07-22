@@ -65,7 +65,7 @@ Widget::Widget(QWidget *parent) :
     QString locale = QLocale::system().name();
     QString qtTranslationsPath;
     qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translationsQString locale = QLocale::system().name();
-    static QTranslator trans_global, trans_menu;
+    static QTranslator trans_global, trans_menu, trans_sdk;
     if(!trans_global.load("ukui-notebook_" + locale + ".qm", QLatin1String("/usr/share/ukui-notebook/translations")))
         qDebug() << "Load translations file" <<QLocale() << "failed!";
     else
@@ -76,6 +76,10 @@ Widget::Widget(QWidget *parent) :
     else
         QApplication::installTranslator(&trans_menu);
 
+    if(!trans_sdk.load(":/translations/gui_" + locale + ".qm"))
+        qDebug() << "Load translations file" <<QLocale() << "failed!";
+    else
+        QApplication::installTranslator(&trans_sdk);
     ui->setupUi(this);
     m_noteView = static_cast<NoteView *>(ui->listView);
     setupDatabases();
