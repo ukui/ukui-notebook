@@ -1,3 +1,13 @@
+ukui-notebook (3.2.0-0k5) v101; urgency=medium
+
+  * BUG #130758 【便签】【设计】【统一性走查】关于界面样式调用最新的sdk
+  * BUG #129319 【字体】【便签本】【设计】系统设置字号为13.5号（18px）时，便签列表显示不正常
+  * 需求号: 无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+  
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Fri, 22 Jul 2022 13:04:09 +0800
+
 ukui-notebook (3.2.0-0k4) v101; urgency=medium
 
   * BUG:无
