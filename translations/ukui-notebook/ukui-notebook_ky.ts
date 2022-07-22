@@ -2,40 +2,40 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ky">
 <context>
+    <name></name>
+    <message>
+        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
+        <source>Notes</source>
+        <translation>Ноталар</translation>
+    </message>
+</context>
+<context>
     <name>About</name>
     <message>
-        <location filename="../../src/about.ui" line="26"/>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="47"/>
         <source>About</source>
-        <translation>Жөнүндө</translation>
+        <translation type="vanished">Жөнүндө</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="60"/>
-        <location filename="../../src/about.cpp" line="78"/>
+        <location filename="../../src/about.cpp" line="26"/>
         <source>Notes</source>
         <translation>Ноталар</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="71"/>
         <source>Version: %1</source>
-        <translation>Версиясы: %1</translation>
+        <translation type="vanished">Версиясы: %1</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="79"/>
+        <location filename="../../src/about.cpp" line="29"/>
         <source>Notes is a self-developed sidebar application plug-in, which provides a rich interface, convenient operation and stable functions, aiming at a friendly user experience.</source>
         <translation>Ноталар достук колдонуучу тажрыйбасын көздөп, бай интерфейс, ыңгайлуу операция жана туруктуу милдеттерди камсыз кылат, өз алдынча иштелип чыккан сидербар колдонмо плагин болуп саналат.</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="118"/>
-        <location filename="../../src/about.cpp" line="123"/>
-        <location filename="../../src/about.cpp" line="132"/>
-        <location filename="../../src/about.cpp" line="137"/>
         <source>Service &amp; Support: </source>
-        <translation>Кызмат &amp;amp: </translation>
+        <translation type="vanished">Кызмат &amp;amp: </translation>
     </message>
 </context>
 <context>
@@ -197,75 +197,75 @@
         <translation>Жаңы</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="285"/>
         <location filename="../../src/widget.cpp" line="289"/>
+        <location filename="../../src/widget.cpp" line="293"/>
         <source>Notes</source>
         <translation>Ноталар</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="668"/>
+        <location filename="../../src/widget.cpp" line="672"/>
         <source>Help</source>
         <translation>Жардам</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="669"/>
+        <location filename="../../src/widget.cpp" line="673"/>
         <source>About</source>
         <translation>Жөнүндө</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="670"/>
+        <location filename="../../src/widget.cpp" line="674"/>
         <source>Empty Note</source>
         <translation>Бош нота</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="672"/>
+        <location filename="../../src/widget.cpp" line="676"/>
         <source>Exit</source>
         <translation>Чыгуу</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="735"/>
+        <location filename="../../src/widget.cpp" line="739"/>
         <source>Create New Note</source>
         <translation>Жаңы нота түзүү</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="736"/>
+        <location filename="../../src/widget.cpp" line="740"/>
         <source>Delete Selected Note</source>
         <translation>Тандалган нотаны жоготуу</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="737"/>
+        <location filename="../../src/widget.cpp" line="741"/>
         <source>Switch View</source>
         <translation>Көрүү которуу</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="738"/>
+        <location filename="../../src/widget.cpp" line="742"/>
         <source>Close</source>
         <translation>Жабуу</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="739"/>
+        <location filename="../../src/widget.cpp" line="743"/>
         <source>Minimize</source>
         <translation>Минималдуу</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="740"/>
+        <location filename="../../src/widget.cpp" line="744"/>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1136"/>
-        <location filename="../../src/widget.cpp" line="1183"/>
-        <location filename="../../src/widget.cpp" line="1849"/>
+        <location filename="../../src/widget.cpp" line="1140"/>
+        <location filename="../../src/widget.cpp" line="1187"/>
+        <location filename="../../src/widget.cpp" line="1853"/>
         <source>Welcome to use Notes.</source>
         <translation>Ноталарды колдонууга кош келиңиздер.</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1215"/>
+        <location filename="../../src/widget.cpp" line="1219"/>
         <source>Search</source>
         <translation>Издөө</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1851"/>
+        <location filename="../../src/widget.cpp" line="1855"/>
         <source>[picture]</source>
         <translation>[Сүрөт]</translation>
     </message>
@@ -432,14 +432,6 @@
         <location filename="../../src/paletteButton.ui" line="14"/>
         <source>Form</source>
         <translation>Форма</translation>
-    </message>
-</context>
-<context>
-    <name></name>
-    <message>
-        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
-        <source>Notes</source>
-        <translation>Ноталар</translation>
     </message>
 </context>
 </TS>

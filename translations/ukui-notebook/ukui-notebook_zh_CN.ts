@@ -2,12 +2,15 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
-    <name>About</name>
+    <name></name>
     <message>
-        <location filename="../../src/about.ui" line="26"/>
-        <source>Dialog</source>
-        <translation></translation>
+        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
+        <source>Notes</source>
+        <translation>便签贴</translation>
     </message>
+</context>
+<context>
+    <name>About</name>
     <message>
         <source>Note</source>
         <translation type="vanished">麒麟便签本</translation>
@@ -18,10 +21,9 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="47"/>
         <source>About</source>
         <translatorcomment>关于</translatorcomment>
-        <translation>关于</translation>
+        <translation type="vanished">关于</translation>
     </message>
     <message>
         <source>Kylin Memo</source>
@@ -29,8 +31,7 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="60"/>
-        <location filename="../../src/about.cpp" line="78"/>
+        <location filename="../../src/about.cpp" line="26"/>
         <source>Notes</source>
         <translatorcomment>便签贴</translatorcomment>
         <translation>便签贴</translation>
@@ -41,24 +42,19 @@
         <translation type="vanished">版本: 2020.1.0</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="71"/>
         <source>Version: %1</source>
-        <translation>版本号：%1</translation>
+        <translation type="vanished">版本号：%1</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="79"/>
+        <location filename="../../src/about.cpp" line="29"/>
         <source>Notes is a self-developed sidebar application plug-in, which provides a rich interface, convenient operation and stable functions, aiming at a friendly user experience.</source>
         <translatorcomment>便签贴是自主研发的侧边栏应用小插件，它提供了丰富的界面、便捷的操作、稳定的功能，旨在友好的用户体验感。</translatorcomment>
         <translation>便签贴是自主研发的侧边栏应用小插件，它提供了丰富的界面、便捷的操作、稳定的功能，旨在友好的用户体验感。</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="118"/>
-        <location filename="../../src/about.cpp" line="123"/>
-        <location filename="../../src/about.cpp" line="132"/>
-        <location filename="../../src/about.cpp" line="137"/>
         <source>Service &amp; Support: </source>
         <translatorcomment>服务与支持团队： </translatorcomment>
-        <translation>服务与支持团队： </translation>
+        <translation type="vanished">服务与支持团队： </translation>
     </message>
     <message>
         <source>Kylin Memo is a self-developed sidebar application plug-in, which provides a rich interface, convenient operation and stable functions, aiming at a friendly user experience.</source>
@@ -384,7 +380,7 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="669"/>
+        <location filename="../../src/widget.cpp" line="673"/>
         <source>About</source>
         <translatorcomment>关于</translatorcomment>
         <translation>关于</translation>
@@ -395,13 +391,13 @@
         <translation type="vanished">欢迎使用麒麟便签本。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1215"/>
+        <location filename="../../src/widget.cpp" line="1219"/>
         <source>Search</source>
         <translatorcomment>搜索</translatorcomment>
         <translation>搜索</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="735"/>
+        <location filename="../../src/widget.cpp" line="739"/>
         <source>Create New Note</source>
         <translatorcomment>新建便签</translatorcomment>
         <translation>新建便签</translation>
@@ -412,46 +408,46 @@
         <translation type="vanished">麒麟便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="285"/>
         <location filename="../../src/widget.cpp" line="289"/>
+        <location filename="../../src/widget.cpp" line="293"/>
         <source>Notes</source>
         <translatorcomment>便签贴</translatorcomment>
         <translation>便签贴</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="668"/>
+        <location filename="../../src/widget.cpp" line="672"/>
         <source>Help</source>
         <translatorcomment>帮助</translatorcomment>
         <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="670"/>
+        <location filename="../../src/widget.cpp" line="674"/>
         <source>Empty Note</source>
         <translatorcomment>清空便签本</translatorcomment>
         <translation>清空便签本</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="738"/>
+        <location filename="../../src/widget.cpp" line="742"/>
         <source>Close</source>
         <translatorcomment>关闭</translatorcomment>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="739"/>
+        <location filename="../../src/widget.cpp" line="743"/>
         <source>Minimize</source>
         <translatorcomment>最小化</translatorcomment>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1136"/>
-        <location filename="../../src/widget.cpp" line="1183"/>
-        <location filename="../../src/widget.cpp" line="1849"/>
+        <location filename="../../src/widget.cpp" line="1140"/>
+        <location filename="../../src/widget.cpp" line="1187"/>
+        <location filename="../../src/widget.cpp" line="1853"/>
         <source>Welcome to use Notes.</source>
         <translatorcomment>欢迎使用便签贴，双击可编辑便签内容。</translatorcomment>
         <translation>欢迎使用便签贴，双击可编辑便签内容。</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1851"/>
+        <location filename="../../src/widget.cpp" line="1855"/>
         <source>[picture]</source>
         <translation>[图片]</translation>
     </message>
@@ -476,13 +472,13 @@
         <translation type="vanished">便签名称</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="736"/>
+        <location filename="../../src/widget.cpp" line="740"/>
         <source>Delete Selected Note</source>
         <translatorcomment>删除</translatorcomment>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="737"/>
+        <location filename="../../src/widget.cpp" line="741"/>
         <source>Switch View</source>
         <translatorcomment>切换视图</translatorcomment>
         <translation>切换视图</translation>
@@ -498,7 +494,7 @@
         <translation type="vanished">换肤</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="672"/>
+        <location filename="../../src/widget.cpp" line="676"/>
         <source>Exit</source>
         <translatorcomment>退出</translatorcomment>
         <translation>退出</translation>
@@ -509,7 +505,7 @@
         <translation type="vanished">最小化</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="740"/>
+        <location filename="../../src/widget.cpp" line="744"/>
         <source>Menu</source>
         <translatorcomment>菜单</translatorcomment>
         <translation>菜单</translation>
@@ -725,14 +721,6 @@
         <location filename="../../src/paletteButton.ui" line="14"/>
         <source>Form</source>
         <translation></translation>
-    </message>
-</context>
-<context>
-    <name></name>
-    <message>
-        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
-        <source>Notes</source>
-        <translation>便签贴</translation>
     </message>
 </context>
 </TS>

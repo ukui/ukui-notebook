@@ -2,40 +2,40 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru">
 <context>
+    <name></name>
+    <message>
+        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
+        <source>Notes</source>
+        <translation>Примечания</translation>
+    </message>
+</context>
+<context>
     <name>About</name>
     <message>
-        <location filename="../../src/about.ui" line="26"/>
         <source>Dialog</source>
-        <translation>Диалог</translation>
+        <translation type="vanished">Диалог</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="47"/>
         <source>About</source>
-        <translation>Около</translation>
+        <translation type="vanished">Около</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="60"/>
-        <location filename="../../src/about.cpp" line="78"/>
+        <location filename="../../src/about.cpp" line="26"/>
         <source>Notes</source>
         <translation>Примечания</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="71"/>
         <source>Version: %1</source>
-        <translation>Версия: %1</translation>
+        <translation type="vanished">Версия: %1</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="79"/>
+        <location filename="../../src/about.cpp" line="29"/>
         <source>Notes is a self-developed sidebar application plug-in, which provides a rich interface, convenient operation and stable functions, aiming at a friendly user experience.</source>
         <translation>Notes - это самостоятельно разработанный плагин приложения боковой панели, который обеспечивает богатый интерфейс, удобную работу и стабильные функции, нацеленные на дружественный пользовательский опыт.</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="118"/>
-        <location filename="../../src/about.cpp" line="123"/>
-        <location filename="../../src/about.cpp" line="132"/>
-        <location filename="../../src/about.cpp" line="137"/>
         <source>Service &amp; Support: </source>
-        <translation>Сервис и поддержка: </translation>
+        <translation type="vanished">Сервис и поддержка: </translation>
     </message>
 </context>
 <context>
@@ -197,75 +197,75 @@
         <translation>Новые функции</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="285"/>
         <location filename="../../src/widget.cpp" line="289"/>
+        <location filename="../../src/widget.cpp" line="293"/>
         <source>Notes</source>
         <translation>Примечания</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="668"/>
+        <location filename="../../src/widget.cpp" line="672"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="669"/>
+        <location filename="../../src/widget.cpp" line="673"/>
         <source>About</source>
         <translation>Около</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="670"/>
+        <location filename="../../src/widget.cpp" line="674"/>
         <source>Empty Note</source>
         <translation>Пустая заметка</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="672"/>
+        <location filename="../../src/widget.cpp" line="676"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="735"/>
+        <location filename="../../src/widget.cpp" line="739"/>
         <source>Create New Note</source>
         <translation>Создать новую заметку</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="736"/>
+        <location filename="../../src/widget.cpp" line="740"/>
         <source>Delete Selected Note</source>
         <translation>Удаление выбранной заметки</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="737"/>
+        <location filename="../../src/widget.cpp" line="741"/>
         <source>Switch View</source>
         <translation>Переключить вид</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="738"/>
+        <location filename="../../src/widget.cpp" line="742"/>
         <source>Close</source>
         <translation>Закрывать</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="739"/>
+        <location filename="../../src/widget.cpp" line="743"/>
         <source>Minimize</source>
         <translation>Минимизировать</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="740"/>
+        <location filename="../../src/widget.cpp" line="744"/>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1136"/>
-        <location filename="../../src/widget.cpp" line="1183"/>
-        <location filename="../../src/widget.cpp" line="1849"/>
+        <location filename="../../src/widget.cpp" line="1140"/>
+        <location filename="../../src/widget.cpp" line="1187"/>
+        <location filename="../../src/widget.cpp" line="1853"/>
         <source>Welcome to use Notes.</source>
         <translation>Добро пожаловать в Заметки.</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1215"/>
+        <location filename="../../src/widget.cpp" line="1219"/>
         <source>Search</source>
         <translation>Искать</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1851"/>
+        <location filename="../../src/widget.cpp" line="1855"/>
         <source>[picture]</source>
         <translation>[рисунок]</translation>
     </message>
@@ -432,14 +432,6 @@
         <location filename="../../src/paletteButton.ui" line="14"/>
         <source>Form</source>
         <translation>Форма</translation>
-    </message>
-</context>
-<context>
-    <name></name>
-    <message>
-        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
-        <source>Notes</source>
-        <translation>Примечания</translation>
     </message>
 </context>
 </TS>
