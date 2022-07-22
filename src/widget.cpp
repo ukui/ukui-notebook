@@ -444,14 +444,14 @@ void Widget::listenToGsettings()
             {
                 //获取字号的值
                 QString fontStyle = styleSettings->get(FONT_STYLE).toString();
-                int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+                auto fontSizeKey = styleSettings->get(FONT_SIZE).toString().toFloat();
 
                 QFontDatabase db;
                 //发送改变信号
                 if (db.families().contains(fontStyle))
                 {
                     g_currentFont.setFamily(fontStyle);
-                    g_currentFont.setPointSize(fontSizeKey);
+                    g_currentFont.setPointSizeF(fontSizeKey);
                 }
                 else
                 {
@@ -463,14 +463,14 @@ void Widget::listenToGsettings()
         });
 
         QString fontStyle = styleSettings->get(FONT_STYLE).toString();
-        int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+        auto fontSizeKey = styleSettings->get(FONT_SIZE).toString().toFloat();
 
         QFontDatabase db;
         //发送改变信号
         if (db.families().contains(fontStyle))
         {
             g_currentFont.setFamily(fontStyle);
-            g_currentFont.setPointSize(fontSizeKey);
+            g_currentFont.setPointSizeF(fontSizeKey);
         }
     }
 
