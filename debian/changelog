@@ -1,3 +1,13 @@
+ukui-notebook (3.2.0-0k6) v101; urgency=medium
+
+  * BUG #126790 【云桌面】【便签本】只插入图片然后删除图片，便签本还是显示picture，内容没有清空 	银河麒麟桌面操作系统V10专业版（通用） 	代码错误 	唐彩云 				
+  * BUG #126786 【云桌面】【便签贴】只插入图片时，便签本显示的是picture
+  * 需求号: 无
+  * 其他改动说明：无
+  * 其他改动影响域：无
+  
+ -- jiangdingyuan <jiangdingyuan@kylinos.cn>  Mon, 25 Jul 2022 16:43:17 +0800
+
 ukui-notebook (3.2.0-0k5) v101; urgency=medium
 
   * BUG #130758 【便签】【设计】【统一性走查】关于界面样式调用最新的sdk

@@ -575,18 +575,23 @@
         <translation type="vanished">昨天  </translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="328"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="260"/>
+        <source>[picture]</source>
+        <translation type="unfinished">[图片]</translation>
+    </message>
+    <message>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="332"/>
         <source>Welcome to use Notes.</source>
         <translation>欢迎使用便签贴，双击可编辑便签内容。</translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="357"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="361"/>
         <source>Today  </source>
         <translatorcomment>今天  </translatorcomment>
         <translation>今天  </translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="366"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="370"/>
         <source>Yesterday  </source>
         <translatorcomment>昨天  </translatorcomment>
         <translation>昨天  </translation>
