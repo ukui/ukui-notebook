@@ -2,131 +2,131 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="bo_CN">
 <context>
+    <name></name>
+    <message>
+        <location filename="../data/ukui-notebook.desktop.in.h" line="1"/>
+        <source>Notes</source>
+        <translation>ཟིན་བྲིས་གནད་བསྡུས།</translation>
+    </message>
+</context>
+<context>
     <name>About</name>
     <message>
-        <location filename="../../src/about.ui" line="26"/>
         <source>Dialog</source>
-        <translation>གླེང་མོལ།</translation>
+        <translation type="vanished">གླེང་མོལ།</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="47"/>
         <source>About</source>
-        <translation>འབྲེལ་ཡོད་ཀྱི་སྐོར།</translation>
+        <translation type="vanished">འབྲེལ་ཡོད་ཀྱི་སྐོར།</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="60"/>
-        <location filename="../../src/about.cpp" line="78"/>
+        <location filename="../../src/about.cpp" line="26"/>
         <source>Notes</source>
         <translation>ཟིན་བྲིས་གནད་བསྡུས།</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="71"/>
         <source>Version: %1</source>
-        <translation>པར་གཞི། %1</translation>
+        <translation type="vanished">པར་གཞི། %1</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="79"/>
+        <location filename="../../src/about.cpp" line="29"/>
         <source>Notes is a self-developed sidebar application plug-in, which provides a rich interface, convenient operation and stable functions, aiming at a friendly user experience.</source>
         <translation>ཟིན་བྲིས་ནི་རང་ཉིད་ཀྱིས་གསར་སྤེལ་བྱས་པའི་ཞོར་ལས་ཉེར་སྤྱོད་གློག་སྒུལ་འཕྲུལ་འཁོར་ཞིག་ཡིན་ཞིང་། དེས་འབྲེལ་མཐུད་ཕུན་སུམ་ཚོགས་པ་དང་། བཀོལ་སྤྱོད་སྟབས་བདེ། བརྟན་ལྷིང་བཅས་ཀྱི་ནུས་པ་འདོན་སྤྲོད་བྱས་ཡོད།</translation>
     </message>
     <message>
-        <location filename="../../src/about.cpp" line="118"/>
-        <location filename="../../src/about.cpp" line="123"/>
-        <location filename="../../src/about.cpp" line="132"/>
-        <location filename="../../src/about.cpp" line="137"/>
         <source>Service &amp; Support: </source>
-        <translation>ཞབས་ཞུ་ &amp; Support: </translation>
+        <translation type="vanished">ཞབས་ཞུ་ &amp; Support: </translation>
     </message>
 </context>
 <context>
     <name>EditPage</name>
     <message>
-        <location filename="../../src/editPage.cpp" line="106"/>
+        <location filename="../../src/editPage.cpp" line="107"/>
         <source>Notes</source>
         <translation>ཟིན་བྲིས་གནད་བསྡུས།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="175"/>
+        <location filename="../../src/editPage.cpp" line="176"/>
         <source>Bold</source>
         <translation>སྤོབས་པ་ཆེ་བ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="176"/>
+        <location filename="../../src/editPage.cpp" line="177"/>
         <source>Italic</source>
         <translation>དབྱི་སི་ལན་ཆོས་ཁང་།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="177"/>
+        <location filename="../../src/editPage.cpp" line="178"/>
         <source>Underline</source>
         <translation>གསལ་བཤད་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="178"/>
+        <location filename="../../src/editPage.cpp" line="179"/>
         <source>Strikeout</source>
         <translation>ལས་མཚམས་འཇོག་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="179"/>
+        <location filename="../../src/editPage.cpp" line="180"/>
         <source>Unordered</source>
         <translation>གོ་རིམ་མེད་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="180"/>
+        <location filename="../../src/editPage.cpp" line="181"/>
         <source>Ordered</source>
         <translation>མངག་ཉོ་བྱས་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="182"/>
+        <location filename="../../src/editPage.cpp" line="183"/>
         <source>Font Size</source>
         <translation>ཡིག་གཟུགས་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="183"/>
+        <location filename="../../src/editPage.cpp" line="184"/>
         <source>Font Color</source>
         <translation>ཡིག་གཟུགས་ཀྱི་ཁ་དོག</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="184"/>
+        <location filename="../../src/editPage.cpp" line="185"/>
         <source>InsertPicture</source>
         <translation>ནང་འཇུག་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="548"/>
+        <location filename="../../src/editPage.cpp" line="550"/>
         <source>undo</source>
         <translation>ཕྱིར་འཐེན་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="549"/>
+        <location filename="../../src/editPage.cpp" line="551"/>
         <source>redo</source>
         <translation>བསྐྱར་དུ་བཟོ་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="550"/>
+        <location filename="../../src/editPage.cpp" line="552"/>
         <source>cut</source>
         <translation>འབྲེག་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="551"/>
+        <location filename="../../src/editPage.cpp" line="553"/>
         <source>copy</source>
         <translation>འདྲ་བཤུས་</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="552"/>
+        <location filename="../../src/editPage.cpp" line="554"/>
         <source>paste</source>
         <translation>འབྱར་བག་ཅན།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="553"/>
+        <location filename="../../src/editPage.cpp" line="555"/>
         <source>copy to newpage</source>
         <translation>ཤོག་ངོས་གསར་པར་འདྲ་བཤུས་བྱས་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1007"/>
+        <location filename="../../src/editPage.cpp" line="1018"/>
         <source>Select an image</source>
         <translation>པར་རིས་ཤིག་བདམས་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/editPage.cpp" line="1009"/>
+        <location filename="../../src/editPage.cpp" line="1020"/>
         <source>JPEG (*.jpg);; GIF (*.gif);; PNG (*.png);; BMP (*.bmp);; All (*)</source>
         <translation>JPEG(*.jpg); GIF(*.gif); PNG(*.png); BMP(*.bmp); ཚང་མ(*)</translation>
     </message>
@@ -203,81 +203,81 @@
         <translation>གསར་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1210"/>
+        <location filename="../../src/widget.cpp" line="1219"/>
         <source>Search</source>
         <translatorcomment>Ara</translatorcomment>
         <translation>འཚོལ་ཞིབ།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="735"/>
+        <location filename="../../src/widget.cpp" line="739"/>
         <source>Create New Note</source>
         <translatorcomment>Yeni Not Oluştur</translatorcomment>
         <translation>ཤོག་བྱང་གསར་པ་གཏོད་དགོས།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="285"/>
         <location filename="../../src/widget.cpp" line="289"/>
+        <location filename="../../src/widget.cpp" line="293"/>
         <source>Notes</source>
         <translation>ཟིན་བྲིས་གནད་བསྡུས།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="668"/>
+        <location filename="../../src/widget.cpp" line="672"/>
         <source>Help</source>
         <translation>རོགས་རམ་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="669"/>
+        <location filename="../../src/widget.cpp" line="673"/>
         <source>About</source>
         <translation>འབྲེལ་ཡོད་ཀྱི་སྐོར།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="670"/>
+        <location filename="../../src/widget.cpp" line="674"/>
         <source>Empty Note</source>
         <translatorcomment>Boş Not</translatorcomment>
         <translation>ཤོག་བྱང་སྟོང་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="736"/>
+        <location filename="../../src/widget.cpp" line="740"/>
         <source>Delete Selected Note</source>
         <translatorcomment>Seçilen Notu Sil</translatorcomment>
         <translation>བདམས་ཟིན་པའི་ཟིན་ཐོ་བསུབ་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="737"/>
+        <location filename="../../src/widget.cpp" line="741"/>
         <source>Switch View</source>
         <translatorcomment>Görünümü Değiştir</translatorcomment>
         <translation>གློག་སྒོ་འབྱེད་པའི་ལྟ་ཚུལ</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="738"/>
+        <location filename="../../src/widget.cpp" line="742"/>
         <source>Close</source>
         <translation>སྒོ་རྒྱག་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="739"/>
+        <location filename="../../src/widget.cpp" line="743"/>
         <source>Minimize</source>
         <translation>ཉུང་དུ་གཏོང་གང་ཐུབ་བྱ་དགོས།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1131"/>
-        <location filename="../../src/widget.cpp" line="1178"/>
-        <location filename="../../src/widget.cpp" line="1841"/>
+        <location filename="../../src/widget.cpp" line="1140"/>
+        <location filename="../../src/widget.cpp" line="1187"/>
+        <location filename="../../src/widget.cpp" line="1853"/>
         <source>Welcome to use Notes.</source>
         <translation>ཟིན་བྲིས་སྤྱོད་རྒྱུར་དགའ་བསུ་ཞུ་རྒྱུ་ཡིན།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="1843"/>
+        <location filename="../../src/widget.cpp" line="1855"/>
         <source>[picture]</source>
         <translation>[པར་རིས]།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="672"/>
+        <location filename="../../src/widget.cpp" line="676"/>
         <source>Exit</source>
         <translatorcomment>Çıkış</translatorcomment>
         <translation>ཕྱིར་འཐེན་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../../src/widget.cpp" line="740"/>
+        <location filename="../../src/widget.cpp" line="744"/>
         <source>Menu</source>
         <translatorcomment>Menü</translatorcomment>
         <translation>ཟས་ཐོ།</translation>

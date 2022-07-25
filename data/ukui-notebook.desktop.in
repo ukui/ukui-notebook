@@ -1,0 +1,13 @@
+[Desktop Entry]
+_Name=Notes
+_GenericName=Notes
+_Comment=Notes
+Keywords=guide;
+Exec=/usr/bin/ukui-notebook
+Icon=kylin-notebook
+Terminal=false
+Type=Application
+NoDisplay=false
+Categories=System;Utility;
+StartupNotify=false
+

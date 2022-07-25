@@ -17,7 +17,7 @@
 */
 
 #ifndef SETFONTCOLOR_H
-#define SETFONTCOLORE_H
+#define SETFONTCOLOR_H
 
 #include <QWidget>
 #include <QListWidgetItem>

@@ -20,6 +20,7 @@
 #include "ui_widget.h"
 #include "editPage.h"
 #include "utils/xatom-helper.h"
+#include "information_collector.h"
 
 /*!
  * 系统时间
@@ -61,21 +62,24 @@ Widget::Widget(QWidget *parent) :
     m_isTextCpNew(false),
     m_isThemeChanged(false)   // ukui-default
 {
-    QString qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translations
     QString locale = QLocale::system().name();
-    QTranslator *trans_global = new QTranslator;
-    QTranslator *trans_menu = new QTranslator;
-    if (locale == "zh_CN") {
-        if(!trans_global->load(QLocale(), "ukui-notebook", "_", QLatin1String("/usr/share/ukui-notebook")))
-            qDebug() << "Load translations file" <<QLocale() << "failed!";
-        else
-            QApplication::installTranslator(trans_global);
+    QString qtTranslationsPath;
+    qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translationsQString locale = QLocale::system().name();
+    static QTranslator trans_global, trans_menu, trans_sdk;
+    if(!trans_global.load("ukui-notebook_" + locale + ".qm", QLatin1String("/usr/share/ukui-notebook/translations")))
+        qDebug() << "Load translations file" <<QLocale() << "failed!";
+    else
+        QApplication::installTranslator(&trans_global);
 
-        if(!trans_menu->load(QLocale(), "qt", "_", qtTranslationsPath))
-            qDebug() << "Load translations file" <<QLocale() << "failed!";
-        else
-            QApplication::installTranslator(trans_menu);
-    }
+    if(!trans_menu.load("qt_" + locale + ".qm", qtTranslationsPath))
+        qDebug() << "Load translations file" <<QLocale() << "failed!";
+    else
+        QApplication::installTranslator(&trans_menu);
+
+    if(!trans_sdk.load(":/translations/gui_" + locale + ".qm"))
+        qDebug() << "Load translations file" <<QLocale() << "failed!";
+    else
+        QApplication::installTranslator(&trans_sdk);
     ui->setupUi(this);
     m_noteView = static_cast<NoteView *>(ui->listView);
     setupDatabases();
@@ -440,14 +444,14 @@ void Widget::listenToGsettings()
             {
                 //获取字号的值
                 QString fontStyle = styleSettings->get(FONT_STYLE).toString();
-                int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+                auto fontSizeKey = styleSettings->get(FONT_SIZE).toString().toFloat();
 
                 QFontDatabase db;
                 //发送改变信号
                 if (db.families().contains(fontStyle))
                 {
                     g_currentFont.setFamily(fontStyle);
-                    g_currentFont.setPointSize(fontSizeKey);
+                    g_currentFont.setPointSizeF(fontSizeKey);
                 }
                 else
                 {
@@ -459,14 +463,14 @@ void Widget::listenToGsettings()
         });
 
         QString fontStyle = styleSettings->get(FONT_STYLE).toString();
-        int fontSizeKey = styleSettings->get(FONT_SIZE).toString().toInt();
+        auto fontSizeKey = styleSettings->get(FONT_SIZE).toString().toFloat();
 
         QFontDatabase db;
         //发送改变信号
         if (db.families().contains(fontStyle))
         {
             g_currentFont.setFamily(fontStyle);
-            g_currentFont.setPointSize(fontSizeKey);
+            g_currentFont.setPointSizeF(fontSizeKey);
         }
     }
 
@@ -764,6 +768,7 @@ void Widget::setListFlag(const int &listflag)
  */
 void Widget::initIconMode()
 {
+    InformationCollector::getInstance().addPoint(InformationCollector::IconMode);
     qDebug() << "当前函数 :" << __FUNCTION__ << "当前行号 :" << __LINE__;
     m_noteView->setViewMode(QListView::IconMode);
     m_noteView->setSelectionMode(QListView::ExtendedSelection);
@@ -782,6 +787,7 @@ void Widget::initIconMode()
  */
 void Widget::initListMode()
 {
+    InformationCollector::getInstance().addPoint(InformationCollector::ListMode);
     qDebug() << "当前函数 :" << __FUNCTION__ << "当前行号 :" << __LINE__;
     // 列表模式
     m_noteView->setViewMode(QListView::ListMode);
@@ -810,6 +816,7 @@ void Widget::initListMode()
  */
 void Widget::deleteNote(const QModelIndex &noteIndex, bool isFromUser)
 {
+    InformationCollector::getInstance().addPoint(InformationCollector::Delete);
     qDebug() << "当前函数 :" << __FUNCTION__ << "当前行号 :" << __LINE__;
     if (noteIndex.isValid()) {
         // delete from model
@@ -846,6 +853,7 @@ void Widget::deleteNote(const QModelIndex &noteIndex, bool isFromUser)
  */
 void Widget::deleteSelectedNote()
 {
+    InformationCollector::getInstance().addPoint(InformationCollector::DeleteCurrent);
     qDebug() << "当前函数 :" << __FUNCTION__ << "当前行号 :" << __LINE__;
     if (!m_isOperationRunning) {
         m_isOperationRunning = true;
@@ -954,6 +962,7 @@ void Widget::createNewNoteIfEmpty()
  */
 void Widget::createNewNote()
 {
+    InformationCollector::getInstance().addPoint(InformationCollector::NewNote);
     qDebug() << "当前函数 :" << __FUNCTION__ << "当前行号 :" << __LINE__;
     if (!m_isOperationRunning) {
         m_isOperationRunning = true;
@@ -1419,6 +1428,7 @@ void Widget::onTextEditTextChanged(int noteId, int i)
  */
 void Widget::onColorChanged(const QColor &color, int noteId)
 {
+    InformationCollector::getInstance().addMessage(QString("set widget color to %1.").arg(color.name()));
     qDebug() << "receive signal onColorChanged";
     for (int count = 0; count <= m_proxyModel->rowCount(); count++) {
         m_tmpColorIndex = m_proxyModel->index(count, 0);
@@ -1614,6 +1624,7 @@ void Widget::listDoubleClickSlot(const QModelIndex &index)
  */
 void Widget::onSearchEditTextChanged(const QString &keyword)
 {
+    InformationCollector::getInstance().addPoint(InformationCollector::Search);
     qDebug() << "onSearchEditTextChanged";
     m_searchQueue.enqueue(keyword);
 
@@ -1654,6 +1665,7 @@ void Widget::onSearchEditTextChanged(const QString &keyword)
  */
 void Widget::changePageSlot()
 {
+    InformationCollector::getInstance().addPoint(InformationCollector::ModeChange);
     if (getListFlag() != 0) {
         initIconMode();
         m_viewChangeButton->setIcon(QIcon::fromTheme("view-list-symbolic"));

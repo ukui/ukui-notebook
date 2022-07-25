@@ -1,6 +1,6 @@
 #include "font_color_push_button.h"
 
-FontColorPushButton::FontColorPushButton(QWidget *parent = 0)
+FontColorPushButton::FontColorPushButton(QWidget *parent)
     : QPushButton(parent)
 {
 }
