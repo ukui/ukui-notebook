@@ -1374,6 +1374,10 @@ void Widget::onTextEditTextChanged(int noteId, int i)
         QString content = m_tmpIndex.data(NoteModel::NoteContent).toString();
         QString mdContent = m_tmpIndex.data(NoteModel::NoteMdContent).toString();
 
+        if (m_editors[i]->ui->textEdit->document()->isEmpty()) {
+            m_editors[i]->m_isInsImg = false;
+        }
+
         if (m_editors[i]->ui->textEdit->toHtml().toUtf8() != content) {
             // move note to the top of the list
             QModelIndex sourceIndex = m_proxyModel->mapToSource(m_tmpIndex);
