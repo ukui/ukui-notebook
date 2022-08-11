@@ -255,6 +255,10 @@ void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
 
 
     QString title{index.data(NoteModel::NoteMdContent).toString()};
+    QString t = index.data(NoteModel::NoteFullTitle).toString();
+    if (t.contains(tr("[picture]")) || t.contains("[picture]")) {
+            title = tr("[picture]");
+    }
 
     QFont titleFont = (option.state & QStyle::State_Selected) == QStyle::State_Selected ? m_titleSelectedFont : m_titleFont;
     QFontMetrics fmTitle(titleFont);

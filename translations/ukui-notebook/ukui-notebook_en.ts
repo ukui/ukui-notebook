@@ -290,17 +290,22 @@
 <context>
     <name>iconViewModeDelegate</name>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="328"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="260"/>
+        <source>[picture]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="332"/>
         <source>Welcome to use Notes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="357"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="361"/>
         <source>Today  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/iconViewModeDelegate.cpp" line="366"/>
+        <location filename="../../src/iconViewModeDelegate.cpp" line="370"/>
         <source>Yesterday  </source>
         <translation type="unfinished"></translation>
     </message>
