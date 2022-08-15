@@ -320,7 +320,13 @@ void listViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     QStyleOptionViewItem opt = option;
     // `
     QString title{index.data(NoteModel::NoteFullTitle).toString()};
-
+    QString t = index.data(NoteModel::NoteFullTitle).toString();
+    if (t.contains("[picture]")) {
+        title = tr("[picture]");
+    }
+    if (title.isEmpty()) {
+        title = tr("Welcome to use Notes.");
+    }
     QFont titleFont;
 
     if ((option.state & QStyle::State_Selected) == QStyle::State_Selected) {

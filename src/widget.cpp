@@ -1043,7 +1043,6 @@ void Widget::loadNotes(QList<NoteData *> noteList, int noteCounter)
 
     createNewNoteIfEmpty();
     selectFirstNote();
-    transFisrtLine();
 }
 
 /*!
@@ -1105,8 +1104,7 @@ NoteData *Widget::generateNote(const int noteID)
     QDateTime noteDate = QDateTime::currentDateTime();
     newNote->setCreationDateTime(noteDate);
     newNote->setLastModificationDateTime(noteDate);
-    newNote->setFullTitle(tr("Welcome to use Notes."));
-    newNote->setNoteColor(15169356);
+    newNote->setNoteColor(15169356); // 0xe7774c
     newNote->m_note = nullptr;
     return newNote;
 }
@@ -1152,7 +1150,7 @@ void Widget::moveNoteToTop()
 QString Widget::getFirstLine(const QString &str)
 {
     if (str.simplified().isEmpty()) {
-        return tr("Welcome to use Notes.");
+        return QString();
     }
 
     QString text = str.trimmed();
@@ -1725,25 +1723,6 @@ QPixmap drawSymbolicColoredPixmap(const QPixmap& source, QAction *btn)
     }
 
     return QPixmap::fromImage(img);
-}
-
-/*!
- * \brief Widget::transFisrtLine
- *
- */
-void Widget::transFisrtLine()
-{
-    for (int i = 0; i < m_proxyModel->rowCount(); i++) {
-
-        QModelIndex index = m_proxyModel->index(i, 0);
-        NoteData *note = m_noteModel->getNote(index);
-
-        if (note != Q_NULLPTR && note->content() == NULL)
-            note->setFullTitle(tr("Welcome to use Notes."));
-        else if (note->fullTitle() == "[picture]" || note->fullTitle() == "[图片]") {
-            note->setFullTitle(tr("[picture]"));
-        }
-    }
 }
 
 quint32 Widget::getWindowId(void)

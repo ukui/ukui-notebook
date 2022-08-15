@@ -77,36 +77,24 @@ void EditPage::paintEvent(QPaintEvent *event)
 
 bool EditPage::eventFilter(QObject *obj,QEvent *event)
 {
-  if(obj == this)
-  {
-      if (event->type() == QEvent::WindowActivate) {
-          qDebug() << "WindowActivate";
-          m_noteHead->hide();
+    if (obj == this) {
+        if (event->type() == QEvent::WindowActivate) {
+            m_noteHead->hide();
             m_noteHeadMenu->show();
-      }
-      if (event->type() == QEvent::WindowDeactivate) {
-           qDebug() << "WindowDeactivate";
-          m_noteHead->show();
+        }
+        if (event->type() == QEvent::WindowDeactivate) {
+            m_noteHead->show();
             m_noteHeadMenu->hide();
-      }
-      if(event->type() == QEvent::Close)
-      {
-//          if (ui->textEdit->document()->isEmpty()) {
-//              qDebug() << "ZDEBUG " << __LINE__ ;
-//              emit isEmptyNote(m_noteId);
-//          }
-      }
-  }
-  return false;
+        }
+    }
+    return false;
 }
 
 void EditPage::initSetup()
 {
     // 标题
     this->setWindowTitle(tr("Notes"));
-    // 任务栏图标
-    //setWindowIcon(QIcon::fromTheme("kylin-notebook"));
-    //setWindowFlags(Qt::FramelessWindowHint);
+
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
     // 高分屏适配
