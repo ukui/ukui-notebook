@@ -22,7 +22,6 @@
 #include <QTextList>
 //#include <QClipboard>
 #include <QDebug>
-#include <QtX11Extras/QX11Info>
 #include <QFileDialog>
 #include <QImageReader>
 
@@ -34,7 +33,7 @@
 #include "ui_widget.h"
 #include "editPage.h"
 #include "ui_editPage.h"
-#include "utils/xatom-helper.h"
+#include "windowmanage.hpp"
 #include "information_collector.h"
 
 extern void qt_blurImage(QImage &blurImage, qreal radius, bool quality, int transposed);
@@ -115,12 +114,7 @@ void EditPage::initSetup()
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
-    // 添加窗管协议
-    MotifWmHints hints;
-    hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-    hints.functions = MWM_FUNC_ALL;
-    hints.decorations = MWM_DECOR_BORDER;
-    XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+    kabase::WindowManage::removeHeader(this);
     // 配置按钮
     btnSetup();
     initColor();
@@ -933,42 +927,6 @@ void EditPage::setWindowStatusClear()
     KWindowSystem::clearState(this->winId(), NET::KeepAbove);
 }
 
-#if 0
-void EditPage::setStayOnTopSlot(bool b)
-{
-    //m_ignoreShowHideEvents = true;
-
-    bool visible = isVisible();
-    QPoint old_pos = pos();
-
-    Display *display = QX11Info::display();
-    XEvent event;
-    event.xclient.type = ClientMessage;
-    event.xclient.serial = 0;
-    event.xclient.send_event = True;
-    event.xclient.display = display;
-    event.xclient.window = winId();
-    event.xclient.message_type = XInternAtom(display, "_NET_WM_STATE", False);
-    event.xclient.format = 32;
-
-    event.xclient.data.l[0] = b;
-    event.xclient.data.l[1] = XInternAtom(display, "_NET_WM_STATE_ABOVE", False);
-    event.xclient.data.l[2] = 0;
-    event.xclient.data.l[3] = 0;
-    event.xclient.data.l[4] = 0;
-
-    XSendEvent(display, DefaultRootWindow(display), False,
-               SubstructureRedirectMask|SubstructureNotifyMask, &event);
-
-    move(old_pos);
-
-    if (visible) {
-        show();
-    }
-    //m_ignoreShowHideEvents = false;
-}
-#endif
-
 void EditPage::dropImage(const QImage& image, const QString& format) {
     QByteArray bytes;
     QBuffer buffer(&bytes);
@@ -1024,12 +982,7 @@ void EditPage::insertpicture()
 
 void EditPage::setHints()
 {
-    // 添加窗管协议
-    MotifWmHints hints;
-    hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-    hints.functions = MWM_FUNC_ALL;
-    hints.decorations = MWM_DECOR_BORDER;
-    XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+    kabase::WindowManage::removeHeader(this);
 }
 
 void EditPage::defaultTextColorSlot()

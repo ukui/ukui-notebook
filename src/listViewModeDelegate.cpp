@@ -321,7 +321,14 @@ void listViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
     // `
     QString title{index.data(NoteModel::NoteFullTitle).toString()};
 
-    QFont titleFont = (option.state & QStyle::State_Selected) == QStyle::State_Selected ? m_titleSelectedFont : m_titleFont;
+    QFont titleFont;
+
+    if ((option.state & QStyle::State_Selected) == QStyle::State_Selected) {
+        titleFont = m_titleSelectedFont;
+    }
+    else {
+        titleFont = m_titleFont;
+    }
     QFontMetrics fmTitle(titleFont);
     QRect fmRectTitle = fmTitle.boundingRect(title);
 

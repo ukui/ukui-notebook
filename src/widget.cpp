@@ -19,8 +19,8 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "editPage.h"
-#include "utils/xatom-helper.h"
 #include "information_collector.h"
+#include "windowmanage.hpp"
 
 /*!
  * 系统时间
@@ -62,6 +62,9 @@ Widget::Widget(QWidget *parent) :
     m_isTextCpNew(false),
     m_isThemeChanged(false)   // ukui-default
 {
+    kabase::WindowManage::getWindowId(&m_windowId);
+    kabase::WindowManage::removeHeader(this);
+
     QString locale = QLocale::system().name();
     QString qtTranslationsPath;
     qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);// /usr/share/qt5/translationsQString locale = QLocale::system().name();
@@ -87,6 +90,8 @@ Widget::Widget(QWidget *parent) :
     kyNoteInit();
     kyNoteConn();
     initData();
+
+    m_noteView->setStyleSheet("QListView{border-radius:4px;}");
 }
 
 /*!
@@ -259,7 +264,6 @@ void Widget::setupDatabases()
  */
 void Widget::kyNoteInit()
 {
-    qDebug() << "\033[32m" << "kyNote init";
     sortflag = 1;           // 排序
     m_listflag = 1;         // 平铺\列表
 
@@ -272,14 +276,7 @@ void Widget::kyNoteInit()
     initListMode();
     setFixedSize(714, 590);
     setMouseTracking(true);               // 设置鼠标追踪
-    // 窗口属性
-    // setWindowFlags(Qt::FramelessWindowHint);    //开启窗口无边框
-    // setAttribute(Qt::WA_TranslucentBackground); //设置窗口透明显示(毛玻璃效果)
 
-    // QPainterPath blurPath;
-    // blurPath.addRoundedRect(rect().adjusted(0, 0, -0, -0), 6, 6);
-    // setProperty("useSystemStyleBlur", true);
-    // setProperty("blurRegion", QRegion(blurPath.toFillPolygon().toPolygon()));//使用QPainterPath的api生成多边形Region
 
     // 弹出位置
     m_pSreenInfo = new adaptScreenInfo(this);
@@ -296,14 +293,6 @@ void Widget::kyNoteInit()
     // 搜索
     searchInit();
 
-    // QBitmap bmp(this->size());
-    // bmp.fill();
-    // QPainter p(&bmp);
-    // p.setPen(Qt::NoPen);
-    // p.setBrush(Qt::black);
-    // p.setRenderHint(QPainter::Antialiasing);
-    // p.drawRoundedRect(bmp.rect(),6,6);
-    // setMask(bmp);
 
     // 退出框
     m_noteExitWindow = new noteExitWindow(this, this);
@@ -326,19 +315,12 @@ void Widget::kyNoteConn()
     connect(m_newKynote, &QPushButton::clicked, this, &Widget::newSlot);
     // 除按钮
     connect(m_trashButton, &QPushButton::clicked, this, &Widget::onTrashButtonClicked);
-
-    // connect(m_noteModel, &NoteModel::rowsAboutToBeMoved, m_noteView, &NoteView::rowsAboutToBeMoved);
-    // connect(m_noteModel, &NoteModel::rowsMoved, m_noteView, &NoteView::rowsMoved);
-    // 升/降序按钮
-    // connect(m_sortLabel,&QPushButton::clicked,this,&Widget::sortSlot);
     connect(this, &Widget::switchSortTypeRequest, this, &Widget::sortSlot);
     // 清空便签
     connect(m_menuActionEmpty, &QAction::triggered, this, &Widget::trashSlot);
     connect(m_emptyNotes, &emptyNotes::requestEmptyNotes, this, &Widget::clearNoteSlot);
     // 菜单按钮退出便签本
     connect(m_menuExit, &QAction::triggered, this, &Widget::exitSlot);
-    // 设置界面
-    // connect(m_menuActionSet,&QAction::triggered,this,&Widget::SetNoteSlot);
     // 列表平铺切换
     connect(m_viewChangeButton, &QPushButton::clicked, this, &Widget::changePageSlot);
     // 搜索栏文本输入
@@ -378,12 +360,6 @@ void Widget::kyNoteConn()
             m_dbManager, &DBManager::onDeleteNoteRequested);
     connect(this, &Widget::requestClearNote,
             m_dbManager, &DBManager::permanantlyRemoveAllNotes);
-    // connect(this, &Widget::requestRestoreNotes,
-    // m_dbManager, &DBManager::onRestoreNotesRequested, Qt::BlockingQueuedConnection);
-    // connect(this, &Widget::requestImportNotes,
-    // m_dbManager, &DBManager::onImportNotesRequested, Qt::BlockingQueuedConnection);
-    // connect(this, &Widget::requestExportNotes,
-    // m_dbManager, &DBManager::onExportNotesRequested, Qt::BlockingQueuedConnection);
     connect(this, &Widget::requestMigrateNotes,
             m_dbManager, &DBManager::onMigrateNotesRequested, Qt::BlockingQueuedConnection);
     connect(this, &Widget::requestMigrateTrash,
@@ -622,11 +598,7 @@ void Widget::openMemoWithId(int noteId)
         });
         connect(m_notebook->m_noteHeadMenu, &noteHeadMenu::requestShowNote, this, [=] {
             // 添加窗管协议
-            MotifWmHints hints;
-            hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-            hints.functions = MWM_FUNC_ALL;
-            hints.decorations = MWM_DECOR_BORDER;
-            XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+            kabase::WindowManage::removeHeader(this);
             this->raise();
             this->activateWindow();
             this->show();
@@ -1028,11 +1000,7 @@ void Widget::createNewNote()
     });
     connect(m_notebook->m_noteHeadMenu, &noteHeadMenu::requestShowNote, this, [=] {
         // 添加窗管协议
-        MotifWmHints hints;
-        hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-        hints.functions = MWM_FUNC_ALL;
-        hints.decorations = MWM_DECOR_BORDER;
-        XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+        kabase::WindowManage::removeHeader(this);
         this->raise();
         this->activateWindow();
         this->show();
@@ -1266,46 +1234,6 @@ void Widget::clearSearch()
 }
 
 /*!
- * \brief Widget::mousePressEvent
- *
- */
-// void Widget::mousePressEvent(QMouseEvent *event)
-// {
-// if (event->button() == Qt::LeftButton) {
-// this->dragPosition = event->globalPos() - frameGeometry().topLeft();
-// this->mousePressed = true;
-// }
-// QWidget::mousePressEvent(event);
-// }
-
-/*!
- * \brief Widget::mouseReleaseEvent
- *
- */
-// void Widget::mouseReleaseEvent(QMouseEvent *event)
-// {
-// if (event->button() == Qt::LeftButton) {
-// this->mousePressed = false;
-// }
-// QWidget::mouseReleaseEvent(event);
-// }
-
-/*!
- * \brief Widget::mouseMoveEvent
- *
- */
-// void Widget::mouseMoveEvent(QMouseEvent *event)
-// {
-// if (this->mousePressed) {
-// int dpiRatio = qApp->devicePixelRatio();
-// move(event->globalPos() - this->dragPosition.x() * dpiRatio,
-// (event->globalPos() - this->dragPosition.y() * dpiRatio));
-// this->setCursor(Qt::ClosedHandCursor);
-// }
-// QWidget::mouseMoveEvent(event);
-// }
-
-/*!
  * \brief Widget::paintEvent
  *
  */
@@ -1318,37 +1246,7 @@ void Widget::paintEvent(QPaintEvent *event)
     p.setRenderHint(QPainter::Antialiasing);  // 反锯齿;
     QPainterPath rectPath;
     rectPath.addRect(this->rect());
-    // rectPath.addRoundedRect(this->rect(), 6, 6); // 左上右下
 
-    // 画一个黑底
-    // QPixmap pixmap(this->rect().size());
-    // pixmap.fill(Qt::transparent);
-    // QPainter pixmapPainter(&pixmap);
-    // pixmapPainter.setRenderHint(QPainter::Antialiasing);
-    // pixmapPainter.setPen(Qt::transparent);
-    // pixmapPainter.setBrush(Qt::black);
-    // pixmapPainter.drawPath(rectPath);
-    // pixmapPainter.end();
-
-    // 模糊这个黑底
-    // QImage img = pixmap.toImage();
-    // qt_blurImage(img, 10, false, false);
-
-    // 挖掉中心
-    // pixmap = QPixmap::fromImage(img);
-    // QPainter pixmapPainter2(&pixmap);
-    // pixmapPainter2.setRenderHint(QPainter::Antialiasing);
-    // pixmapPainter2.setCompositionMode(QPainter::CompositionMode_Clear);
-    // pixmapPainter2.setPen(Qt::transparent);
-    // pixmapPainter2.setBrush(Qt::transparent);
-    // pixmapPainter2.drawPath(rectPath);
-
-    // 绘制阴影
-    // p.drawPixmap(this->rect(), pixmap, pixmap.rect());
-
-    // 绘制一个背景
-    // p.save();
-    // p.setOpacity(0.7);
     p.fillPath(rectPath, palette().color(QPalette::Base));
     // p.restore();
 }
@@ -1590,11 +1488,7 @@ void Widget::listDoubleClickSlot(const QModelIndex &index)
         });
         connect(m_notebook->m_noteHeadMenu, &noteHeadMenu::requestShowNote, this, [=] {
             // 添加窗管协议
-            MotifWmHints hints;
-            hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-            hints.functions = MWM_FUNC_ALL;
-            hints.decorations = MWM_DECOR_BORDER;
-            XAtomHelper::getInstance()->setWindowMotifHint(this->winId(), hints);
+            kabase::WindowManage::removeHeader(this);
             this->raise();
             this->activateWindow();
             this->show();
@@ -1732,15 +1626,6 @@ void Widget::clearNoteSlot()
 }
 
 /*!
- * \brief Widget::SetNoteSlot
- *
- */
-// void Widget::SetNoteSlot()
-// {
-// qDebug() << "SetNoteSlot";
-// }
-
-/*!
  * \brief Widget::setNoteNullSlot
  *
  */
@@ -1859,4 +1744,9 @@ void Widget::transFisrtLine()
             note->setFullTitle(tr("[picture]"));
         }
     }
+}
+
+quint32 Widget::getWindowId(void)
+{
+    return m_windowId;
 }
