@@ -108,20 +108,17 @@ public:
     void setListFlag(const int &listflag);                          //设置列表切换标志位
     void createNewNote();                                           //新建便签
     void openMemoWithId(int noteId);
-
+    quint32 getWindowId(void);
 public slots:
     void sltMessageReceived(/*const QString &msg*/);                //接收socket信息
     void textForNewEditpageSigReceived();                           //将选中内容复制到新便签页功能的内容传递函数
     void iniNoteModeRead();                                         //读取配置文件iniNoteMode字段的内容
-    void transFisrtLine();                                          //便签页标题为默认时，翻译标题函数
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
-    //void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    //void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    //void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
+    quint32 m_windowId{0};
     EditPage *m_notebook;                                          //新建便签指针
     int m_listflag;                                                 //平铺/展开列表切换
     int sortflag;                                                   //升降序切换
@@ -213,7 +210,6 @@ private slots:
     void changePageSlot();                                          //列表平铺切换槽函数
     void setNoteNullSlot();                                         //便签页关闭置空槽函数
     void clearNoteSlot();                                           //清空便签槽函数
-    //void SetNoteSlot();                                             //便签设置界面槽函数
     void onF1ButtonClicked();                                       //快捷键F1槽函数
 
 signals:
@@ -222,9 +218,7 @@ signals:
     void requestCreateUpdateNote(NoteData* note);                   //数据库更新信号
     void requestDeleteNote(NoteData* note);                         //数据库同步删除信号
     void requestClearNote();                                        //清空数据库
-    void requestRestoreNotes(QList<NoteData *> noteList);           //重加载信号
-    void requestImportNotes(QList<NoteData *> noteList);            //导入信号
-    void requestExportNotes(QString fileName);                      //导出信号
+
     void requestMigrateNotes(QList<NoteData *> noteList);           //迁移信号
     void requestMigrateTrash(QList<NoteData *> noteList);           //迁移废纸篓信号
     void requestForceLastRowIndexValue(int index);                  //请求返回受结果的SQL语句影响的行数信号

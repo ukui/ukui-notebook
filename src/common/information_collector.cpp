@@ -53,10 +53,12 @@ void InformationCollector::addMessage(const QString &str) const
 
 void InformationCollector::sendMessage(const QString &key, const QString &value) const
 {
+#ifndef TEST_DEBUG
     KBuriedPoint p[1];
     p[0].key = QTC(key);
     p[0].value = QTC(value);
     if (kdk_buried_point(const_cast<char *>("ukui-notebook"), const_cast<char *>("FunctionType"), p, 1)) {
         qWarning() << "InformationCollector::sendMessage : kdk_buried_point failed!";
     }
+#endif
 }

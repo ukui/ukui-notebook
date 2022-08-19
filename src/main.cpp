@@ -17,30 +17,15 @@
 */
 
 #include "widget.h"
-#include "singleApplication.h"
-#include "utils/xatom-helper.h"
+#include <singleapplication.h>
+
 #include "utils/utils.h"
 
 #include <QApplication>
-#include <X11/Xlib.h>
-//#include <KWindowEffects>
 
 #include "log.h"
 #include "information_collector.h"
-
-int getScreenWidth() {
-    Display *disp = XOpenDisplay(NULL);
-    Screen *scrn = DefaultScreenOfDisplay(disp);
-    if (NULL == scrn) {
-        return 0;
-    }
-    int width = scrn->width;
-
-    if (NULL != disp) {
-        XCloseDisplay(disp);
-    }
-    return width;
-}
+#include "windowmanage.hpp"
 
 /*!
  * \brief main
@@ -53,14 +38,17 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(myMessageOutput);
 #endif
     InformationCollector::getInstance().addMessage("便签应用启动!");
-    if (getScreenWidth() > 2560) {
-        #if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
-                QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-                QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-        #endif
-    }
 
-    SingleApplication a(argc, argv);
+    //高清屏幕自适应,适配990高DPI
+    kabase::WindowManage::setScalingProperties();
+
+    kdk::QtSingleApplication a(argc, argv);
+
+    if (a.isRunning()) {
+        qDebug() << "is running";
+        a.sendMessage(kdk::QtSingleApplication::arguments().join(" ") , 4000);
+        return 0;
+    }
 
     a.setWindowIcon(QIcon::fromTheme("kylin-notebook"));
     a.setApplicationVersion ("1.0.0");
@@ -74,38 +62,22 @@ int main(int argc, char *argv[])
     */
     parser.process(a);
     Widget w;
-
-    if(!a.isRunning()){
-        a.w = &w;
-        w.setProperty("useSystemStyleBlur", true);
-        // 添加窗管协议
-        MotifWmHints hints;
-        hints.flags = MWM_HINTS_FUNCTIONS|MWM_HINTS_DECORATIONS;
-        hints.functions = MWM_FUNC_ALL;
-        hints.decorations = MWM_DECOR_BORDER;
-        XAtomHelper::getInstance()->setWindowMotifHint(w.winId(), hints);
-        //w.setAttribute(Qt::WA_TranslucentBackground);
-        //KWindowEffects::enableBlurBehind(w.winId(),true);
-
-        QObject::connect(&a, SIGNAL(messageReceived(/*const QString&*/)), &w, SLOT(sltMessageReceived(/*const QString&*/)));
-
-        if (QApplication::arguments().length() > 1) {
-            if (QApplication::arguments().at(1) == "--show") {
-                QString arg = QApplication::arguments().at(2);
-                qDebug() << "main" << arg.toInt();
-                w.openMemoWithId(arg.toInt());
+    a.setActivationWindow(&w);
+    if (QGuiApplication::platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
+        QObject::connect(&a, &kdk::QtSingleApplication::messageReceived, [&w](const QString &message) {
+            qDebug() << message;
+            auto arguments = message.split(" ");
+            if (QApplication::arguments().length() > 1) {
+                if (QApplication::arguments().at(1) == "--show") {
+                    QString arg = QApplication::arguments().at(2);
+                    qDebug() << "main" << arg.toInt();
+                    w.openMemoWithId(arg.toInt());
+                }
+            } else {
+                kabase::WindowManage::activateWindow(w.getWindowId());
             }
-        }
-
-        return a.exec();
-    } else {
-        if (QApplication::arguments().length() > 1) {
-            if (QApplication::arguments().at(1) == "--show") {
-                QString arg = QApplication::arguments().at(2);
-                qDebug() << "main" << arg.toInt();
-                w.openMemoWithId(arg.toInt());
-            }
-        }
+        });
     }
-    return 0;
+
+    return a.exec();
 }

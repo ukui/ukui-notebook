@@ -1,6 +1,15 @@
-project(ukui-notebook)
+cmake_minimum_required(VERSION 3.5)
+
+project(ukui-notebook LANGUAGES CXX C)
 
 include(${PROJECT_SOURCE_DIR}/../cmake/common.cmake)
+
+add_subdirectory(${PROJECT_SOURCE_DIR}/common)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
 
 option(TEST_DEBUG "option for debug" OFF)
 
@@ -14,8 +23,8 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools X11Extras Network DBus Sql Concurrent REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools X11Extras Network DBus Sql Concurrent REQUIRED)
+find_package(QT NAMES Qt6 Qt5)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools Network DBus Sql Concurrent REQUIRED)
 
 execute_process(COMMAND bash ${PROJECT_SOURCE_DIR}/../sh/update_translations.sh
                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
@@ -23,8 +32,8 @@ execute_process(COMMAND bash ${PROJECT_SOURCE_DIR}/../sh/apply_translations.sh
                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 include_directories(${PROJECT_SOURCE_DIR}
-                    ${PROJECT_SOURCE_DIR}/common
                     ${PROJECT_SOURCE_DIR}/utils
+                    ${common_SOURCE_DIR}
                     )
 
 file(GLOB SRC 
@@ -32,8 +41,6 @@ file(GLOB SRC
     "*.h"
     "utils/*.cpp"
     "utils/*.h"
-    "common/*.cpp"
-    "common/*.h"
 )
 
 SET(ui_RESOURCE ${PROJECT_SOURCE_DIR}/src.qrc
@@ -44,14 +51,19 @@ add_executable(${PROJECT_NAME}
     ${ui_RESOURCE}
 )
 
-target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::X11Extras Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::DBus Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::Concurrent)
+target_link_libraries(${PROJECT_NAME} common)
+
+target_link_libraries(${PROJECT_NAME} Qt${QT_VERSION_MAJOR}::Widgets
+                                      Qt${QT_VERSION_MAJOR}::Network
+                                      Qt${QT_VERSION_MAJOR}::DBus
+                                      Qt${QT_VERSION_MAJOR}::Sql
+                                      Qt${QT_VERSION_MAJOR}::Concurrent)
 
 #dependencies
 target_link_libraries(${PROJECT_NAME} "-lpthread -lz")
 
 target_link_kysdk_libraries(${PROJECT_NAME})
 target_link_KWindowSystem_libraries(${PROJECT_NAME})
-target_link_X11_libraries(${PROJECT_NAME})
 target_link_qgsettings_libraries(${PROJECT_NAME})
 
 ########### install ###############

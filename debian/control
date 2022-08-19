@@ -1,5 +1,5 @@
 Source: ukui-notebook
-Section: x11
+Section: utils
 Priority: optional
 Maintainer: Kylin Team <team+kylin@tracker.debian.org>
 Uploaders: handsome_feng <jianfengli@ubuntukylin.com>,
@@ -15,16 +15,16 @@ Build-Depends: debhelper-compat (= 12),
                qttools5-dev,
                qtbase5-dev-tools,
                libgsettings-qt-dev,
-               libqt5x11extras5-dev,
                libkf5windowsystem-dev,
-               libx11-dev,
                pkgconf,
                libglib2.0-dev,
-	           libkysdk-qtwidgets-dev,
+               libkysdk-qtwidgets-dev,
                libkysdk-log-dev,
                libkysdk-diagnostics-dev,
                libkysdk-config-dev,
-               libkysdk-utils-dev
+               libkysdk-utils-dev,
+               libkysdk-waylandhelper-dev,
+               libkysdk-alm-dev,
 Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Homepage: https://github.com/ukui/ukui-sidebar.git

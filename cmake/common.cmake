@@ -25,6 +25,16 @@ function(target_link_kysdk_libraries prj_name)
     target_include_directories(${prj_name} PRIVATE ${KYSDKCONFIG_PKG_INCLUDE_DIRS})
     target_link_directories(${prj_name} PRIVATE ${KYSDKCONFIG_PKG_LIBRARY_DIRS})
     target_link_libraries(${prj_name}  ${KYSDKCONFIG_PKG_LIBRARIES})
+
+    pkg_check_modules(KYSDKWAYLANDHELPER_PKG kysdk-waylandhelper)
+    target_include_directories(${prj_name} PRIVATE ${KYSDKWAYLANDHELPER_PKG_INCLUDE_DIRS})
+    target_link_directories(${prj_name} PRIVATE ${KYSDKWAYLANDHELPER_PKG_LIBRARY_DIRS})
+    target_link_libraries(${prj_name}  ${KYSDKWAYLANDHELPER_PKG_LIBRARIES})
+
+    pkg_check_modules(KYSDKALM_PKG kysdk-alm)
+    target_include_directories(${prj_name} PRIVATE ${KYSDKALM_PKG_INCLUDE_DIRS})
+    target_link_directories(${prj_name} PRIVATE ${KYSDKALM_PKG_LIBRARY_DIRS})
+    target_link_libraries(${prj_name}  ${KYSDKALM_PKG_LIBRARIES})
 endfunction()
 
 function(target_link_glib_libraries prj_name)

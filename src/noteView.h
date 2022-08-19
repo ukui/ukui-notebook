@@ -25,9 +25,6 @@
 class NoteView : public QListView
 {
     Q_OBJECT
-
-    friend class tst_NoteView;  //友元类 class tst_NoteView可以访问此类NoteView的private和protected成员变量
-
 public:
     explicit NoteView(QWidget* parent = Q_NULLPTR);
     ~NoteView();

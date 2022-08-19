@@ -256,7 +256,7 @@ void iconViewModeDelegate::paintLabels(QPainter* painter, const QStyleOptionView
 
     QString title{index.data(NoteModel::NoteMdContent).toString()};
     QString t = index.data(NoteModel::NoteFullTitle).toString();
-    if (t.contains(tr("[picture]")) || t.contains("[picture]")) {
+    if (t.contains("[picture]")) {
             title = tr("[picture]");
     }
 
